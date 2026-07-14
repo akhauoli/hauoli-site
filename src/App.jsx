@@ -275,30 +275,28 @@ function MVV() {
     <section id="mvv" className="section mvv">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Mission / Vision / Values</p>
-        <div className="mvv-grid">
-          <div className="mvv-item">
-            <h3 className="mvv-label">Mission</h3>
-            <p className="mvv-text">
+        <blockquote className="mvv-vision">
+          自分にしか描けない人生を、自分らしく。
+        </blockquote>
+        <div className="mvv-rule" aria-hidden="true" />
+        <div className="mvv-lower">
+          <div className="mvv-col">
+            <h3 className="mvv-col-label">Mission</h3>
+            <p className="mvv-col-text">
               挑戦する人々と企業の"熱い思いと志"を成果と成長に変換し、全ての人が正しく報われる幸せな未来を切り拓く。
             </p>
           </div>
-          <div className="mvv-item">
-            <h3 className="mvv-label">Vision</h3>
-            <p className="mvv-text mvv-text--vision">
-              自分にしか描けない人生を、自分らしく。
-            </p>
-          </div>
-          <div className="mvv-item">
-            <h3 className="mvv-label">Values</h3>
+          <div className="mvv-col">
+            <h3 className="mvv-col-label">Values</h3>
             <div className="mvv-values">
               {values.map(v => (
                 <span key={v} className="mvv-value">{v}</span>
               ))}
             </div>
           </div>
-          <div className="mvv-item">
-            <h3 className="mvv-label">Purpose</h3>
-            <p className="mvv-text">
+          <div className="mvv-col">
+            <h3 className="mvv-col-label">Purpose</h3>
+            <p className="mvv-col-text">
               言葉とマーケティングの力で、"正しく報われる努力"を増やし、人生と社会の可能性を最大化する。
             </p>
           </div>
