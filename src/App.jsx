@@ -247,15 +247,13 @@ function About() {
     <section id="about" className="section about">
       <div className={`about-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <div className="about-photo">
-          <div className="about-photo-placeholder">
-            <span>小林 顕人</span>
-          </div>
+          <img src="/akihito.png" alt="小林 顕人" className="about-photo-img" />
         </div>
         <div className="about-text">
           <p className="section-label">代表</p>
           <h2 className="about-name">
             小林 顕人
-            <span className="about-name-en">Akito Kobayashi</span>
+            <span className="about-name-en">Akihito Kobayashi</span>
           </h2>
           <p className="about-role">代表取締役 CEO</p>
           <p className="about-bio">
