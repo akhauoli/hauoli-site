@@ -189,15 +189,17 @@ img { max-width: 100%; display: block; }
   position: absolute;
   bottom: -8px;
   border-radius: 50%;
-  background: var(--c-accent);
+  background: var(--c-accent-light);
   opacity: 0;
   animation: floatUp linear infinite;
+  box-shadow: 0 0 6px 2px rgba(224,168,88,0.4);
 }
 @keyframes floatUp {
-  0%   { transform: translateY(0);      opacity: 0; }
-  15%  { opacity: 0.35; }
-  70%  { opacity: 0.12; }
-  100% { transform: translateY(-100vh); opacity: 0; }
+  0%   { transform: translateY(0) scale(1);    opacity: 0; }
+  10%  { opacity: 0.75; }
+  50%  { opacity: 0.45; }
+  85%  { opacity: 0.15; }
+  100% { transform: translateY(-100vh) scale(0.6); opacity: 0; }
 }
 .hero-content {
   position: relative;
