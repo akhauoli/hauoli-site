@@ -380,11 +380,19 @@ img { max-width: 100%; display: block; }
 }
 .service-card {
   background: var(--c-dark-mid);
-  padding: 36px 28px;
+  padding: 32px 22px;
   transition: background 0.25s;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+  /* スタガーアニメーション用 */
+  opacity: 0;
+  transform: translateY(32px);
+}
+.service-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: background 0.25s, opacity 0.6s ease, transform 0.6s ease;
 }
 .service-card:hover { background: var(--c-dark-card); }
 .service-card--featured {
@@ -415,13 +423,21 @@ img { max-width: 100%; display: block; }
   border-radius: 1px;
   white-space: nowrap;
 }
+.num {
+  font-family: var(--font-body);
+  font-size: 0.88em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  vertical-align: 0.04em;
+}
 .service-ja {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-style: italic;
   font-weight: 400;
   color: var(--c-text-light);
-  line-height: 1.4;
+  line-height: 1.5;
+  word-break: keep-all;
 }
 .service-desc {
   font-size: 0.84rem;

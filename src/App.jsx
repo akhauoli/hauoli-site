@@ -227,7 +227,7 @@ function Services() {
     <section id="services" className="section services">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Service</p>
-        <h2 className="section-heading">Elevateを頂点に、<br />4段階の登山道</h2>
+        <h2 className="section-heading">Elevateを頂点に、<br /><span className="num">4</span>段階の登山道</h2>
         <p className="services-sub">
           手段ではなく、<strong>"何を変えるか"</strong>で整理したHau'oliのサービス構成。
         </p>
