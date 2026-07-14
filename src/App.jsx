@@ -179,6 +179,12 @@ function Concept() {
             <span key={i} style={{ transitionDelay: `${i * 0.045}s` }}>{ch}</span>
           ))}
         </h2>
+        <p className="concept-definition">
+          el·e·vate ── 〔動〕高める。引き上げる。昇華させる。
+        </p>
+        <p className="concept-bridge">
+          Hau'oli growthがすべての事業に問いかける、ひとつの言葉。
+        </p>
         <p className="concept-lead">
           その熱を、Elevateする。<br />
           あなたの事業に眠る<em>"熱い思いと志"</em>を、成果と成長へ。<br />

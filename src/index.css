@@ -337,6 +337,22 @@ img { max-width: 100%; display: block; }
   transform: translateY(0);
   opacity: 1;
 }
+.concept-definition {
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  color: var(--c-accent);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.concept-bridge {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--c-text-dark);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  border-left: 2px solid var(--c-accent);
+  padding-left: 16px;
+}
 .concept-lead {
   font-size: clamp(0.97rem, 2vw, 1.12rem);
   line-height: 2.1;
