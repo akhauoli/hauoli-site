@@ -518,6 +518,17 @@ img { max-width: 100%; display: block; }
 .mvv { background: var(--c-dark-mid); color: var(--c-text-light); }
 .mvv .section-label { color: var(--c-text-dim); }
 
+.mvv-vision-label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-top: 52px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
 .mvv-vision {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.2vw, 3.1rem);
@@ -526,7 +537,7 @@ img { max-width: 100%; display: block; }
   color: var(--c-text-light);
   line-height: 1.5;
   text-align: center;
-  margin: 56px auto 52px;
+  margin: 12px auto 52px;
   letter-spacing: 0.02em;
   max-width: 780px;
   word-break: keep-all;
