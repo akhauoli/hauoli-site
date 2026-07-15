@@ -359,7 +359,7 @@ function Contact() {
           一歩踏み出す準備ができたら、<br />ご連絡ください。
         </h2>
         <p className="contact-sub">紹介・ご相談・お見積もりなど、お気軽にどうぞ。</p>
-        <a href="mailto:a.kobayashi@hauoil.com" className="contact-cta">
+        <a href="https://forms.gle/jLUNmb7tnTzkgoJb7" target="_blank" rel="noopener noreferrer" className="contact-cta">
           メールで問い合わせる
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M3.5 9h11M10.5 5.5l3.5 3.5-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
