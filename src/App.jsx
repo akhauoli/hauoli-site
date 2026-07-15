@@ -126,7 +126,7 @@ const SERVICES = [
     stage: 'CONVERT',
     ja: '成果に、変える',
     desc: '届けるだけでは伸びない。"選ばれ買われる"ところまで。磨いた価値を確かな数字へ変換。',
-    tags: ['Meta広告運用', '集客設計', 'CV改善', 'LTV最大化'],
+    tags: ['広告運用', '集客設計', 'CV改善', 'LTV最大化'],
     accent: 'green',
   },
   {
