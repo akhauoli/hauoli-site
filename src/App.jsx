@@ -374,6 +374,7 @@ function About() {
           <ul className="about-traits">
             <li>諦めが悪い</li>
             <li>話を聞いたら、ゴールが見える</li>
+            <li>業種が変わっても、本質はいつも同じに聞こえる</li>
           </ul>
           <blockquote className="about-belief">
             "人は、幸せに向かって成長し、その成長の中にまた新しい幸せを見つけていく。そんな循環が、まわりにも幸せな変化を起こしていく。"
