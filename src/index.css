@@ -472,7 +472,7 @@ img { max-width: 100%; display: block; }
 
 .strength-num {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-style: italic;
   color: var(--c-accent);
   letter-spacing: 0.06em;
