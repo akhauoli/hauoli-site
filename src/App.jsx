@@ -340,7 +340,7 @@ function MVV() {
         <div className={`section-inner reveal${inViewPurpose ? ' in-view' : ''}`} ref={refPurpose}>
           <p className="mvv-block-label">Purpose</p>
           <p className="mvv-block-text">
-            言葉とマーケティングの力で、<em>"正しく報われる努力"</em>を増やし、<br />
+            言葉・マーケティング・仕組みの力で、<em>"正しく報われる努力"</em>を増やし、<br />
             人生と社会の可能性を最大化する。
           </p>
         </div>
