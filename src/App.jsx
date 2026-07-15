@@ -274,7 +274,7 @@ function MVV() {
   return (
     <section id="mvv" className="section mvv">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
-        <p className="section-label">Mission / Vision / Values</p>
+        <p className="section-label">Mission / Vision / Values / Purpose</p>
         <blockquote className="mvv-vision">
           自分にしか描けない人生を、自分らしく。
         </blockquote>
