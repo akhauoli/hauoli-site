@@ -664,7 +664,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 960px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; }
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
-  .about-photo-img { aspect-ratio: 4/3; object-position: center 20%; }
+  .about-photo-img { aspect-ratio: 3/4; object-position: center top; max-height: 480px; }
   .mvv-values-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 640px) {
@@ -676,7 +676,13 @@ img { max-width: 100%; display: block; }
   .services { padding: 72px 0; }
   .services .section-inner { padding: 0 20px; }
   .services-grid { grid-template-columns: 1fr; padding: 0 20px; }
-  .mvv-values-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-photo-img { aspect-ratio: 4/5; max-height: none; object-position: center top; }
+  .mvv-vision { font-size: clamp(1.5rem, 7vw, 2rem); word-break: normal; overflow-wrap: break-word; }
+  .mvv-vision br { display: none; }
+  .mvv-block-text { font-size: clamp(1.1rem, 4.2vw, 1.4rem); word-break: normal; overflow-wrap: break-word; }
+  .mvv-block-text br { display: none; }
+  .mvv-values-grid { grid-template-columns: 1fr; }
+  .mvv-value-card { padding: 28px 20px; }
   .mvv-block { padding: 56px 20px; }
   .mvv-vision-section { padding: 72px 20px 56px; }
   .footer { flex-direction: column; gap: 12px; text-align: center; }
