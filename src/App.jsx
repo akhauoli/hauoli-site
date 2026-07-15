@@ -56,6 +56,54 @@ const VALUES = [
   },
 ]
 
+const STRENGTHS = [
+  {
+    num: '01',
+    title: 'ゴールから逆算する、戦略設計',
+    paragraphs: [
+      '目の前の課題に、対処法を出すのは簡単です。私たちがやるのは、その先。',
+      '「本当は、どうなりたいのか」から逆算して、そこへ至る道筋ごと、設計します。',
+      '施策単体ではなく、事業全体の絵を描いてから、手を打つ。だから、打ち手がブレません。',
+    ],
+  },
+  {
+    num: '02',
+    title: '人と組織を、見抜く目',
+    paragraphs: [
+      'マーケティングは、最後は、人がやります。',
+      '誰に、どの役割を、どう任せるか——そこを外すと、どんな戦略も、回りません。',
+      '私たちは、事業だけでなく、そこにいる人の適性と関係性まで見た上で、実行できる形に、落とし込みます。',
+    ],
+  },
+  {
+    num: '03',
+    title: '企画から実装まで、一人で完結する速さ',
+    paragraphs: [
+      '戦略を描く人と、手を動かす人が分かれていると、必ず、伝達ロスが生まれます。',
+      '私たちは、構想・設計・制作・実装まで、同じ頭で、走り抜けます。',
+      '会議で決めたことが、そのままの熱量で、形になる。この速さが、最大の武器です。',
+    ],
+  },
+  {
+    num: '04',
+    title: '泥臭く、正攻法で',
+    paragraphs: [
+      '派手な手法や、近道には、頼りません。',
+      '数字を見て、仮説を立て、検証し、また直す。その地味な反復こそが、成果を生む唯一の道だと知っています。',
+      '愚直であることを、私たちは、誇りにしています。',
+    ],
+  },
+  {
+    num: '05',
+    title: '最後は、いなくなる',
+    paragraphs: [
+      '私たちのゴールは、契約を続けることではありません。あなたの組織が、自走することです。',
+      'ノウハウを囲い込まず、渡し、根付かせる。',
+      '「もう大丈夫です」と言われる日を目指して、伴走します。',
+    ],
+  },
+]
+
 const SERVICES = [
   {
     id: 'ignite',
@@ -126,6 +174,7 @@ function Nav({ menuOpen, setMenuOpen }) {
       <ul className="nav-links">
         <li><a href="#concept">ELEVATE</a></li>
         <li><a href="#services">SERVICE</a></li>
+        <li><a href="#strengths">強み</a></li>
         <li><a href="#about">代表</a></li>
         <li><a href="#contact" className="nav-cta">お問い合わせ</a></li>
       </ul>
@@ -139,6 +188,7 @@ function MobileMenu({ open, onClose }) {
       <nav className="mobile-nav">
         <a href="#concept" onClick={onClose}>ELEVATE</a>
         <a href="#services" onClick={onClose}>SERVICE</a>
+        <a href="#strengths" onClick={onClose}>強み</a>
         <a href="#about" onClick={onClose}>代表</a>
         <a href="#mvv" onClick={onClose}>MVV</a>
         <a href="#contact" onClick={onClose}>お問い合わせ</a>
@@ -241,6 +291,42 @@ function ServiceCard({ service, index }) {
         ))}
       </div>
     </div>
+  )
+}
+
+function StrengthItem({ item, index }) {
+  const [ref, inView] = useInView(0.1)
+  return (
+    <div
+      ref={ref}
+      className={`strength-item reveal${inView ? ' in-view' : ''}`}
+      style={{ transitionDelay: `${index * 0.08}s` }}
+    >
+      <span className="strength-num">{item.num}</span>
+      <div className="strength-content">
+        <h3 className="strength-title">{item.title}</h3>
+        <div className="strength-body">
+          {item.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Strengths() {
+  const [ref, inView] = useInView()
+  return (
+    <section id="strengths" className="section strengths">
+      <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
+        <p className="section-label">Our Strengths</p>
+        <h2 className="section-heading">私たちの強み</h2>
+      </div>
+      <div className="strengths-list section-inner">
+        {STRENGTHS.map((item, i) => (
+          <StrengthItem key={item.num} item={item} index={i} />
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -394,6 +480,7 @@ export default function App() {
         <Hero />
         <Concept />
         <Services />
+        <Strengths />
         <About />
         <MVV />
         <Contact />
