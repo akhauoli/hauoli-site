@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0D1B0F"/>
+  <rect width="32" height="32" rx="6" fill="#1D1B18"/>
   <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle"
-    font-family="Georgia,serif" font-size="18" font-style="italic"
-    fill="#4A8B62">H</text>
+    font-family="Georgia,serif" font-size="20" font-style="italic"
+    fill="#E0A858">H</text>
 </svg>
