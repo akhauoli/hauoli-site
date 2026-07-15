@@ -33,6 +33,29 @@ const PARTICLES = [
   { left: 79, delay: 1.2, dur: 7.1, size: 6 },
 ]
 
+const VALUES = [
+  {
+    name: '信頼',
+    desc: '実績と誠実さで積み上げる、全ての関係の土台。期待を超え続けることでしか育まれない。',
+  },
+  {
+    name: '幸福',
+    desc: 'クライアントが幸せになることが、自分たちの喜びになる。最終的な目的地はここにある。',
+  },
+  {
+    name: '成長',
+    desc: '昨日より今日。学び続け、進化し続ける姿勢を手放さない。止まった瞬間に価値は消える。',
+  },
+  {
+    name: '愚直',
+    desc: '近道も派手さも要らない。正攻法で、泥臭く、手を抜かない。それが唯一の正しい道。',
+  },
+  {
+    name: '感謝',
+    desc: '全ての出会いと機会に感謝し、謙虚に向き合い続ける。おかげさまで、が原動力になる。',
+  },
+]
+
 const SERVICES = [
   {
     id: 'ignite',
@@ -269,38 +292,57 @@ function About() {
 }
 
 function MVV() {
-  const [ref, inView] = useInView()
-  const values = ['信頼', '幸福', '成長', '愚直', '感謝']
+  const [refTop, inViewTop] = useInView()
+  const [refMission, inViewMission] = useInView()
+  const [refValues, inViewValues] = useInView()
+  const [refPurpose, inViewPurpose] = useInView()
   return (
-    <section id="mvv" className="section mvv">
-      <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
-        <p className="section-label">Mission / Vision / Values / Purpose</p>
-        <p className="mvv-vision-label">Vision</p>
-        <blockquote className="mvv-vision">
-          自分にしか描けない人生を、自分らしく。
-        </blockquote>
-        <div className="mvv-rule" aria-hidden="true" />
-        <div className="mvv-lower">
-          <div className="mvv-col">
-            <h3 className="mvv-col-label">Mission</h3>
-            <p className="mvv-col-text">
-              挑戦する人々と企業の"熱い思いと志"を成果と成長に変換し、全ての人が正しく報われる幸せな未来を切り拓く。
-            </p>
+    <section id="mvv" className="mvv">
+      {/* Vision */}
+      <div className="mvv-vision-section">
+        <div className={`section-inner reveal${inViewTop ? ' in-view' : ''}`} ref={refTop}>
+          <p className="section-label">Mission / Vision / Values / Purpose</p>
+          <p className="mvv-vision-label">Vision</p>
+          <blockquote className="mvv-vision">
+            自分にしか描けない人生を、自分らしく。
+          </blockquote>
+        </div>
+      </div>
+
+      {/* Mission */}
+      <div className="mvv-block mvv-block--mission">
+        <div className={`section-inner reveal${inViewMission ? ' in-view' : ''}`} ref={refMission}>
+          <p className="mvv-block-label">Mission</p>
+          <p className="mvv-block-text">
+            挑戦する人々と企業の<em>"熱い思いと志"</em>を成果と成長に変換し、<br />
+            全ての人が正しく報われる幸せな未来を切り拓く。
+          </p>
+        </div>
+      </div>
+
+      {/* Values */}
+      <div className="mvv-block mvv-block--values">
+        <div className={`section-inner reveal${inViewValues ? ' in-view' : ''}`} ref={refValues}>
+          <p className="mvv-block-label">Values</p>
+          <div className="mvv-values-grid">
+            {VALUES.map(v => (
+              <div key={v.name} className="mvv-value-card">
+                <h3 className="mvv-value-name">{v.name}</h3>
+                <p className="mvv-value-desc">{v.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="mvv-col">
-            <h3 className="mvv-col-label">Values</h3>
-            <div className="mvv-values">
-              {values.map(v => (
-                <span key={v} className="mvv-value">{v}</span>
-              ))}
-            </div>
-          </div>
-          <div className="mvv-col">
-            <h3 className="mvv-col-label">Purpose</h3>
-            <p className="mvv-col-text">
-              言葉とマーケティングの力で、"正しく報われる努力"を増やし、人生と社会の可能性を最大化する。
-            </p>
-          </div>
+        </div>
+      </div>
+
+      {/* Purpose */}
+      <div className="mvv-block mvv-block--purpose">
+        <div className={`section-inner reveal${inViewPurpose ? ' in-view' : ''}`} ref={refPurpose}>
+          <p className="mvv-block-label">Purpose</p>
+          <p className="mvv-block-text">
+            言葉とマーケティングの力で、<em>"正しく報われる努力"</em>を増やし、<br />
+            人生と社会の可能性を最大化する。
+          </p>
         </div>
       </div>
     </section>
