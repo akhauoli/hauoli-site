@@ -750,8 +750,10 @@ img { max-width: 100%; display: block; }
   .about-photo-img { aspect-ratio: 4/5; max-height: none; object-position: center top; }
   .mvv-vision { font-size: clamp(1.5rem, 7vw, 2rem); word-break: normal; overflow-wrap: break-word; }
   .mvv-vision br { display: none; }
-  .mvv-block-text { font-size: clamp(1.1rem, 4.2vw, 1.4rem); word-break: normal; overflow-wrap: break-word; }
+  .mvv-block-text { font-size: clamp(1.1rem, 4.2vw, 1.4rem); word-break: break-all; overflow-wrap: break-word; }
   .mvv-block-text br { display: none; }
+  .contact-heading { font-size: clamp(1.4rem, 5.5vw, 1.9rem); }
+  .contact-heading br { display: none; }
   .mvv-values-grid { grid-template-columns: 1fr; }
   .mvv-value-card { padding: 28px 20px; }
   .mvv-block { padding: 56px 20px; }
