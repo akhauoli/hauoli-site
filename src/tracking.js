@@ -82,7 +82,8 @@ export function initPixel() {
   window.fbq('init', META_PIXEL_ID)
   window.fbq('track', 'PageView')
 }
-const fbq = (...args) => { if (pixelReady && window.fbq) window.fbq(...args) }
+// 子コンポーネントの effect（記事閲覧など）は App の effect より先に走るので、未初期化なら先に初期化してから送る
+const fbq = (...args) => { initPixel(); if (window.fbq) window.fbq(...args) }
 
 // ── イベント ──
 // dataLayer(GTM→GA4) と Meta Pixel の両方に流す。GTM 側は event 名でトリガーを作れる
