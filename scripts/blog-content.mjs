@@ -30,6 +30,8 @@ function createMarked() {
   const used = new Set()
   const marked = new Marked({
     gfm: true,
+    // 1行改行をそのまま <br> にする。短い行で息をつく書き方（Reelの声）をそのまま活かすため
+    breaks: true,
     renderer: {
       heading({ tokens, depth }) {
         const text = this.parser.parseInline(tokens)

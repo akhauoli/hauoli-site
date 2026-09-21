@@ -130,6 +130,8 @@
   padding-top: 0.8em;
   border-top: 1px solid var(--c-border-light);
 }
+/* 区切り線(---)の直後の見出しは線が二重になるので上線を消す */
+.blog-body hr + h2 { border-top: none; padding-top: 0; margin-top: 0; }
 .blog-body h3 { font-size: 1.12rem; font-weight: 600; line-height: 1.5; margin-top: 2.2em; }
 .blog-body h2 + *, .blog-body h3 + * { margin-top: 1em; }
 .blog-body p { color: var(--c-text-dark); }

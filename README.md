@@ -12,7 +12,7 @@ Hau'oli growth コーポレートサイト。React 19 + Vite。トップ（1ペ�
 - `src/Budou.jsx` — 日本語の改行ルール（下記）
 - `src/index.css` — デザイントークンと全スタイル
 - `src/entry-server.jsx` — ビルド時プリレンダー用エントリ
-- `content/` — **ブログ記事の正本**（Markdown）。書き方は [content/README.md](content/README.md)
+- `content/` — **ブログ記事の正本**（Markdown）。仕組みは [content/README.md](content/README.md)、原稿の書き方は [content/BLOG_WRITING_GUIDE.md](content/BLOG_WRITING_GUIDE.md)
 - `scripts/blog-content.mjs` — content/ を読んでHTML化する共通ロジック（Vite plugin と prerender が使う）
 - `scripts/prerender.mjs` — ブログ各ページの静的HTML・自動アイキャッチ・sitemap.xml・feed.xml・blog/index.json を生成
 - `scripts/blog-cover.mjs` — アイキャッチ/OG画像の自動生成（satori + resvg、ブランドテンプレ4種）。フォントは `scripts/fonts/` に同梱
