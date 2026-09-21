@@ -5,16 +5,50 @@
 const SHEET_NAME = 'お問い合わせ'
 const CONFIG_SHEET_NAME = '設定'
 
+// 列は右に足していく（既存の行・列は動かさない）。足した列は doPost 時に ensureHeaders() が自動で追加する
 const HEADERS = [
+  // ── 初期16列（2026-09-21 公開時） ──
   '受付日時', 'ID', 'ステータス', '担当', '対応日時',
   'お名前', '会社名', '会社URL', 'メール', '電話',
   '今、一番困っていること', '今後どうしていきたいか', '支援形態', 'ご予算',
   '参照元', 'UTM',
+  // ── Phase1 計測列（2026-09-21 追加）。ID列 = lead_id = 広告イベントの event_id ──
+  'リードステータス',            // Lead → Qualified → Meeting → Proposal → Won / Lost（Phase2のAdminで使う。今は Lead 固定）
+  '着地ページ', 'フォームページ', '記事slug',
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'fbclid', 'gclid',
+  '初回接点日時', '初回着地', '初回参照元', '初回utm_source', '初回utm_medium', '初回utm_campaign',
+  '最終接点日時', '最終着地', '最終参照元', '最終utm_source', '最終utm_medium', '最終utm_campaign',
+  '接点JSON',                  // first/last/click_ids の生データ。後で項目を増やしても取り直し不要
 ]
 const COL = {}
 HEADERS.forEach((h, i) => { COL[h] = i + 1 })
 
 const STATUS = { NEW: '未対応', DONE: '対応済' }
+const LEAD_STATUS_INITIAL = 'Lead'
+const LEAD_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+// フォームから来た値 → 列名。ブラウザ側 src/tracking.js の attribution() と対
+const FIELD_TO_COL = {
+  landing_page: '着地ページ', form_page: 'フォームページ', blog_slug: '記事slug',
+  utm_source: 'utm_source', utm_medium: 'utm_medium', utm_campaign: 'utm_campaign', utm_content: 'utm_content', utm_term: 'utm_term',
+  fbclid: 'fbclid', gclid: 'gclid',
+  first_ts: '初回接点日時', first_landing: '初回着地', first_referrer: '初回参照元',
+  first_utm_source: '初回utm_source', first_utm_medium: '初回utm_medium', first_utm_campaign: '初回utm_campaign',
+  last_ts: '最終接点日時', last_landing: '最終着地', last_referrer: '最終参照元',
+  last_utm_source: '最終utm_source', last_utm_medium: '最終utm_medium', last_utm_campaign: '最終utm_campaign',
+  touch_json: '接点JSON',
+}
+
+// ヘッダー行に無い列を右端に追加する（何度呼んでも安全）
+function ensureHeaders(sheet) {
+  const lastCol = sheet.getLastColumn()
+  const existing = lastCol > 0 ? sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(String) : []
+  const missing = HEADERS.filter(h => !existing.includes(h))
+  if (missing.length === 0) return
+  sheet.getRange(1, existing.length + 1, 1, missing.length).setValues([missing]).setFontWeight('bold')
+  Logger.log('列を追加: ' + missing.join(', '))
+}
 
 // 初期設定値（以降は「設定」シートが正）
 const DEFAULT_CONFIG = {
@@ -70,14 +104,17 @@ function doPost(e) {
     const err = validate(data)
     if (err) return json({ ok: false, error: err })
 
+    // 伝票番号。ブラウザが発行した lead_id（UUID）をそのまま使う。無ければ従来どおり自前で作る
+    const id = LEAD_ID_RE.test(String(data.lead_id || '')) ? String(data.lead_id).toLowerCase() : Utilities.getUuid().replace(/-/g, '').slice(0, 10)
+    const now = new Date()
+    // dry_run: 書き込み・通知をせず、シートに入る予定の行を返す（疎通テスト用。本番フォームは送らない）
+    if (data.dry_run) return json({ ok: true, id, dry_run: true, headers: HEADERS, row: buildRow(id, now, data) })
+
     // 同一メールからの連投は60秒抑止
     const cache = CacheService.getScriptCache()
     const key = 'contact:' + data.email.toLowerCase()
     if (cache.get(key)) return json({ ok: false, error: '短時間に複数回送信されています。少し時間をおいてお試しください。' })
     cache.put(key, '1', 60)
-
-    const id = Utilities.getUuid().replace(/-/g, '').slice(0, 10)
-    const now = new Date()
     appendRow(id, now, data)
     notifyTeam(id, now, data)
     autoReply(data)
@@ -100,6 +137,11 @@ function validate(d) {
 
 function appendRow(id, now, d) {
   const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME)
+  ensureHeaders(sheet)
+  sheet.appendRow(buildRow(id, now, d))
+}
+
+function buildRow(id, now, d) {
   const row = new Array(HEADERS.length).fill('')
   row[COL['受付日時'] - 1] = now
   row[COL['ID'] - 1] = id
@@ -114,8 +156,16 @@ function appendRow(id, now, d) {
   row[COL['支援形態'] - 1] = d.support
   row[COL['ご予算'] - 1] = d.budget
   row[COL['参照元'] - 1] = d.referrer || ''
-  row[COL['UTM'] - 1] = d.utm || ''
-  sheet.appendRow(row)
+  row[COL['UTM'] - 1] = utmSummary(d)
+  row[COL['リードステータス'] - 1] = LEAD_STATUS_INITIAL
+  for (const k in FIELD_TO_COL) row[COL[FIELD_TO_COL[k]] - 1] = d[k] != null ? String(d[k]) : ''
+  return row
+}
+
+// 人が読む用の1行（旧UTM列の互換）。構造化した値は個別の列に入っている
+function utmSummary(d) {
+  if (d.utm) return String(d.utm)
+  return ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].filter(k => d[k]).map(k => k + '=' + d[k]).join('&')
 }
 
 function summaryText(d) {
@@ -147,7 +197,9 @@ function notifyTeam(id, now, d) {
     '',
     '────────',
     '受付: ' + Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy/MM/dd HH:mm'),
-    '参照元: ' + (d.referrer || '—') + (d.utm ? ' / ' + d.utm : ''),
+    '参照元: ' + (d.referrer || '—') + (utmSummary(d) ? ' / ' + utmSummary(d) : ''),
+    '着地: ' + (d.landing_page || '—') + (d.blog_slug ? ' / 読んだ記事: ' + d.blog_slug : ''),
+    'ID: ' + id,
     '',
     '対応したら押す（シートの「ステータス」が対応済になる）:',
     ...doneLinks,
@@ -192,6 +244,12 @@ function autoReply(d) {
 function doGet(e) {
   const p = (e && e.parameter) || {}
   if (p.action === 'ping') return json({ ok: true, ts: new Date().toISOString() })
+  // 列の追加だけ先に済ませる（何度呼んでも安全。データは触らない）
+  if (p.action === 'migrate') {
+    const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME)
+    ensureHeaders(sheet)
+    return json({ ok: true, columns: sheet.getLastColumn() })
+  }
   if (p.action === 'done' && p.id) {
     const r = markDone(p.id, p.by || '')
     if (r.result === 'done') return html('対応済みにしました（担当: ' + r.by + '）')

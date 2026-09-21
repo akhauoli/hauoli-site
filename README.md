@@ -43,6 +43,37 @@ npm run build = vite build（クライアント）                              
 本文・フォームは通常の折り返しのまま。
 `vite.config.js` のエイリアスでパーサーと日本語モデルだけを読み込んでいる（`budoux` を直接 import すると4言語分のモデルが全部入って +200KB になる）。
 
+## 計測（Phase1: 2026-09-21）
+
+計測は `src/tracking.js` に集約。dataLayer(GTM→GA4) と Meta Pixel（hauoil.com 用 `1768300734297039`、ビジネス Hau'oli growth 所有、`src/config.js` の `META_PIXEL_ID`）の両方に同じイベントを流す。GTM 内に Pixel は入れない（コードで一元管理）。
+
+### イベント（5種）
+
+| event | いつ | 主なパラメータ | Meta Pixel |
+|---|---|---|---|
+| `page_view` | SPA 内のページ遷移時（初回表示は GTM / Pixel 初期化が数える） | path | PageView |
+| `article_view` | 記事ページ表示 | slug, category, title | ViewContent |
+| `cta_click` | 相談ボタン等 | location: hero / situations / nav / mobile_nav / footer / blog_post | CTAClick（カスタム） |
+| `form_start` | フォームに最初の入力 | form_page, lead_id | FormStart（カスタム） |
+| `form_submit` | フォーム送信成功 ＝ **広告のCV（Lead）** | lead_id, support, budget, blog_slug, utm_source | Lead（`eventID = lead_id`） |
+
+`form_submit` と同時に旧イベント `contact_submit` も push している（GTM の既存トリガー用）。GTM 側を `form_submit` に切り替えたら `tracking.js` から消す。
+
+### 接点（first / last touch）
+
+- `hg_first_touch`（localStorage）: 初めてサイトに来た時の ts / landing / referrer / utm_* / fbclid・gclid 等。以後上書きしない
+- `hg_last_touch`（sessionStorage）: この訪問の接点。utm や click id 付きで来直したら更新
+- `hg_last_post`（sessionStorage）: 最後に読んだ記事の slug
+
+### lead_id（伝票番号）
+
+フォームに最初の入力があった時点でブラウザが UUID を発行。送信ペイロード（`lead_id` / `event_id`）→ シートの `ID` 列 → Pixel の Lead `eventID` で同じ値。Phase3 でサーバー（CAPI）から同じ Lead を送っても Meta 側で1件に統合される。
+
+### シートに入る列（GAS `HEADERS`、右に追加した Phase1 列）
+
+`リードステータス`（Lead → Qualified → Meeting → Proposal → Won / Lost。今は Lead 固定）/ `着地ページ` `フォームページ` `記事slug` / `utm_source〜utm_term` / `fbclid` `gclid` / `初回接点日時・着地・参照元・utm_source/medium/campaign` / `最終接点日時・…` / `接点JSON`（生データ）。
+列は `ensureHeaders()` が送信時に自動追加する。手で先に足すなら `GET <WebApp>?action=migrate`。`dry_run: true` を付けて POST すると書き込み・通知なしで入る予定の行が返る。
+
 ## お問い合わせの流れ
 
 ```

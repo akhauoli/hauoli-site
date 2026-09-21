@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { CONTACT_ENDPOINT, SOURCE_STORAGE_KEY } from './config'
+import { useRef, useState } from 'react'
+import { CONTACT_ENDPOINT } from './config'
+import { attribution, newLeadId, track } from './tracking'
 
 const SUPPORT_OPTIONS = ['継続的な支援を検討している', 'まずは相談したい']
 const BUDGET_OPTIONS = ['月20〜30万円程度', '月30〜50万円程度', '月50万円以上', '内容を見て相談したい']
@@ -10,14 +11,6 @@ const INITIAL = {
   website: '', // ハニーポット（人間には見えない）
 }
 
-// 流入元。ブログ経由の場合は着地ページ・最後に読んだ記事をUTM欄に添える（シート側の列はそのまま）
-function readSource() {
-  try {
-    const { referrer = '', utm = '', landing, post } = JSON.parse(sessionStorage.getItem(SOURCE_STORAGE_KEY) || '{}')
-    const extra = [landing && landing !== '/' && `landing=${landing}`, post && `post=${post}`].filter(Boolean)
-    return { referrer, utm: [utm, ...extra].filter(Boolean).join('&') }
-  } catch { return {} }
-}
 
 function Field({ label, required, children, hint }) {
   return (
@@ -62,7 +55,14 @@ export default function ContactForm() {
   const [status, setStatus] = useState('idle') // idle | sending | done | error
   const [error, setError] = useState('')
 
-  const onChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  // 伝票番号(lead_id)。入力を始めた瞬間に発行し、送信・シート・Pixel・将来のサーバー送信で同じ値を使う
+  const leadId = useRef(null)
+  const started = () => {
+    if (leadId.current) return
+    leadId.current = newLeadId()
+    track('form_start', { form_page: window.location.pathname + window.location.hash, lead_id: leadId.current })
+  }
+  const onChange = e => { started(); setForm(f => ({ ...f, [e.target.name]: e.target.value })) }
 
   const missing = () => {
     if (!form.name.trim()) return 'お名前を入力してください。'
@@ -81,16 +81,19 @@ export default function ContactForm() {
     setError('')
     setStatus('sending')
     try {
+      started()
+      const attr = attribution()
       const res = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         // text/plain にするとブラウザの事前確認(preflight)が走らず GAS に届く
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ ...form, ...readSource() }),
+        body: JSON.stringify({ ...form, lead_id: leadId.current, event_id: leadId.current, ...attr }),
       })
       const data = await res.json()
       if (!data.ok) throw new Error(data.error || 'server')
       setStatus('done')
-      window.dataLayer?.push({ event: 'contact_submit', support: form.support, budget: form.budget })
+      // 広告のCV(Lead)。lead_id を eventID として渡す
+      track('form_submit', { lead_id: leadId.current, support: form.support, budget: form.budget, blog_slug: attr.blog_slug, utm_source: attr.utm_source, form_page: attr.form_page })
     } catch (err) {
       console.log('問い合わせ送信に失敗:', err)
       setError(err.message && err.message !== 'server' && err.message !== 'Failed to fetch'

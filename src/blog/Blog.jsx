@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import blog from 'virtual:blog-data'
 import Budou from '../Budou'
 import { Link, useTitle } from '../router'
-import { SOURCE_STORAGE_KEY } from '../config'
+import { rememberPost, track } from '../tracking'
 import './blog.css'
 
 const { posts, categories, authors } = blog
@@ -113,13 +113,11 @@ export function BlogPost({ slug }) {
   const post = postBySlug[slug]
   useTitle(post ? `${post.metaTitle || post.title}｜Hau'oli growth` : null)
 
-  // どの記事を読んで問い合わせに来たかをフォームの参照元に添える
+  // 記事閲覧を計測し、どの記事を読んで問い合わせに来たかを覚えておく
   useEffect(() => {
     if (!post) return
-    try {
-      const cur = JSON.parse(sessionStorage.getItem(SOURCE_STORAGE_KEY) || '{}')
-      sessionStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ ...cur, post: post.slug }))
-    } catch { /* 無視 */ }
+    rememberPost(post.slug)
+    track('article_view', { slug: post.slug, category: post.category, title: post.title })
   }, [post])
 
   if (!post) return <NotFound />
@@ -181,7 +179,7 @@ export function BlogPost({ slug }) {
           <Budou as="p" className="blog-cta-text">
             何が問題か、まだ整理できていなくても大丈夫です。現在地を整理するところから、一緒に考えます。
           </Budou>
-          <Link href="/#contact" className="situations-cta">相談してみる <span aria-hidden="true">→</span></Link>
+          <Link href="/#contact" className="situations-cta" onClick={() => track('cta_click', { location: 'blog_post', slug: post.slug })}>相談してみる <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </article>

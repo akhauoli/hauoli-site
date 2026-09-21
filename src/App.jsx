@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import ContactForm from './ContactForm'
 import Budou from './Budou'
-import { rememberSource } from './config'
+import { rememberTouch, initPixel, track } from './tracking'
 import { RouterProvider, Link, useRoute, useTitle } from './router'
 import { BlogList, BlogPost, NotFound } from './blog/Blog'
 
@@ -196,7 +196,7 @@ function Nav({ menuOpen, setMenuOpen }) {
         <li><Link href="/#strengths">強み</Link></li>
         <li><Link href="/#about">代表</Link></li>
         <li><Link href="/blog">BLOG</Link></li>
-        <li><Link href="/#contact" className="nav-cta">お問い合わせ</Link></li>
+        <li><Link href="/#contact" className="nav-cta" onClick={() => track('cta_click', { location: 'nav' })}>お問い合わせ</Link></li>
       </ul>
     </nav>
   )
@@ -212,7 +212,7 @@ function MobileMenu({ open, onClose }) {
         <Link href="/#about" onClick={onClose}>代表</Link>
         <Link href="/#mvv" onClick={onClose}>MVV</Link>
         <Link href="/blog" onClick={onClose}>BLOG</Link>
-        <Link href="/#contact" onClick={onClose}>お問い合わせ</Link>
+        <Link href="/#contact" onClick={() => { track('cta_click', { location: 'mobile_nav' }); onClose() }}>お問い合わせ</Link>
       </nav>
     </div>
   )
@@ -247,7 +247,7 @@ function Hero() {
           <span className="hero-dash">—</span>
           <Budou className="hero-sub">その熱を、高みへ</Budou>
         </div>
-        <a href="#contact" className="hero-cta">
+        <a href="#contact" className="hero-cta" onClick={() => track('cta_click', { location: 'hero' })}>
           相談してみる
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -317,7 +317,7 @@ function Situations() {
           「何が問題なのか」<br />
           を整理するところから、一緒に始めます。
         </Budou>
-        <a href="#contact" className="situations-cta">
+        <a href="#contact" className="situations-cta" onClick={() => track('cta_click', { location: 'situations' })}>
           相談してみる
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -556,7 +556,7 @@ function Footer() {
       <p className="footer-logo">Hau'oli growth</p>
       <nav className="footer-links" aria-label="フッター">
         <Link href="/blog">Blog</Link>
-        <Link href="/#contact">お問い合わせ</Link>
+        <Link href="/#contact" onClick={() => track('cta_click', { location: 'footer' })}>お問い合わせ</Link>
       </nav>
       <p className="footer-copy">© 2026 Hau'oli growth. All rights reserved.</p>
     </footer>
@@ -593,7 +593,8 @@ function Page() {
 export default function App({ url = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false)
   useEffect(() => {
-    rememberSource()
+    rememberTouch()
+    initPixel()
     const onResize = () => { if (window.innerWidth > 640) setMenuOpen(false) }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)

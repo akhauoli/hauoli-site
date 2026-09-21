@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { track } from './tracking'
 
 // 2画面(トップ/ブログ)しか無いので、ルーターは自前の最小実装。
 // pathname を state に持ち、内部リンクは pushState で切り替える。
@@ -11,6 +12,13 @@ export function normalizePath(p) {
 
 export function RouterProvider({ initialPath, children }) {
   const [path, setPath] = useState(normalizePath(initialPath))
+
+  // 2回目以降のパス変更(SPA遷移)だけ page_view を送る。初回表示は GTM/Pixel の初期化側が数える
+  const first = useRef(true)
+  useEffect(() => {
+    if (first.current) { first.current = false; return }
+    track('page_view', { path })
+  }, [path])
 
   useEffect(() => {
     const onPop = () => setPath(normalizePath(window.location.pathname))
