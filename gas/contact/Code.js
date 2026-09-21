@@ -193,27 +193,38 @@ function doGet(e) {
   const p = (e && e.parameter) || {}
   if (p.action === 'ping') return json({ ok: true, ts: new Date().toISOString() })
   if (p.action === 'done' && p.id) {
-    const done = markDone(p.id, p.by || '')
-    return html(done
-      ? '対応済みにしました（ID: ' + p.id + ' / 担当: ' + (p.by || '—') + '）'
-      : '該当する問い合わせが見つかりませんでした（ID: ' + p.id + '）')
+    const r = markDone(p.id, p.by || '')
+    if (r.result === 'done') return html('対応済みにしました（担当: ' + r.by + '）')
+    if (r.result === 'already') return html('この問い合わせは既に ' + r.by + ' が ' + r.at + ' に対応済みです。上書きしていません。')
+    return html('該当する問い合わせが見つかりませんでした（ID: ' + p.id + '）')
   }
   return html("Hau'oli growth contact endpoint")
 }
 
+// 先に押した人が担当。後から押しても上書きしない（同時押しはロックで防ぐ）
 function markDone(id, by) {
-  const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME)
-  const last = sheet.getLastRow()
-  if (last < 2) return false
-  const ids = sheet.getRange(2, COL['ID'], last - 1, 1).getValues().map(r => String(r[0]))
-  const idx = ids.indexOf(id)
-  if (idx < 0) return false
-  const rowNum = idx + 2
-  sheet.getRange(rowNum, COL['ステータス']).setValue(STATUS.DONE)
-  sheet.getRange(rowNum, COL['担当']).setValue(by)
-  sheet.getRange(rowNum, COL['対応日時']).setValue(new Date())
-  Logger.log('対応済みに更新: ' + id + ' by ' + by)
-  return true
+  const lock = LockService.getScriptLock()
+  lock.waitLock(10000)
+  try {
+    const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME)
+    const last = sheet.getLastRow()
+    if (last < 2) return { result: 'notfound' }
+    const ids = sheet.getRange(2, COL['ID'], last - 1, 1).getValues().map(r => String(r[0]))
+    const idx = ids.indexOf(id)
+    if (idx < 0) return { result: 'notfound' }
+    const rowNum = idx + 2
+    const cur = sheet.getRange(rowNum, COL['ステータス'], 1, 3).getValues()[0] // ステータス, 担当, 対応日時
+    if (cur[0] === STATUS.DONE) {
+      const at = cur[2] instanceof Date ? Utilities.formatDate(cur[2], 'Asia/Tokyo', 'M/d HH:mm') : String(cur[2])
+      Logger.log('既に対応済み: ' + id + ' by ' + cur[1])
+      return { result: 'already', by: cur[1] || '—', at }
+    }
+    sheet.getRange(rowNum, COL['ステータス'], 1, 3).setValues([[STATUS.DONE, by, new Date()]])
+    Logger.log('対応済みに更新: ' + id + ' by ' + by)
+    return { result: 'done', by: by || '—' }
+  } finally {
+    lock.releaseLock()
+  }
 }
 
 function json(obj) {

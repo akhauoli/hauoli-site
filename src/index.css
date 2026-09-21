@@ -530,7 +530,7 @@ img { max-width: 100%; display: block; }
   border-left: 2px solid var(--c-accent);
   padding-left: 20px;
   margin-bottom: 32px;
-  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .situations-cta {
   display: inline-flex;

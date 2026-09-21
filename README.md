@@ -25,8 +25,8 @@ Hau'oli growth コーポレートサイト。React 19 + Vite、1ページ構成�
 
 ```bash
 cd gas/contact
-clasp push --force          # コード反映（URLは変わらない）
-clasp deploy --description "..."   # 新バージョンを切る場合のみ
+clasp push --force   # コード反映（HEADのみ。公開版はまだ変わらない）
+clasp deploy --deploymentId AKfycbyb6GMLqIIVmSfnTwBf0YaHwMOKr4yzxHZyDNVYPHmn2LOqXF8EvcsOet_qd7F9mIby --description "..."   # 公開版を更新（URLは変わらない）。push後に必ず実行
 ```
 
 ## 開発
