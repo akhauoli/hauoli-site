@@ -481,7 +481,7 @@ function MVV() {
           <p className="section-label">Mission / Vision / Values / Purpose</p>
           <p className="mvv-vision-label">Vision</p>
           <blockquote className="mvv-vision">
-            自分にしか描けない人生を、自分らしく。
+            自分にしか描けない人生を自分らしく
           </blockquote>
         </div>
       </div>
