@@ -1,6 +1,7 @@
 // Hau'oli growth お問い合わせフォーム バックエンド
 // hauoil.com のフォーム → doPost → シート記録 + 通知メール（小林・佐川）+ 自動返信
-// 通知先・送信者名・担当者は「設定」シートで変更できる（コード変更不要）
+// Phase2 以降: 正本は Firestore（admin.hauoil.com）。ここは Admin API からの relay で通知メール＋シートバックアップを担う
+// 旧経路（ブラウザ直送信）の通知先・送信者名・担当者は「設定」シート。relay では Admin の Settings から渡される
 
 const SHEET_NAME = 'お問い合わせ'
 const CONFIG_SHEET_NAME = '設定'
@@ -98,6 +99,15 @@ function getConfig(key) {
 function doPost(e) {
   try {
     const data = JSON.parse((e && e.postData && e.postData.contents) || '{}')
+
+    // Phase2: Admin API（admin.hauoil.com）からの relay。正本は Firestore、ここは通知メール＋シートバックアップだけ担う
+    if (data.relay_secret !== undefined) return handleRelay(data)
+
+    // Phase2 移行後はブラウザからの直接送信を受けない（Script Properties DIRECT_POST_DISABLED=1）
+    if (PropertiesService.getScriptProperties().getProperty('DIRECT_POST_DISABLED') === '1') {
+      return json({ ok: false, error: 'このエンドポイントは終了しました。hauoil.com のフォームからお送りください。' })
+    }
+
     // ハニーポット: bot は成功を返して静かに捨てる
     if (data.website) return json({ ok: true })
 
@@ -126,6 +136,22 @@ function doPost(e) {
   }
 }
 
+// Admin API からの relay: { relay_secret, notify_to, sender_name, admin_url, data }
+//   検証・連投制限・ハニーポットは API 側で済んでいる。宛先は Firestore(config/notify) から渡される（設定シートは見ない）
+function handleRelay(body) {
+  const secret = PropertiesService.getScriptProperties().getProperty('RELAY_SECRET')
+  if (!secret || body.relay_secret !== secret) return json({ ok: false, error: 'unauthorized' })
+  const d = body.data || {}
+  const id = String(d.lead_id || '')
+  if (!id || !d.email) return json({ ok: false, error: 'bad_request' })
+  const now = new Date()
+  const ctx = { to: String(body.notify_to || '').trim() || getConfig('通知先'), senderName: String(body.sender_name || '').trim() || getConfig('送信者名'), adminUrl: String(body.admin_url || '') }
+  const out = { ok: true, id, notified: false, backed_up: false }
+  try { appendRow(id, now, d); out.backed_up = true } catch (err) { out.sheet_error = String(err); Logger.log('relay シート追記失敗: ' + err) }
+  try { notifyTeam(id, now, d, ctx); autoReply(d, ctx); out.notified = true } catch (err) { out.mail_error = String(err); Logger.log('relay メール失敗: ' + err) }
+  Logger.log('relay 受付: ' + id + ' ' + d.company + ' / ' + d.name + (d.test ? ' [TEST]' : ''))
+  return json(out)
+}
 function validate(d) {
   const req = { name: 'お名前', company: '会社名', email: 'メールアドレス', problem: '今、一番困っていること', support: '支援形態', budget: 'ご予算' }
   for (const k in req) {
@@ -186,12 +212,15 @@ function summaryText(d) {
   ].join('\n')
 }
 
-function notifyTeam(id, now, d) {
+function notifyTeam(id, now, d, ctx) {
   const base = ScriptApp.getService().getUrl()
-  const doneLinks = getConfig('担当者').split(',').map(s => s.trim()).filter(Boolean)
-    .map(who => '・' + who + 'が対応済みにする: ' + base + '?action=done&id=' + id + '&by=' + encodeURIComponent(who))
+  // Phase2（relay 経由）: Admin の Lead ページへ。旧経路: シートの対応済みリンク
+  const actionLines = ctx && ctx.adminUrl
+    ? ['Admin で開く（ステータス・担当を更新）:', ctx.adminUrl]
+    : ['対応したら押す（シートの「ステータス」が対応済になる）:', ...getConfig('担当者').split(',').map(s => s.trim()).filter(Boolean)
+        .map(who => '・' + who + 'が対応済みにする: ' + base + '?action=done&id=' + id + '&by=' + encodeURIComponent(who))]
   const body = [
-    'hauoil.com にお問い合わせが届きました。',
+    (d.test ? '【テスト】' : '') + 'hauoil.com にお問い合わせが届きました。',
     '',
     summaryText(d),
     '',
@@ -201,23 +230,22 @@ function notifyTeam(id, now, d) {
     '着地: ' + (d.landing_page || '—') + (d.blog_slug ? ' / 読んだ記事: ' + d.blog_slug : ''),
     'ID: ' + id,
     '',
-    '対応したら押す（シートの「ステータス」が対応済になる）:',
-    ...doneLinks,
+    ...actionLines,
     '',
-    '一覧: ' + SpreadsheetApp.getActive().getUrl(),
+    (ctx && ctx.adminUrl ? 'バックアップ（シート）: ' : '一覧: ') + SpreadsheetApp.getActive().getUrl(),
     '',
     'このメールに返信すると、問い合わせ者本人（' + d.email + '）宛になります。',
   ].join('\n')
   MailApp.sendEmail({
-    to: getConfig('通知先'),
+    to: (ctx && ctx.to) || getConfig('通知先'),
     replyTo: d.email,
-    name: getConfig('送信者名') + ' サイト',
-    subject: '【お問い合わせ】' + d.company + ' ' + d.name + ' 様（' + d.budget + '）',
+    name: ((ctx && ctx.senderName) || getConfig('送信者名')) + ' サイト',
+    subject: (d.test ? '【テスト】' : '') + '【お問い合わせ】' + d.company + ' ' + d.name + ' 様（' + d.budget + '）',
     body,
   })
 }
 
-function autoReply(d) {
+function autoReply(d, ctx) {
   const body = [
     d.name + ' 様',
     '',
@@ -233,8 +261,8 @@ function autoReply(d) {
   ].join('\n')
   MailApp.sendEmail({
     to: d.email,
-    replyTo: getConfig('通知先'), // 自動返信への返事も通知先と同じ人に届く
-    name: getConfig('送信者名'),
+    replyTo: (ctx && ctx.to) || getConfig('通知先'), // 自動返信への返事も通知先と同じ人に届く
+    name: (ctx && ctx.senderName) || getConfig('送信者名'),
     subject: "【Hau'oli growth】お問い合わせを受け付けました",
     body,
   })
@@ -243,7 +271,20 @@ function autoReply(d) {
 // ── 対応済みリンク / 疎通確認 ──
 function doGet(e) {
   const p = (e && e.parameter) || {}
-  if (p.action === 'ping') return json({ ok: true, ts: new Date().toISOString() })
+  if (p.action === 'ping') return json({ ok: true, ts: new Date().toISOString(), relay_ready: !!PropertiesService.getScriptProperties().getProperty('RELAY_SECRET') })
+  // relay 用シークレットの初期設定（未設定の時だけ受け付ける。設定後はこの入口は閉じる）
+  if (p.action === 'init_relay' && p.secret) {
+    const props = PropertiesService.getScriptProperties()
+    if (props.getProperty('RELAY_SECRET')) return json({ ok: false, error: 'already_set' })
+    if (String(p.secret).length < 32) return json({ ok: false, error: 'too_short' })
+    props.setProperty('RELAY_SECRET', String(p.secret))
+    return json({ ok: true })
+  }
+  // Phase2 切替: ブラウザからの直接送信を止める/戻す（relay シークレットで認可）
+  if (p.action === 'direct_post' && p.secret && p.secret === PropertiesService.getScriptProperties().getProperty('RELAY_SECRET')) {
+    PropertiesService.getScriptProperties().setProperty('DIRECT_POST_DISABLED', p.disabled === '1' ? '1' : '0')
+    return json({ ok: true, direct_post_disabled: p.disabled === '1' })
+  }
   // 列の追加だけ先に済ませる（何度呼んでも安全。データは触らない）
   if (p.action === 'migrate') {
     const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME)

@@ -85,7 +85,7 @@ export default function ContactForm() {
       const attr = attribution()
       const res = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
-        // text/plain にするとブラウザの事前確認(preflight)が走らず GAS に届く
+        // text/plain にするとブラウザの事前確認(preflight)が走らない（Admin API 側でテキストとして受けて JSON にする）
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ ...form, lead_id: leadId.current, event_id: leadId.current, ...attr }),
       })
