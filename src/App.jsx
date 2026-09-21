@@ -309,7 +309,8 @@ function Situations() {
       <div className="section-inner situations-close">
         <p className="situations-lead">
           課題を、きれいに整理してからご相談いただく必要はありません。<br />
-          「何が問題なのか」を整理するところから、一緒に始めます。
+          「何が問題なのか」<br />
+          を整理するところから、一緒に始めます。
         </p>
         <a href="#contact" className="situations-cta">
           相談してみる

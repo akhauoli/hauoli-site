@@ -958,7 +958,6 @@ img { max-width: 100%; display: block; }
   .situations-list { grid-template-columns: 1fr; }
   .situation-item { font-size: 0.92rem; padding: 18px 0 18px 24px; }
   .situation-item::before { top: 18px; }
-  .situations-lead br { display: none; }
   .cf-grid { grid-template-columns: 1fr; gap: 0; }
   .cf-choice { padding: 10px 14px; font-size: 0.82rem; }
   .cf-done { padding: 32px 20px; }
