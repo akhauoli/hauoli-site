@@ -19,7 +19,6 @@ const STATUS = { NEW: '未対応', DONE: '対応済' }
 // 初期設定値（以降は「設定」シートが正）
 const DEFAULT_CONFIG = {
   '通知先': 'a.kobayashi@hauoil.com, s.yuna@hauoil.com',
-  '返信先': 'a.kobayashi@hauoil.com, s.yuna@hauoil.com',
   '送信者名': "Hau'oli growth",
   '担当者': '小林, 優奈',
 }
@@ -182,7 +181,7 @@ function autoReply(d) {
   ].join('\n')
   MailApp.sendEmail({
     to: d.email,
-    replyTo: getConfig('返信先'),
+    replyTo: getConfig('通知先'), // 自動返信への返事も通知先と同じ人に届く
     name: getConfig('送信者名'),
     subject: "【Hau'oli growth】お問い合わせを受け付けました",
     body,
