@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { loadBlog } from './scripts/blog-content.mjs'
+import { renderCover, coverInputFor } from './scripts/blog-cover.mjs'
 
 // budoux は index から4言語分のモデルを全部束ねてしまう(+200KB)ので、
 // パーサー本体と日本語モデルだけを直接読む
@@ -25,6 +26,19 @@ function blogPlugin() {
       return `export default ${JSON.stringify(data)}`
     },
     configureServer(server) {
+      // dev では /blog/<slug>/cover.png をその場で生成して返す（本番はビルド時に静的ファイルになる）
+      server.middlewares.use(async (req, res, next) => {
+        const m = req.url?.match(/^\/blog\/([a-z0-9-]+)\/cover\.png$/)
+        if (!m) return next()
+        try {
+          const { posts, categories, authors } = loadBlog({ includeDrafts: true })
+          const post = posts.find(p => p.slug === m[1])
+          if (!post || post.coverCustom) return next()
+          const png = await renderCover(coverInputFor(post, categories.find(c => c.id === post.category), authors.find(a => a.id === post.author), categories))
+          res.setHeader('Content-Type', 'image/png')
+          res.end(png)
+        } catch (e) { next(e) }
+      })
       server.watcher.add(CONTENT_DIR)
       server.watcher.on('all', (_e, file) => {
         if (!file.startsWith(CONTENT_DIR)) return

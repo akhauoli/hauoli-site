@@ -14,7 +14,8 @@ Hau'oli growth コーポレートサイト。React 19 + Vite。トップ（1ペ�
 - `src/entry-server.jsx` — ビルド時プリレンダー用エントリ
 - `content/` — **ブログ記事の正本**（Markdown）。書き方は [content/README.md](content/README.md)
 - `scripts/blog-content.mjs` — content/ を読んでHTML化する共通ロジック（Vite plugin と prerender が使う）
-- `scripts/prerender.mjs` — ブログ各ページの静的HTML・sitemap.xml・feed.xml・blog/index.json を生成
+- `scripts/prerender.mjs` — ブログ各ページの静的HTML・自動アイキャッチ・sitemap.xml・feed.xml・blog/index.json を生成
+- `scripts/blog-cover.mjs` — アイキャッチ/OG画像の自動生成（satori + resvg、ブランドテンプレ4種）。フォントは `scripts/fonts/` に同梱
 - `scripts/new-post.mjs` — `npm run new-post <slug>` で記事の雛形を作る
 - `gas/contact/` — フォームの受け口（Google Apps Script）。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
 
@@ -25,7 +26,7 @@ content/blog/*.md ──(vite plugin: Markdown→HTML)──▶ virtual:blog-dat
                                                                           │
 npm run build = vite build（クライアント）                                  │
               + vite build --ssr（.ssr/entry-server.js）                    │
-              + scripts/prerender.mjs ─▶ dist/blog/index.html, dist/blog/<slug>/index.html, dist/404.html
+              + scripts/prerender.mjs ─▶ dist/blog/index.html, dist/blog/<slug>/index.html, dist/blog/<slug>/cover.png, dist/404.html
                                         dist/sitemap.xml, dist/feed.xml, dist/blog/index.json
 ```
 
@@ -33,7 +34,7 @@ npm run build = vite build（クライアント）                              
 - `draft: true` の記事は `npm run dev` だけで見える。本番ビルドには出ない
 - カテゴリ・著者は `content/categories.json` `content/authors.json`。不正なidはビルドが落ちる
 - 存在しないURLは Vercel が `dist/404.html` を返す（`vercel.json` にrewriteは無い）
-- OG画像のデフォルトは `public/og-default.jpg`。記事の `cover` があればそれを使う
+- 記事のアイキャッチ/OG画像は frontmatter からビルド時に自動生成（`dist/blog/<slug>/cover.png`）。`cover` 指定があればそれを優先。トップ・一覧ページのOG画像は `public/og-default.jpg`
 
 ## 日本語の改行ルール
 

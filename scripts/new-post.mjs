@@ -1,5 +1,5 @@
 // 雛形から記事ファイルを作る: npm run new-post <slug>
-import { copyFileSync, existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 const slug = process.argv[2]

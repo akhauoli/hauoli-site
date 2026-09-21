@@ -15,17 +15,9 @@ const BLOG_TITLE = "Blog｜Hau'oli growth"
 // 2026-09-21 → 2026.09.21
 const fmtDate = (d) => d.replaceAll('-', '.')
 
+// アイキャッチ。frontmatter で指定が無ければビルド時に自動生成された /blog/<slug>/cover.png
 function Cover({ post, className = '' }) {
-  const cat = categoryById[post.category]
-  if (post.cover) {
-    return <img className={`blog-cover ${className}`.trim()} src={post.cover} alt="" loading="lazy" decoding="async" />
-  }
-  // アイキャッチ未設定の記事は、カテゴリ名だけの生成カバー（サイトのセクションラベルと同じ英語表記）
-  return (
-    <div className={`blog-cover blog-cover--generated ${className}`.trim()} aria-hidden="true">
-      <span>{cat?.label || cat?.name}</span>
-    </div>
-  )
+  return <img className={`blog-cover ${className}`.trim()} src={post.cover} alt="" width="1200" height="630" loading="lazy" decoding="async" />
 }
 
 function AuthorLine({ author, compact }) {
@@ -34,7 +26,7 @@ function AuthorLine({ author, compact }) {
     <span className={`blog-author${compact ? ' blog-author--compact' : ''}`}>
       {author.image && <img className="blog-author-img" src={author.image} alt="" width="28" height="28" loading="lazy" />}
       <span className="blog-author-name">{author.name}</span>
-      {!compact && author.role && <span className="blog-author-role">{author.role}</span>}
+      {!compact && <span className="blog-author-role">{[author.org, author.role].filter(Boolean).join(' ')}</span>}
     </span>
   )
 }
@@ -156,7 +148,7 @@ export function BlogPost({ slug }) {
 
       <div className="blog-post-main">
         <div className="blog-post-inner">
-          {post.cover && <img className="blog-post-cover" src={post.cover} alt="" decoding="async" />}
+          {post.coverCustom && <img className="blog-post-cover" src={post.cover} alt="" decoding="async" />}
           <div className="blog-body" dangerouslySetInnerHTML={{ __html: post.html }} />
 
           {author && (

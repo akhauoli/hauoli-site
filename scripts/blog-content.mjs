@@ -100,7 +100,9 @@ export function loadBlog({ includeDrafts = false } = {}) {
       updated: updated && updated !== date ? updated : null,
       category: data.category,
       author: data.author,
-      cover: data.cover || null,
+      // アイキャッチ兼OG画像。指定(cover / image)があればそれ、無ければビルド時に自動生成する固定パス
+      cover: data.cover || data.image || `/blog/${slug}/cover.png`,
+      coverCustom: !!(data.cover || data.image),
       related: Array.isArray(data.related) ? data.related : [],
       draft: !!data.draft,
       html,

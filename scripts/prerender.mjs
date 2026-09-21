@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { SITE_URL, SITE_NAME, BLOG_TITLE, BLOG_DESCRIPTION, DEFAULT_OG_IMAGE } from './blog-content.mjs'
+import { renderCover, coverInputFor } from './blog-cover.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const dist = join(root, 'dist')
@@ -93,9 +94,17 @@ writePage('blog/index.html', renderPage('/blog', {
 }))
 
 // ── 記事 ──
+let generated = 0
 for (const p of posts) {
   const cat = categoryById[p.category]
   const author = authorById[p.author]
+  // アイキャッチ未指定の記事は、frontmatter からブランドテンプレで生成（1200x630、一覧とOGPで共用）
+  if (!p.coverCustom) {
+    const png = await renderCover(coverInputFor(p, cat, author, categories))
+    mkdirSync(join(dist, 'blog', p.slug), { recursive: true })
+    writeFileSync(join(dist, 'blog', p.slug, 'cover.png'), png)
+    generated++
+  }
   const image = abs(p.cover || DEFAULT_OG_IMAGE)
   const title = `${p.metaTitle || p.title}｜${SITE_NAME}`
   writePage(`blog/${p.slug}/index.html`, renderPage(`/blog/${p.slug}`, {
@@ -185,4 +194,4 @@ writeFileSync(join(dist, 'blog/index.json'), JSON.stringify({
   posts: posts.map(({ html: _html, ...p }) => p),
 }, null, 2))
 
-console.log(`プリレンダー完了: 一覧 + 記事${posts.length}本 + 404 / sitemap.xml / feed.xml / blog/index.json`)
+console.log(`プリレンダー完了: 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)

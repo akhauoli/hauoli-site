@@ -79,26 +79,10 @@
 .blog-card-link { display: flex; flex-direction: column; height: 100%; }
 .blog-cover {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: auto; /* width/height 属性(レイアウトシフト防止)より比率を優先 */
+  aspect-ratio: 1200 / 630;
   object-fit: cover;
   background: var(--c-dark-card);
-}
-.blog-cover--generated {
-  display: flex;
-  align-items: flex-end;
-  padding: 20px 22px;
-  background:
-    radial-gradient(120% 90% at 100% 0%, rgba(201,138,58,0.28), transparent 60%),
-    linear-gradient(160deg, var(--c-dark-card), var(--c-dark-mid));
-  border-bottom: 1px solid var(--c-border-dark);
-}
-.blog-cover--generated span {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.7rem;
-  line-height: 1;
-  color: var(--c-accent-light);
-  letter-spacing: 0.02em;
 }
 .blog-card-body { display: flex; flex-direction: column; gap: 12px; padding: 22px 22px 26px; flex: 1; }
 .blog-card-meta { display: flex; align-items: center; gap: 14px; font-size: 0.74rem; color: var(--c-text-dim); }
