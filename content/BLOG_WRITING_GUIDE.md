@@ -153,6 +153,9 @@ STEP 6  小林が preview を確認 →「OK」→ Claude Code が draft 解除 
         「OK」が無い限り push しない
 ```
 
+進行状況と結果は管理画面 https://admin.hauoil.com の **Content** で見る（公開／下書き／企画中、記事別の閲覧数・問い合わせ数）。
+企画中のテーマは Content の「企画を追加」で slug と仮タイトルを置いておく（記事ファイルができたら自動で同じ行に繋がる）。
+
 ### 公開前チェックリスト（Claude Code）
 - [ ] `npm run build` 成功
 - [ ] PC / mobile 表示（横はみ出しなし、表が崩れていない）

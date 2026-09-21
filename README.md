@@ -17,7 +17,7 @@ Hau'oli growth コーポレートサイト。React 19 + Vite。トップ（1ペ�
 - `scripts/prerender.mjs` — ブログ各ページの静的HTML・自動アイキャッチ・sitemap.xml・feed.xml・blog/index.json を生成
 - `scripts/blog-cover.mjs` — アイキャッチ/OG画像の自動生成（satori + resvg、ブランドテンプレ4種）。フォントは `scripts/fonts/` に同梱
 - `scripts/new-post.mjs` — `npm run new-post <slug>` で雛形、`-- --json` で構造化データ(ちびあっきー/Bridge)から原稿を作る。どちらも draft
-- `gas/contact/` — フォームの受け口（Google Apps Script）。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
+- `gas/contact/` — 通知メール＋シートバックアップの relay（Google Apps Script）。Admin API からのみ呼ばれる。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
 
 ## ブログの仕組み
 
@@ -74,16 +74,23 @@ npm run build = vite build（クライアント）                              
 `リードステータス`（Lead → Qualified → Meeting → Proposal → Won / Lost。今は Lead 固定）/ `着地ページ` `フォームページ` `記事slug` / `utm_source〜utm_term` / `fbclid` `gclid` / `初回接点日時・着地・参照元・utm_source/medium/campaign` / `最終接点日時・…` / `接点JSON`（生データ）。
 列は `ensureHeaders()` が送信時に自動追加する。手で先に足すなら `GET <WebApp>?action=migrate`。`dry_run: true` を付けて POST すると書き込み・通知なしで入る予定の行が返る。
 
-## お問い合わせの流れ
+## お問い合わせの流れ（Phase2: 2026-09-22〜）
 
 ```
-フォーム送信 → GAS doPost → シート「お問い合わせ」に1行追加
-                          → 通知メール（設定シート「通知先」宛。初期値: 小林・佐川）
-                          → 問い合わせ者へ自動返信（返信すると「通知先」に届く）
-通知メール内の「対応済みにする」リンク → シートのステータスが「対応済」になる
+フォーム送信 → POST https://admin.hauoil.com/api/leads（hauoli-admin / Cloud Run）
+                → Firestore leads/{lead_id} に保存（★正本。Phase1 の全項目を1対1で保持）
+                → GAS relay → 通知メール（Admin の Settings「通知先」宛。初期値: 小林・佐川）
+                             → 問い合わせ者へ自動返信
+                             → スプレッドシート「お問い合わせ」に1行（バックアップ。読む用途のみ）
+通知メール内のリンク → admin.hauoil.com の Lead ページ（ステータス・担当・メモ）
+計測イベント5種 → 同時に POST /api/events（sendBeacon）→ Firestore events → Admin の Dashboard
 ```
 
-通知先・送信者名・担当者はスプレッドシートの「設定」シートで変更できる（コード変更不要）。
+- Admin（管理画面）: https://admin.hauoil.com — リポジトリ `akhauoli/hauoli-admin`、GCP `hauoli-growth`。Google ログイン＋メンバー照合（Owner / Admin）
+- 通知先・担当者は Admin の Settings で変更（設定シートは旧経路用に残っているだけ）
+- テスト: サイトに `?hg_test=1` を付けて入ると、その訪問の計測・問い合わせは `test:true`（Dashboard 集計から除外。通知メールには【テスト】が付く）
+- 送り先は `src/config.js` の `ADMIN_API_BASE`（env `VITE_ADMIN_API_BASE` で差し替え可。`VITE_EVENTS_ENDPOINT=` 空で計測送信オフ）
+- GAS はブラウザから直接叩かれない（`?action=direct_post&secret=…&disabled=1` で停止済み）。relay の認可は Script Properties `RELAY_SECRET`
 
 ## GAS の更新
 
