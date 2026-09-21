@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import ContactForm from './ContactForm'
+import { rememberSource } from './config'
 
 // 上昇パーティクル（決定論的配置）
 const PARTICLES = [
@@ -31,6 +33,20 @@ const PARTICLES = [
   { left: 25, delay: 4.5, dur: 4.4, size: 4 },
   { left: 46, delay: 2.6, dur: 5.9, size: 2 },
   { left: 79, delay: 1.2, dur: 7.1, size: 6 },
+]
+
+// 何をする会社か（ファーストビュー直下）
+const DOMAINS = ['集客', '広告', '経営課題', '組織', '人材育成', 'AI活用', '業務設計', '仕組み化']
+
+// こんな状態からご相談いただけます
+const SITUATIONS = [
+  '集客が落ちているが、広告が原因なのか分からない',
+  '売上を伸ばしたいが、何から変えるべきか整理できていない',
+  '人や店舗が増え、これまでのやり方では回らなくなってきた',
+  'AIを活用したいが、何をAIに任せるべきか分からない',
+  '目標はあるが、今の延長線では届かない気がする',
+  '施策は色々やっているが、結局何が問題なのか分からない',
+  'そもそも、課題自体がまだ整理できていない',
 ]
 
 const VALUES = [
@@ -227,7 +243,7 @@ function Hero() {
           <span className="hero-sub">その熱を、高みへ</span>
         </div>
         <a href="#contact" className="hero-cta">
-          お問い合わせ
+          相談してみる
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
@@ -236,6 +252,71 @@ function Hero() {
       <div className="hero-scroll" aria-hidden="true">
         <span>scroll</span>
         <span className="hero-scroll-line" />
+      </div>
+    </section>
+  )
+}
+
+function WhatWeDo() {
+  const [ref, inView] = useInView()
+  return (
+    <section id="what" className="section whatwedo">
+      <div className={`section-inner whatwedo-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
+        <div className="whatwedo-head">
+          <p className="section-label">What we do</p>
+          <h2 className="whatwedo-heading">
+            マーケティングを入口に、<br />
+            会社の課題を整理し、<br className="sp-only" />成長する仕組みをつくる。
+          </h2>
+        </div>
+        <div className="whatwedo-body">
+          <p>集客や広告だけではなく、組織、人材、AI、業務設計まで。</p>
+          <p>目標と現在地を整理し、本当に解くべき課題を見つけ、次にやることを一緒に考えます。</p>
+          <p>施策を実行するだけではなく、最終的にはクライアント自身が、考え、判断し、改善できる状態を目指します。</p>
+          <div className="whatwedo-domains">
+            {DOMAINS.map(d => <span key={d} className="service-tag">{d}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SituationItem({ text, index }) {
+  const [ref, inView] = useInView(0.1)
+  return (
+    <li
+      ref={ref}
+      className={`situation-item reveal${inView ? ' in-view' : ''}`}
+      style={{ transitionDelay: `${index * 0.06}s` }}
+    >
+      {text}
+    </li>
+  )
+}
+
+function Situations() {
+  const [ref, inView] = useInView()
+  return (
+    <section id="situations" className="section situations">
+      <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
+        <p className="section-label">Cases</p>
+        <h2 className="section-heading">こんな状態から、<br className="sp-only" />ご相談いただけます。</h2>
+      </div>
+      <ul className="situations-list section-inner">
+        {SITUATIONS.map((t, i) => <SituationItem key={t} text={t} index={i} />)}
+      </ul>
+      <div className="section-inner situations-close">
+        <p className="situations-lead">
+          課題を、きれいに整理してからご相談いただく必要はありません。<br />
+          「何が問題なのか」を整理するところから、一緒に始めます。
+        </p>
+        <a href="#contact" className="situations-cta">
+          相談してみる
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
       </div>
     </section>
   )
@@ -451,15 +532,13 @@ function Contact() {
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Contact</p>
         <h2 className="contact-heading">
-          一歩踏み出す準備ができたら、<br />ご連絡ください。
+          まだ、何が問題か<br className="sp-only" />整理できていなくても、<br />大丈夫です。
         </h2>
-        <p className="contact-sub">紹介・ご相談・お見積もりなど、お気軽にどうぞ。</p>
-        <a href="https://forms.gle/jLUNmb7tnTzkgoJb7" target="_blank" rel="noopener noreferrer" className="contact-cta">
-          メールで問い合わせる
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <path d="M3.5 9h11M10.5 5.5l3.5 3.5-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
+        <p className="contact-sub">
+          「なんとなく上手くいっていない」「このままでいいのか分からない」<br className="pc-only" />
+          そんな状態からでも、現在地を整理するところから一緒に考えます。
+        </p>
+        <ContactForm />
       </div>
     </section>
   )
@@ -477,6 +556,7 @@ function Footer() {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   useEffect(() => {
+    rememberSource()
     const onResize = () => { if (window.innerWidth > 640) setMenuOpen(false) }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
@@ -487,8 +567,10 @@ export default function App() {
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
       <main>
         <Hero />
+        <WhatWeDo />
         <Concept />
         <Services />
+        <Situations />
         <Strengths />
         <About />
         <MVV />

@@ -313,6 +313,41 @@ img { max-width: 100%; display: block; }
   margin-bottom: 20px;
 }
 
+
+/* ── What we do（ファーストビュー直下） ─────────────────────── */
+.whatwedo { background: var(--c-dark-mid); color: var(--c-text-light); }
+.whatwedo .section-label { color: var(--c-accent); }
+.whatwedo-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.whatwedo-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--c-text-light);
+  word-break: keep-all;
+}
+.whatwedo-body p {
+  font-size: 0.97rem;
+  line-height: 2;
+  color: var(--c-text-dim);
+  margin-bottom: 14px;
+}
+.whatwedo-body p:last-of-type { color: var(--c-text-light); }
+.whatwedo-domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-border-dark);
+}
+.sp-only { display: none; }
+
 /* ── Concept ─────────────────────────────────────────────────── */
 .concept { background: var(--c-warm-bg); color: var(--c-text-dark); }
 .concept .section-label { color: var(--c-accent); }
@@ -454,6 +489,63 @@ img { max-width: 100%; display: block; }
   padding: 3px 9px;
   border-radius: 1px;
 }
+
+
+/* ── Situations（こんな状態からご相談いただけます） ───────────── */
+.situations { background: var(--c-warm-bg); color: var(--c-text-dark); }
+.situations .section-label { color: var(--c-accent); }
+.situations .section-heading { color: var(--c-text-dark); margin-bottom: 40px; }
+.situations-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 48px;
+  border-top: 1px solid var(--c-border-light);
+}
+.situation-item {
+  position: relative;
+  padding: 22px 0 22px 28px;
+  border-bottom: 1px solid var(--c-border-light);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--c-text-dark);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.situation-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 22px;
+  color: var(--c-accent);
+}
+.situation-item:last-child { grid-column: 1 / -1; font-weight: 500; }
+.situations-close { margin-top: 48px; }
+.situations-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.9;
+  color: var(--c-text-dark);
+  border-left: 2px solid var(--c-accent);
+  padding-left: 20px;
+  margin-bottom: 32px;
+  word-break: keep-all;
+}
+.situations-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(201,138,58,0.6);
+  color: var(--c-accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  padding: 13px 30px;
+  border-radius: 2px;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.situations-cta:hover { background: var(--c-accent); border-color: var(--c-accent); color: #fff; }
 
 /* ── Strengths ───────────────────────────────────────────────── */
 .strengths { background: var(--c-warm-bg2); color: var(--c-text-dark); }
@@ -696,7 +788,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.4;
   margin-bottom: 20px;
 }
-.contact-sub { font-size: 0.9rem; color: var(--c-text-dim); margin-bottom: 48px; }
+.contact-sub { font-size: 0.9rem; line-height: 1.9; color: var(--c-text-dim); margin-bottom: 56px; }
 .contact-cta {
   display: inline-flex;
   align-items: center;
@@ -711,6 +803,111 @@ img { max-width: 100%; display: block; }
   transition: background 0.2s, transform 0.2s;
 }
 .contact-cta:hover { background: var(--c-accent-light); transform: translateX(4px); }
+
+
+/* ── Contact Form ─────────────────────────────────────────── */
+.pc-only { display: inline; }
+.cf {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+}
+.cf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+.cf-grid .cf-field:last-child { grid-column: 1 / -1; }
+.cf-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 26px; }
+.cf-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--c-text-light);
+}
+.cf-req, .cf-opt {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 1px 7px;
+  border-radius: 1px;
+  border: 1px solid;
+}
+.cf-req { color: var(--c-accent-light); border-color: rgba(224,168,88,0.5); }
+.cf-opt { color: var(--c-text-dim); border-color: var(--c-border-dark); }
+.cf-hint { font-size: 0.74rem; line-height: 1.6; color: var(--c-text-dim); }
+.cf input, .cf textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px; /* iOS の自動ズーム防止 */
+  line-height: 1.6;
+  color: var(--c-text-light);
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--c-border-dark);
+  border-radius: 2px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.cf textarea { resize: vertical; min-height: 120px; }
+.cf input::placeholder, .cf textarea::placeholder { color: rgba(138,128,112,0.6); }
+.cf input:focus, .cf textarea:focus {
+  border-color: rgba(201,138,58,0.7);
+  background: rgba(255,255,255,0.05);
+}
+.cf-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.cf-choice {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--c-text-dim);
+  background: transparent;
+  border: 1px solid var(--c-border-dark);
+  border-radius: 2px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.cf-choice:hover { color: var(--c-text-light); border-color: rgba(255,255,255,0.2); }
+.cf-choice.is-selected {
+  color: var(--c-accent-light);
+  border-color: var(--c-accent);
+  background: rgba(201,138,58,0.1);
+}
+.cf-note { font-size: 0.78rem; line-height: 1.7; color: var(--c-text-dim); margin: -12px 0 28px; }
+.cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.cf-error {
+  font-size: 0.86rem;
+  color: #E8A38A;
+  border-left: 2px solid #E8A38A;
+  padding-left: 12px;
+  margin-bottom: 20px;
+}
+.cf-actions { text-align: center; padding-top: 8px; }
+.cf-actions .contact-cta {
+  font-family: var(--font-body);
+  border: none;
+  cursor: pointer;
+}
+.cf-actions .contact-cta:disabled { opacity: 0.6; cursor: default; transform: none; }
+.cf-privacy { font-size: 0.72rem; color: var(--c-text-dim); margin-top: 20px; }
+.cf-done {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  border: 1px solid rgba(201,138,58,0.35);
+  border-radius: 2px;
+}
+.cf-done-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--c-text-light);
+  margin-bottom: 14px;
+}
+.cf-done-text { font-size: 0.9rem; line-height: 1.9; color: var(--c-text-dim); }
 
 /* ── Footer ──────────────────────────────────────────────────── */
 .footer {
@@ -731,6 +928,7 @@ img { max-width: 100%; display: block; }
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; }
+  .whatwedo-inner { grid-template-columns: 1fr; gap: 32px; }
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
   .about-photo-img { aspect-ratio: 3/4; object-position: center top; max-height: 480px; }
   .mvv-values-grid { grid-template-columns: repeat(3, 1fr); }
@@ -752,7 +950,18 @@ img { max-width: 100%; display: block; }
   .mvv-vision br { display: none; }
   .mvv-block-text { font-size: clamp(1.1rem, 4.2vw, 1.4rem); word-break: break-all; overflow-wrap: break-word; }
   .mvv-block--mission .mvv-block-text br { display: none; }
-  .contact-heading { font-size: clamp(1.05rem, 5vw, 1.35rem); }
+  .contact-heading { font-size: clamp(1.3rem, 5.6vw, 1.6rem); }
+  .contact-sub { font-size: 0.86rem; margin-bottom: 44px; }
+  .sp-only { display: inline; }
+  .pc-only { display: none; }
+  .whatwedo-heading { font-size: clamp(1.4rem, 6vw, 1.7rem); }
+  .situations-list { grid-template-columns: 1fr; }
+  .situation-item { font-size: 0.92rem; padding: 18px 0 18px 24px; }
+  .situation-item::before { top: 18px; }
+  .situations-lead br { display: none; }
+  .cf-grid { grid-template-columns: 1fr; gap: 0; }
+  .cf-choice { padding: 10px 14px; font-size: 0.82rem; }
+  .cf-done { padding: 32px 20px; }
   .mvv-values-grid { grid-template-columns: 1fr; }
   .mvv-value-card { padding: 28px 20px; }
   .mvv-block { padding: 56px 20px; }
