@@ -191,7 +191,7 @@ writeFileSync(join(dist, 'blog/index.json'), JSON.stringify({
   generatedAt: new Date().toISOString(),
   categories,
   authors: authors.map(({ bio: _bio, ...a }) => a),
-  posts: posts.map(({ html: _html, ...p }) => p),
+  posts: posts.map(({ html: _html, sources: _sources, ...p }) => p),
 }, null, 2))
 
 console.log(`プリレンダー完了: 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)

@@ -8,6 +8,8 @@ author: akihito              # content/authors.json の id
 # cover: /blog/<slug>/cover.jpg   # 1200x630推奨。無ければカテゴリ＋タイトルの生成カバーとデフォルトOG画像を使う
 # related: [other-slug, another-slug]   # 指定なしなら同カテゴリの最新3本
 # metaTitle: 検索結果用に別タイトルを出したい時だけ
+# sources:                   # 出典メモ（表示されない）。brain-hubのidや記録名。事実確認の証跡
+#   - "..."
 draft: true                  # 公開する時に false にするか行ごと消す
 ---
 

@@ -4,6 +4,10 @@ description: Meta広告の数字が崩れた時、すぐ作り直すのか、そ
 date: 2026-09-21
 category: marketing
 author: akihito
+draft: true
+sources:
+  - "akki-brain 13_Brain/frameworks/2026-09-09 異常検知の4つの型（D A B C）と対応アプローチ.md（2026-09-21追記）"
+  - "brain-hub ent_1788985833937_762bb83d / ent_1788985716938_0d0f7a6f / ent_1788985689638_5d7c8b86 / ent_1788985771837_160c3138"
 ---
 
 広告の数字が悪くなると、

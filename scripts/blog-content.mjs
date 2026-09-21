@@ -90,7 +90,8 @@ export function loadBlog({ includeDrafts = false } = {}) {
     assert(categoryIds.has(data.category), `${file}: category「${data.category}」は content/categories.json に無い`)
     assert(authorIds.has(data.author), `${file}: author「${data.author}」は content/authors.json に無い`)
 
-    const html = createMarked().parse(content)
+    // 表はスマホで横スクロールできるよう包む（表自体は幅いっぱいに広げる）
+    const html = createMarked().parse(content).replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>')
     const date = toDateString(data.date)
     const updated = data.updated ? toDateString(data.updated) : null
     posts.push({
@@ -106,6 +107,8 @@ export function loadBlog({ includeDrafts = false } = {}) {
       cover: data.cover || data.image || `/blog/${slug}/cover.png`,
       coverCustom: !!(data.cover || data.image),
       related: Array.isArray(data.related) ? data.related : [],
+      // 出典メモ（brain-hubのid・記録名など）。表示はしない。事実確認の証跡として残す
+      sources: Array.isArray(data.sources) ? data.sources : [],
       draft: !!data.draft,
       html,
       url: `${SITE_URL}/blog/${slug}`,

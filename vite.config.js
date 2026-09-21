@@ -11,7 +11,8 @@ const budoux = (p) => fileURLToPath(new URL(`./node_modules/budoux/module/${p}`,
 const CONTENT_DIR = fileURLToPath(new URL('./content/', import.meta.url))
 
 // content/ の Markdown をビルド時に読み、`virtual:blog-data` として配る。
-// dev では draft も含める（下書きの確認用）。build では draft を落とす。
+// draft を含めるのは dev と Vercel の Preview デプロイ（ブランチをpushした時のURL）だけ。
+// 本番(main)のビルドでは draft を落とす。Preview は Vercel 側が noindex を付ける。
 function blogPlugin() {
   const id = 'virtual:blog-data'
   const resolved = '\0' + id
@@ -22,7 +23,7 @@ function blogPlugin() {
     resolveId(source) { if (source === id) return resolved },
     load(source) {
       if (source !== resolved) return
-      const data = loadBlog({ includeDrafts: isDev })
+      const data = loadBlog({ includeDrafts: isDev || process.env.VERCEL_ENV === 'preview' })
       return `export default ${JSON.stringify(data)}`
     },
     configureServer(server) {

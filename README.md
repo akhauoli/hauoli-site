@@ -16,7 +16,7 @@ Hau'oli growth コーポレートサイト。React 19 + Vite。トップ（1ペ�
 - `scripts/blog-content.mjs` — content/ を読んでHTML化する共通ロジック（Vite plugin と prerender が使う）
 - `scripts/prerender.mjs` — ブログ各ページの静的HTML・自動アイキャッチ・sitemap.xml・feed.xml・blog/index.json を生成
 - `scripts/blog-cover.mjs` — アイキャッチ/OG画像の自動生成（satori + resvg、ブランドテンプレ4種）。フォントは `scripts/fonts/` に同梱
-- `scripts/new-post.mjs` — `npm run new-post <slug>` で記事の雛形を作る
+- `scripts/new-post.mjs` — `npm run new-post <slug>` で雛形、`-- --json` で構造化データ(ちびあっきー/Bridge)から原稿を作る。どちらも draft
 - `gas/contact/` — フォームの受け口（Google Apps Script）。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
 
 ## ブログの仕組み
@@ -31,7 +31,7 @@ npm run build = vite build（クライアント）                              
 ```
 
 - 記事ページは静的HTMLとして出るので、OGP・JSON-LD（BlogPosting/BreadcrumbList）・本文がJSなしで読める。ブラウザでは `hydrateRoot` で引き継ぐ
-- `draft: true` の記事は `npm run dev` だけで見える。本番ビルドには出ない
+- `draft: true` の記事は `npm run dev` と Vercel Preview（main以外のブランチ）で見える。本番ビルドには出ない。公開は小林の「OK」の後に draft を外して push
 - カテゴリ・著者は `content/categories.json` `content/authors.json`。不正なidはビルドが落ちる
 - 存在しないURLは Vercel が `dist/404.html` を返す（`vercel.json` にrewriteは無い）
 - 記事のアイキャッチ/OG画像は frontmatter からビルド時に自動生成（`dist/blog/<slug>/cover.png`）。`cover` 指定があればそれを優先。トップ・一覧ページのOG画像は `public/og-default.jpg`
