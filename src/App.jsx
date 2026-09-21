@@ -236,7 +236,7 @@ function Hero() {
       <div className="hero-content">
         <p className="hero-eyebrow">Hau'oli growth</p>
         <Budou as="h1" className="hero-vision">
-          自分にしか描けない<br />人生を、自分らしく。
+          自分にしか描けない<br />人生を自分らしく
         </Budou>
         <div className="hero-tagline">
           <span className="hero-elevate">Elevate</span>
