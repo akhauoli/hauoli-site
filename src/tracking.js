@@ -38,7 +38,8 @@ export function sessionId() {
   if (!sid) { sid = newLeadId(); store.set('session', SESSION_KEY, sid) }
   return sid
 }
-export const isTestVisit = () => store.get('session', TEST_KEY) === true
+// ?hg_test=1 で来た訪問はテスト。URL も見るのは、記事ページの effect が App の rememberTouch より先に走るため
+export const isTestVisit = () => store.get('session', TEST_KEY) === true || (typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('hg_test') === '1')
 
 // サイト到着時に1回呼ぶ。first は無ければ書く、last は無い or 広告クリック付きなら書く
 export function rememberTouch() {
