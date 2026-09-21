@@ -3,6 +3,8 @@ import './App.css'
 import ContactForm from './ContactForm'
 import Budou from './Budou'
 import { rememberSource } from './config'
+import { RouterProvider, Link, useRoute, useTitle } from './router'
+import { BlogList, BlogPost, NotFound } from './blog/Blog'
 
 // 上昇パーティクル（決定論的配置）
 const PARTICLES = [
@@ -180,7 +182,7 @@ function Nav({ menuOpen, setMenuOpen }) {
   }, [])
   return (
     <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
-      <a href="#top" className="nav-logo">Hau'oli growth</a>
+      <Link href="/#top" className="nav-logo">Hau'oli growth</Link>
       <button
         className="nav-menu-btn"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -189,11 +191,12 @@ function Nav({ menuOpen, setMenuOpen }) {
         <span className={`hamburger${menuOpen ? ' open' : ''}`} />
       </button>
       <ul className="nav-links">
-        <li><a href="#concept">ELEVATE</a></li>
-        <li><a href="#services">SERVICE</a></li>
-        <li><a href="#strengths">強み</a></li>
-        <li><a href="#about">代表</a></li>
-        <li><a href="#contact" className="nav-cta">お問い合わせ</a></li>
+        <li><Link href="/#concept">ELEVATE</Link></li>
+        <li><Link href="/#services">SERVICE</Link></li>
+        <li><Link href="/#strengths">強み</Link></li>
+        <li><Link href="/#about">代表</Link></li>
+        <li><Link href="/blog">BLOG</Link></li>
+        <li><Link href="/#contact" className="nav-cta">お問い合わせ</Link></li>
       </ul>
     </nav>
   )
@@ -203,12 +206,13 @@ function MobileMenu({ open, onClose }) {
   return (
     <div className={`mobile-menu${open ? ' open' : ''}`}>
       <nav className="mobile-nav">
-        <a href="#concept" onClick={onClose}>ELEVATE</a>
-        <a href="#services" onClick={onClose}>SERVICE</a>
-        <a href="#strengths" onClick={onClose}>強み</a>
-        <a href="#about" onClick={onClose}>代表</a>
-        <a href="#mvv" onClick={onClose}>MVV</a>
-        <a href="#contact" onClick={onClose}>お問い合わせ</a>
+        <Link href="/#concept" onClick={onClose}>ELEVATE</Link>
+        <Link href="/#services" onClick={onClose}>SERVICE</Link>
+        <Link href="/#strengths" onClick={onClose}>強み</Link>
+        <Link href="/#about" onClick={onClose}>代表</Link>
+        <Link href="/#mvv" onClick={onClose}>MVV</Link>
+        <Link href="/blog" onClick={onClose}>BLOG</Link>
+        <Link href="/#contact" onClick={onClose}>お問い合わせ</Link>
       </nav>
     </div>
   )
@@ -550,12 +554,43 @@ function Footer() {
   return (
     <footer className="footer">
       <p className="footer-logo">Hau'oli growth</p>
+      <nav className="footer-links" aria-label="フッター">
+        <Link href="/blog">Blog</Link>
+        <Link href="/#contact">お問い合わせ</Link>
+      </nav>
       <p className="footer-copy">© 2026 Hau'oli growth. All rights reserved.</p>
     </footer>
   )
 }
 
-export default function App() {
+function Home() {
+  useTitle("Hau'oli growth")
+  return (
+    <main>
+      <Hero />
+      <WhatWeDo />
+      <Concept />
+      <Services />
+      <Situations />
+      <Strengths />
+      <About />
+      <MVV />
+      <Contact />
+    </main>
+  )
+}
+
+// パスに応じてページを切り替える。/ はトップ、/blog 配下はブログ、それ以外は404
+function Page() {
+  const { path } = useRoute()
+  if (path === '/') return <Home />
+  if (path === '/blog') return <main><BlogList /></main>
+  const m = path.match(/^\/blog\/([^/]+)$/)
+  if (m) return <main><BlogPost slug={m[1]} /></main>
+  return <main><NotFound /></main>
+}
+
+export default function App({ url = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false)
   useEffect(() => {
     rememberSource()
@@ -564,21 +599,11 @@ export default function App() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
   return (
-    <>
+    <RouterProvider initialPath={url}>
       <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <main>
-        <Hero />
-        <WhatWeDo />
-        <Concept />
-        <Services />
-        <Situations />
-        <Strengths />
-        <About />
-        <MVV />
-        <Contact />
-      </main>
+      <Page />
       <Footer />
-    </>
+    </RouterProvider>
   )
 }

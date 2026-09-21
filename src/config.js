@@ -12,6 +12,7 @@ export function rememberSource() {
     if (sessionStorage.getItem(SOURCE_STORAGE_KEY)) return
     const params = new URLSearchParams(window.location.search)
     const utm = [...params.entries()].filter(([k]) => k.startsWith('utm_')).map(([k, v]) => `${k}=${v}`).join('&')
-    sessionStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ referrer: document.referrer || '', utm }))
+    // landing: 最初に開いたページ（ブログ記事から入った場合にどの記事かが分かる）
+    sessionStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ referrer: document.referrer || '', utm, landing: window.location.pathname }))
   } catch { /* プライベートモード等では無視 */ }
 }

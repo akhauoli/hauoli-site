@@ -1,15 +1,39 @@
 # hauoli-site（hauoil.com）
 
-Hau'oli growth コーポレートサイト。React 19 + Vite、1ページ構成。Vercel が `main` を自動デプロイ。
+Hau'oli growth コーポレートサイト。React 19 + Vite。トップ（1ページ）＋ブログ（`/blog`）。Vercel が `main` を自動デプロイ。
 
 ## 構成
 
-- `src/App.jsx` — 全セクション（Hero / What we do / Concept / Services / Situations / Strengths / About / MVV / Contact）
+- `src/App.jsx` — トップの全セクション（Hero / What we do / Concept / Services / Situations / Strengths / About / MVV / Contact）とページ切替（`Page`）
+- `src/router.jsx` — 自前の最小ルーター（`Link` / `useRoute` / `useTitle`）。ライブラリ不使用
+- `src/blog/Blog.jsx` `src/blog/blog.css` — ブログ一覧・記事・404
 - `src/ContactForm.jsx` — サイト内お問い合わせフォーム
-- `src/config.js` — フォーム送信先URL・流入元記録
+- `src/config.js` — フォーム送信先URL・流入元記録（着地ページ・読んだ記事もUTM欄に載る）
 - `src/Budou.jsx` — 日本語の改行ルール（下記）
 - `src/index.css` — デザイントークンと全スタイル
+- `src/entry-server.jsx` — ビルド時プリレンダー用エントリ
+- `content/` — **ブログ記事の正本**（Markdown）。書き方は [content/README.md](content/README.md)
+- `scripts/blog-content.mjs` — content/ を読んでHTML化する共通ロジック（Vite plugin と prerender が使う）
+- `scripts/prerender.mjs` — ブログ各ページの静的HTML・sitemap.xml・feed.xml・blog/index.json を生成
+- `scripts/new-post.mjs` — `npm run new-post <slug>` で記事の雛形を作る
 - `gas/contact/` — フォームの受け口（Google Apps Script）。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
+
+## ブログの仕組み
+
+```
+content/blog/*.md ──(vite plugin: Markdown→HTML)──▶ virtual:blog-data ──▶ src/blog/Blog.jsx
+                                                                          │
+npm run build = vite build（クライアント）                                  │
+              + vite build --ssr（.ssr/entry-server.js）                    │
+              + scripts/prerender.mjs ─▶ dist/blog/index.html, dist/blog/<slug>/index.html, dist/404.html
+                                        dist/sitemap.xml, dist/feed.xml, dist/blog/index.json
+```
+
+- 記事ページは静的HTMLとして出るので、OGP・JSON-LD（BlogPosting/BreadcrumbList）・本文がJSなしで読める。ブラウザでは `hydrateRoot` で引き継ぐ
+- `draft: true` の記事は `npm run dev` だけで見える。本番ビルドには出ない
+- カテゴリ・著者は `content/categories.json` `content/authors.json`。不正なidはビルドが落ちる
+- 存在しないURLは Vercel が `dist/404.html` を返す（`vercel.json` にrewriteは無い）
+- OG画像のデフォルトは `public/og-default.jpg`。記事の `cover` があればそれを使う
 
 ## 日本語の改行ルール
 
@@ -40,7 +64,9 @@ clasp deploy --deploymentId AKfycbyb6GMLqIIVmSfnTwBf0YaHwMOKr4yzxHZyDNVYPHmn2LOq
 ## 開発
 
 ```bash
-npm run dev      # ローカル
-npm run build    # ビルド
+npm run dev                  # ローカル（下書き記事も見える）
+npm run build                # ビルド（静的HTML生成まで）
+npm run preview              # dist/ を確認
+npm run new-post <slug>      # 記事の雛形
 npm run lint
 ```

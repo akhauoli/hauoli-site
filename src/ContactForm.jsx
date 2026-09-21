@@ -10,8 +10,13 @@ const INITIAL = {
   website: '', // ハニーポット（人間には見えない）
 }
 
+// 流入元。ブログ経由の場合は着地ページ・最後に読んだ記事をUTM欄に添える（シート側の列はそのまま）
 function readSource() {
-  try { return JSON.parse(sessionStorage.getItem(SOURCE_STORAGE_KEY) || '{}') } catch { return {} }
+  try {
+    const { referrer = '', utm = '', landing, post } = JSON.parse(sessionStorage.getItem(SOURCE_STORAGE_KEY) || '{}')
+    const extra = [landing && landing !== '/' && `landing=${landing}`, post && `post=${post}`].filter(Boolean)
+    return { referrer, utm: [utm, ...extra].filter(Boolean).join('&') }
+  } catch { return {} }
 }
 
 function Field({ label, required, children, hint }) {

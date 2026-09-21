@@ -1,0 +1,6 @@
+[
+  { "id": "marketing",   "name": "マーケティング", "label": "Marketing",    "description": "集客・広告・ブランディング。数字の裏で何が起きているかを見る。" },
+  { "id": "management",  "name": "経営・組織",     "label": "Management",   "description": "会社の目標、人と組織、意思決定の仕方。" },
+  { "id": "ai-systems",  "name": "AI・仕組み",     "label": "AI & Systems", "description": "AI活用、業務設計、人が人らしく働くための仕組み化。" },
+  { "id": "perspective", "name": "仕事の考え方",   "label": "Perspective",  "description": "仕事で何を見て、なぜそう判断するのか。" }
+]
