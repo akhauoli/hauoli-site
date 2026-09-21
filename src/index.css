@@ -346,7 +346,8 @@ img { max-width: 100%; display: block; }
   padding-top: 24px;
   border-top: 1px solid var(--c-border-dark);
 }
-.sp-only { display: none; }
+/* BudouX: 文節の切れ目(ゼロ幅スペース)以外では折り返さない */
+.budou { word-break: keep-all; overflow-wrap: anywhere; }
 
 /* ── Concept ─────────────────────────────────────────────────── */
 .concept { background: var(--c-warm-bg); color: var(--c-text-dark); }
@@ -952,7 +953,6 @@ img { max-width: 100%; display: block; }
   .mvv-block--mission .mvv-block-text br { display: none; }
   .contact-heading { font-size: clamp(1.3rem, 5.6vw, 1.6rem); }
   .contact-sub { font-size: 0.86rem; margin-bottom: 44px; }
-  .sp-only { display: inline; }
   .pc-only { display: none; }
   .whatwedo-heading { font-size: clamp(1.4rem, 6vw, 1.7rem); }
   .situations-list { grid-template-columns: 1fr; }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import ContactForm from './ContactForm'
+import Budou from './Budou'
 import { rememberSource } from './config'
 
 // 上昇パーティクル（決定論的配置）
@@ -234,13 +235,13 @@ function Hero() {
       </div>
       <div className="hero-content">
         <p className="hero-eyebrow">Hau'oli growth</p>
-        <h1 className="hero-vision">
+        <Budou as="h1" className="hero-vision">
           自分にしか描けない<br />人生を、自分らしく。
-        </h1>
+        </Budou>
         <div className="hero-tagline">
           <span className="hero-elevate">Elevate</span>
           <span className="hero-dash">—</span>
-          <span className="hero-sub">その熱を、高みへ</span>
+          <Budou className="hero-sub">その熱を、高みへ</Budou>
         </div>
         <a href="#contact" className="hero-cta">
           相談してみる
@@ -264,15 +265,15 @@ function WhatWeDo() {
       <div className={`section-inner whatwedo-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <div className="whatwedo-head">
           <p className="section-label">What we do</p>
-          <h2 className="whatwedo-heading">
+          <Budou as="h2" className="whatwedo-heading">
             マーケティングを入口に、<br />
-            会社の課題を整理し、<br className="sp-only" />成長する仕組みをつくる。
-          </h2>
+            会社の課題を整理し、成長する仕組みをつくる。
+          </Budou>
         </div>
         <div className="whatwedo-body">
-          <p>集客や広告だけではなく、組織、人材、AI、業務設計まで。</p>
-          <p>目標と現在地を整理し、本当に解くべき課題を見つけ、次にやることを一緒に考えます。</p>
-          <p>施策を実行するだけではなく、最終的にはクライアント自身が、考え、判断し、改善できる状態を目指します。</p>
+          <Budou as="p">集客や広告だけではなく、組織、人材、AI、業務設計まで。</Budou>
+          <Budou as="p">目標と現在地を整理し、本当に解くべき課題を見つけ、次にやることを一緒に考えます。</Budou>
+          <Budou as="p">施策を実行するだけではなく、最終的にはクライアント自身が、考え、判断し、改善できる状態を目指します。</Budou>
           <div className="whatwedo-domains">
             {DOMAINS.map(d => <span key={d} className="service-tag">{d}</span>)}
           </div>
@@ -290,7 +291,7 @@ function SituationItem({ text, index }) {
       className={`situation-item reveal${inView ? ' in-view' : ''}`}
       style={{ transitionDelay: `${index * 0.06}s` }}
     >
-      {text}
+      <Budou>{text}</Budou>
     </li>
   )
 }
@@ -301,17 +302,17 @@ function Situations() {
     <section id="situations" className="section situations">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Cases</p>
-        <h2 className="section-heading">こんな状態から、<br className="sp-only" />ご相談いただけます。</h2>
+        <Budou as="h2" className="section-heading">こんな状態から、ご相談いただけます。</Budou>
       </div>
       <ul className="situations-list section-inner">
         {SITUATIONS.map((t, i) => <SituationItem key={t} text={t} index={i} />)}
       </ul>
       <div className="section-inner situations-close">
-        <p className="situations-lead">
+        <Budou as="p" className="situations-lead">
           課題を、きれいに整理してからご相談いただく必要はありません。<br />
           「何が問題なのか」<br />
           を整理するところから、一緒に始めます。
-        </p>
+        </Budou>
         <a href="#contact" className="situations-cta">
           相談してみる
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -337,15 +338,15 @@ function Concept() {
         <p className="concept-definition">
           el·e·vate ── 〔動〕高める。引き上げる。昇華させる。
         </p>
-        <p className="concept-bridge">
+        <Budou as="p" className="concept-bridge">
           Hau'oli growthがすべての事業に問いかける、ひとつの言葉。
-        </p>
-        <p className="concept-lead">
+        </Budou>
+        <Budou as="p" className="concept-lead">
           その熱を、Elevateする。<br />
           あなたの事業に眠る<em>"熱い思いと志"</em>を、成果と成長へ。<br />
           火をつけ、鍛え、変え、高みへ運ぶ——<br />
           私たちは、その全工程に、伴走します。
-        </p>
+        </Budou>
       </div>
     </section>
   )
@@ -401,7 +402,7 @@ function Strengths() {
     <section id="strengths" className="section strengths">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Our Strengths</p>
-        <h2 className="section-heading">私たちの強み</h2>
+        <Budou as="h2" className="section-heading">私たちの強み</Budou>
       </div>
       <div className="strengths-list section-inner">
         {STRENGTHS.map((item, i) => (
@@ -418,7 +419,7 @@ function Services() {
     <section id="services" className="section services">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Service</p>
-        <h2 className="section-heading">Elevateを頂点に、<br /><span className="num">4</span>段階の登山道</h2>
+        <Budou as="h2" className="section-heading">Elevateを頂点に、<br /><span className="num">4</span>段階の登山道</Budou>
         <p className="services-sub">
           手段ではなく、<strong>"何を変えるか"</strong>で整理したHau'oliのサービス構成。
         </p>
@@ -532,13 +533,13 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className={`section-inner reveal${inView ? ' in-view' : ''}`} ref={ref}>
         <p className="section-label">Contact</p>
-        <h2 className="contact-heading">
-          まだ、何が問題か<br className="sp-only" />整理できていなくても、<br />大丈夫です。
-        </h2>
-        <p className="contact-sub">
+        <Budou as="h2" className="contact-heading">
+          まだ、何が問題か整理できていなくても、<br />大丈夫です。
+        </Budou>
+        <Budou as="p" className="contact-sub">
           「なんとなく上手くいっていない」「このままでいいのか分からない」<br className="pc-only" />
           そんな状態からでも、現在地を整理するところから一緒に考えます。
-        </p>
+        </Budou>
         <ContactForm />
       </div>
     </section>

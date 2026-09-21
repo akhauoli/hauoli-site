@@ -7,8 +7,16 @@ Hau'oli growth コーポレートサイト。React 19 + Vite、1ページ構成�
 - `src/App.jsx` — 全セクション（Hero / What we do / Concept / Services / Situations / Strengths / About / MVV / Contact）
 - `src/ContactForm.jsx` — サイト内お問い合わせフォーム
 - `src/config.js` — フォーム送信先URL・流入元記録
+- `src/Budou.jsx` — 日本語の改行ルール（下記）
 - `src/index.css` — デザイントークンと全スタイル
 - `gas/contact/` — フォームの受け口（Google Apps Script）。スプレッドシート「Hau'oli growth お問い合わせ」に紐付き
+
+## 日本語の改行ルール
+
+見出し・リード文は `<Budou as="h2">…</Budou>` で囲む。BudouX（Google製）が文節の切れ目を判定し、そこでしか折り返さない。
+画面幅ごとの `<br className="sp-only">` は不要。意味の区切りで確実に改行したい場所だけ `<br />` を書く。
+本文・フォームは通常の折り返しのまま。
+`vite.config.js` のエイリアスでパーサーと日本語モデルだけを読み込んでいる（`budoux` を直接 import すると4言語分のモデルが全部入って +200KB になる）。
 
 ## お問い合わせの流れ
 
