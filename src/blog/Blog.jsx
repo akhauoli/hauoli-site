@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import blog from 'virtual:blog-data'
 import Budou from '../Budou'
 import { Link, useTitle } from '../router'
@@ -120,6 +120,21 @@ export function BlogPost({ slug }) {
     track('article_view', { slug: post.slug, category: post.category, title: post.title })
   }, [post])
 
+  // 本文内 /#contact リンクを blog_inline として計測（イベント委譲）
+  const bodyRef = useRef(null)
+  useEffect(() => {
+    if (!bodyRef.current || !post) return
+    const el = bodyRef.current
+    const handler = (e) => {
+      const a = e.target.closest('a')
+      if (a?.getAttribute('href') === '/#contact') {
+        track('cta_click', { location: 'blog_inline', slug: post.slug })
+      }
+    }
+    el.addEventListener('click', handler)
+    return () => el.removeEventListener('click', handler)
+  }, [post])
+
   if (!post) return <NotFound />
   const cat = categoryById[post.category]
   const author = authorById[post.author]
@@ -147,7 +162,7 @@ export function BlogPost({ slug }) {
       <div className="blog-post-main">
         <div className="blog-post-inner">
           {post.coverCustom && <img className="blog-post-cover" src={post.cover} alt="" decoding="async" />}
-          <div className="blog-body" dangerouslySetInnerHTML={{ __html: post.html }} />
+          <div className="blog-body" ref={bodyRef} dangerouslySetInnerHTML={{ __html: post.html }} />
 
           {author && (
             <aside className="blog-author-box">
