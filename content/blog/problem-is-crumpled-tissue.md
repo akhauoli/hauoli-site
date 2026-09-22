@@ -5,7 +5,7 @@ description: 仕事の悩みは、複数の問題が丸まって一つに見え�
 date: 2026-09-22
 category: perspective
 author: akihito
-draft: true
+draft: false
 sources:
   - "小林顕人 本人発言『課題は丸まったティッシュ』／Hau'oli Growth共有プロジェクト"
 ---

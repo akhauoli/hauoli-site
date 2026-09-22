@@ -145,8 +145,7 @@ Voice は単語の真似ではない。**小林の思考順序・問い・判断
 
 - 原稿は**必ず `draft: true` で置く**。ちびあっきーの完成原稿も、Bridge 経由の原稿も例外なし
 - draft は `npm run dev` と Vercel の Preview デプロイでだけ見える。本番（main）には出ない
-- draft を外すのは、小林の「OK」の後に Claude Code がやる
-- 最初の10〜20記事は自動公開しない。「小林らしい文章」「直されるポイント」「技術詳細の深さ」「長さ」「読者反応」を実例から学ぶため
+- draft を外すのは、小林の承認後に Claude Code がやる（下記フロー参照）
 
 ## 11. アイキャッチ
 
@@ -159,12 +158,17 @@ Voice は単語の真似ではない。**小林の思考順序・問い・判断
 ```
 STEP 1  普段の仕事・壁打ち・Reel からテーマが生まれる
 STEP 2  小林「これブログにして」→ ちびあっきー（将来はちびあっきー側から候補提案も可）
-STEP 3  ちびあっきーが記事を完成させる（title / description / slug / category / author / date / body / source_notes / cover_type）
-STEP 4  Claude Code が content/blog/<slug>.md に配置（draft: true）。構造化データなら npm run new-post -- --json で受ける
-STEP 5  Claude Code が確認（下記チェックリスト）
-STEP 6  小林が preview を確認 →「OK」→ Claude Code が draft 解除 → push → Vercel 公開 → 本番確認
-        「OK」が無い限り push しない
+STEP 3  ちびあっきーが完成原稿をチャット上で小林へ提示する
+        （title / metaTitle / description / slug / category / 本文 / CTA を含む最終形）
+STEP 4  小林が「OK」「公開して」等を明示する
+        → この承認は「内容承認＋公開承認」を兼ねる。以後は再承認不要
+STEP 5  Claude Code が content/blog/<slug>.md に配置（draft: true）。技術確認（下記チェックリスト）
+        構造化データなら npm run new-post -- --json で受ける
+STEP 6  Claude Code が draft 解除 → push → Vercel 公開 → 本番確認 → URL・build 結果を報告
+        ※ 技術エラー・原稿との差異・重大な仕様変更がある時だけ停止して確認する
 ```
+
+**品質学習について**: 最初の10〜20記事は、完成原稿をチャットで事前提示（STEP 3）することで「小林らしい文章か」「直されるポイント」を学ぶ。preview 確認後の二重承認は不要。
 
 進行状況と結果は管理画面 https://admin.hauoil.com の **Content** で見る（公開／下書き／企画中、記事別の閲覧数・問い合わせ数）。
 企画中のテーマは Content の「企画を追加」で slug と仮タイトルを置いておく（記事ファイルができたら自動で同じ行に繋がる）。
@@ -185,4 +189,4 @@ STEP 6  小林が preview を確認 →「OK」→ Claude Code が draft 解除 
 
 ちびあっきー → Claude Code Bridge → hauoli-site を直結し、人間側にコピペや Markdown 作成を発生させない。
 サイト側の受け口は今のまま `npm run new-post -- --json`（title / description / slug / category / author / date / body / source_notes / custom_cover の構造化データ）。API の追加は不要。
-Bridge が繋がっても、draft → 小林の「OK」→ push の順は変えない。
+Bridge が繋がっても、完成原稿のチャット提示 → 小林の承認 → draft 配置 → push の順は変えない。
