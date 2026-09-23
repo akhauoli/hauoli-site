@@ -6,6 +6,10 @@ date: 2026-09-05
 category: perspective
 author: akihito
 draft: false
+related:
+  - horenso-ai-learning-feedback
+  - who-takes-responsibility-for-automation
+  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -185,6 +189,16 @@ CVRは改善してるから。
 ---
 
 ## 仕事をして、レビューして、また次の仕事をする
+
+ここで大事なのが、
+やらせて終わりにしないこと。
+
+結果まで返して、
+次の判断につなげる。
+
+その話は、
+[「ホウレンソウできない人は、AIも育てられない」](/blog/horenso-ai-learning-feedback)
+に詳しく書いてる。
 
 ちびあっきーの教育って、
 
@@ -743,7 +757,11 @@ AIは、
 
 ---
 
-## 4本目で「自動化したいんじゃない」って書いた理由
+## 「自動化したいんじゃない」って書いた理由
+
+この考え方の元になってるのが、
+[「うちは自動化なんで」って、それ誰が責任取るの？](/blog/who-takes-responsibility-for-automation)
+で書いた話。
 
 前の記事で、
 
