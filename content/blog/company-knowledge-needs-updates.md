@@ -3,6 +3,7 @@ title: iPhoneのアプリですら更新するのに、社内ナレッジは何�
 metaTitle: 社内ナレッジ・AI・Skillを更新し続ける管理職の役割
 description: Knowledge、Skill、自動化、AIは作って終わりではない。市場も顧客も仕事も変わる以上、会社の判断基準も更新が必要。仕組み化した後こそ管理職が見るべき理由と、仕事するほど会社が賢くなる仕組みについて考えます。
 date: 2026-09-08
+updated: 2026-09-23
 category: management
 author: akihito
 draft: false
