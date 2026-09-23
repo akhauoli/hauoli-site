@@ -7,9 +7,9 @@ category: perspective
 author: akihito
 draft: false
 related:
+  - becoming-the-company-bottleneck
   - the-work-starts-after-launch
   - repeated-explanation-is-a-system-problem
-  - problem-is-crumpled-tissue
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -298,6 +298,10 @@ LPを全部整理して、
 **自分でやるから遅い。**
 
 普通にある。
+
+これが一人の仕事じゃなく、組織全体で起きた時の話は、
+[全部俺を通してたら、俺が会社のボトルネックになった](/blog/becoming-the-company-bottleneck)
+に書いた。
 
 ## ただ、雑にパスすればいいわけじゃない
 
