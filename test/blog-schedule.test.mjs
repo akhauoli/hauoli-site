@@ -65,12 +65,13 @@ function fixtureMd(slug, f) {
   ].join('\n')
 }
 
-// 既存の公開記事（draft でも予約でもないもの）＝今まで通り出るべき記事
+// 実際の記事のうち、テストのビルド時刻(NOW)で本番に出るべきもの（draft でなく、予約なら時刻を過ぎている）
 function existingPublicSlugs() {
   const dir = join(ROOT, 'content/blog')
   return readdirSync(dir).filter(f => f.endsWith('.md') && !f.startsWith('_')).filter(f => {
     const fm = readFileSync(join(dir, f), 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/)[1]
-    return !/^draft:\s*true/m.test(fm) && !/^publishAt:/m.test(fm)
+    const at = fm.match(/^publishAt:[ \t]*(.*?)[ \t]*$/m)
+    return !/^draft:\s*true/m.test(fm) && (!at || parsePublishAt(at[1]) <= NOW)
   }).map(f => f.replace(/\.md$/, ''))
 }
 
@@ -159,7 +160,7 @@ test('本番ビルド: 一覧・記事ページ・sitemap・RSS・index.json・J
   assert.equal(past.date, '2026-09-14')
   assert.equal(past.scheduled, undefined)
   // 既存記事には publishAt / scheduled が増えない（index.json の形は今まで通り）
-  for (const p of index.posts.filter(p => !p.slug.startsWith('zz-'))) { assert.ok(!('publishAt' in p)); assert.ok(!('scheduled' in p)) }
+  for (const p of index.posts.filter(p => !p.slug.startsWith('zz-'))) { assert.ok(!('scheduled' in p)) }
 })
 
 test('Preview ビルド: 下書きも予約中の記事も確認できる', { timeout: 300_000 }, () => {
