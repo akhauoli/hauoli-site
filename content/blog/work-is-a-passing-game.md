@@ -3,13 +3,14 @@ title: 仕事が遅いんじゃない。ボール持ちすぎなんだよ
 metaTitle: 仕事を最速で進めるタスク管理｜直列ではなく「パスゲーム」で並列化する考え方
 description: 仕事が遅い原因は作業速度より、ボールを自分で持ち続けていることかもしれない。相手への確認や依頼を先に投げ、自分だけで完結する仕事は待ち時間に回す。仕事をパスゲームとして考える理由をまとめます。
 date: 2026-09-12
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
 related:
+  - my-special-skill-is-instant-transmission
   - becoming-the-company-bottleneck
   - the-work-starts-after-launch
-  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -373,6 +374,8 @@ PMって聞くと、
 **誰がやるのが一番早くGoalに近づくか。**
 
 そこ。
+
+この「先にGoalを見て、今やることを決める」感覚は、[俺の特技は「瞬間移動」です。笑](/blog/my-special-skill-is-instant-transmission)にも書いた。
 
 前に、
 
