@@ -15,6 +15,17 @@ const BLOG_TITLE = "Blog｜Hau'oli growth"
 // 2026-09-21 → 2026.09.21
 const fmtDate = (d) => d.replaceAll('-', '.')
 
+// 公開前の記事の目印（dev と Vercel Preview にだけ出る。本番のデータには公開前の記事自体が無い）
+// publishAt は 2026-09-25T08:00:00+09:00 の形で来るので、そのまま日本時間として読む
+function PreviewState({ post }) {
+  if (post.scheduled) {
+    const [, m, d, hm] = post.publishAt.match(/^\d{4}-(\d{2})-(\d{2})T(\d{2}:\d{2})/)
+    return <span className="blog-state">{`公開予約 ${+m}/${+d} ${hm}`}</span>
+  }
+  if (post.draft) return <span className="blog-state">下書き</span>
+  return null
+}
+
 // アイキャッチ。frontmatter で指定が無ければビルド時に自動生成された /blog/<slug>/cover.png
 function Cover({ post, className = '' }) {
   return <img className={`blog-cover ${className}`.trim()} src={post.cover} alt="" width="1200" height="630" loading="lazy" decoding="async" />
@@ -42,6 +53,7 @@ function PostCard({ post }) {
           <p className="blog-card-meta">
             <span className="blog-cat">{cat?.name}</span>
             <time dateTime={post.date}>{fmtDate(post.date)}</time>
+            <PreviewState post={post} />
           </p>
           <Budou as="h2" className="blog-card-title">{post.title}</Budou>
           <p className="blog-card-desc">{post.description}</p>
@@ -154,6 +166,7 @@ export function BlogPost({ slug }) {
             <span className="blog-cat">{cat?.name}</span>
             <time dateTime={post.date}>{fmtDate(post.date)}</time>
             {post.updated && <span className="blog-updated">更新 <time dateTime={post.updated}>{fmtDate(post.updated)}</time></span>}
+            <PreviewState post={post} />
           </p>
           <AuthorLine author={author} />
         </div>
