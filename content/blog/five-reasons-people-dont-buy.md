@@ -8,9 +8,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - sell-it-to-yourself-first
   - how-to-sell-sausage-to-people-not-looking-for-it
   - is-it-really-a-price-problem
-  - cpa-is-a-result-not-a-cause
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Akki Principles「買わない理由5つ」"
