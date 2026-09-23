@@ -65,10 +65,53 @@ function assert(cond, msg) {
   if (!cond) throw new Error(`[blog] ${msg}`)
 }
 
+// ── 予約公開 ──
+// publishAt: 2026-09-25T08:00:00+09:00 / 2026-09-25 08:00 / 2026-09-25（= その日の 0:00）。タイムゾーン省略は日本時間
+// 本番ビルドは「draft でない かつ publishAt がビルド時刻以前」の記事だけを出す。publishAt が無い記事は今まで通り
+// ※ hauoli-admin の src/blogPublish/schedule.js に同じ解釈の実装がある（変えるなら両方）
+const PUBLISH_AT_RE = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?\s*(Z|[+-]\d{2}:?\d{2})?$/
+
+/** @returns {number|null} epoch ms。空なら null、読めなければ NaN */
+export function parsePublishAt(value) {
+  if (value == null || value === '') return null
+  const s = String(value).trim().replace(/^(["'])(.*)\1$/, '$2')
+  const m = s.match(PUBLISH_AT_RE)
+  if (!m) return NaN
+  const [, y, mo, d, h = '00', mi = '00', sec = '00', tz] = m
+  // 2026-02-30 や 25:00 のような存在しない日時は弾く（Date は黙って繰り上げるため）
+  const cal = new Date(Date.UTC(+y, +mo - 1, +d))
+  if (cal.getUTCMonth() !== +mo - 1 || cal.getUTCDate() !== +d || +h > 23 || +mi > 59 || +sec > 59) return NaN
+  const offset = !tz ? '+09:00' : tz === 'Z' ? 'Z' : tz.replace(/^([+-]\d{2})(\d{2})$/, '$1:$2')
+  return Date.parse(`${y}-${mo}-${d}T${h}:${mi}:${sec}${offset}`)
+}
+
+// 表示・JSON 用に日本時間の ISO 文字列へ（2026-09-25T08:00:00+09:00）
+export function toJstIso(ms) {
+  return new Date(ms + 9 * 3600_000).toISOString().slice(0, 19) + '+09:00'
+}
+
+// frontmatter の生の文字列を取る（YAML はタイムゾーン無しの日時を UTC として Date にしてしまうので、publishAt は自前で読む）
+function rawFrontmatterValue(raw, key) {
+  const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  const m = fm?.[1].match(new RegExp(`^${key}:[ \\t]*(.*?)[ \\t]*(?:#.*)?$`, 'm'))
+  return m ? m[1] : null
+}
+
+// ビルド時刻。BLOG_NOW（ISO）で上書きできる（テスト・「この時刻にビルドしたら」の確認用）
+export function blogNow() {
+  const v = process.env.BLOG_NOW
+  if (!v) return Date.now()
+  const ms = Date.parse(v)
+  if (Number.isNaN(ms)) throw new Error(`[blog] BLOG_NOW「${v}」は日時として読めない`)
+  return ms
+}
+
 /**
- * @param {{ includeDrafts?: boolean }} opts
+ * @param {{ includeDrafts?: boolean, now?: number }} opts
+ *   includeDrafts: 下書き・公開前の予約記事も含める（dev / Vercel Preview）
+ *   now: 予約記事の公開判定に使う時刻（epoch ms）。既定はビルド時刻
  */
-export function loadBlog({ includeDrafts = false } = {}) {
+export function loadBlog({ includeDrafts = false, now = blogNow() } = {}) {
   const categories = readJson('categories.json')
   const authors = readJson('authors.json')
   const categoryIds = new Set(categories.map(c => c.id))
@@ -89,6 +132,12 @@ export function loadBlog({ includeDrafts = false } = {}) {
     for (const k of ['title', 'description', 'date', 'category', 'author']) assert(data[k], `${file}: frontmatter「${k}」が必須`)
     assert(categoryIds.has(data.category), `${file}: category「${data.category}」は content/categories.json に無い`)
     assert(authorIds.has(data.author), `${file}: author「${data.author}」は content/authors.json に無い`)
+    // 予約記事は公開前でも検証する（公開時刻になってから本番ビルドが落ちるのを防ぐ）
+    const rawPublishAt = rawFrontmatterValue(raw, 'publishAt')
+    const publishAtMs = parsePublishAt(rawPublishAt)
+    assert(!Number.isNaN(publishAtMs), `${file}: publishAt「${rawPublishAt}」は日時として読めない（例: 2026-09-25T08:00:00+09:00）`)
+    const scheduled = publishAtMs != null && publishAtMs > now
+    if (scheduled && !includeDrafts) continue
 
     // 表はスマホで横スクロールできるよう包む（表自体は幅いっぱいに広げる）
     const html = createMarked().parse(content).replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>')
@@ -110,6 +159,9 @@ export function loadBlog({ includeDrafts = false } = {}) {
       // 出典メモ（brain-hubのid・記録名など）。表示はしない。事実確認の証跡として残す
       sources: Array.isArray(data.sources) ? data.sources : [],
       draft: !!data.draft,
+      // 予約公開の日時（指定がある記事だけ）。scheduled は「まだ公開時刻前」＝ dev / Preview でだけ現れる
+      ...(publishAtMs != null ? { publishAt: toJstIso(publishAtMs) } : {}),
+      ...(scheduled ? { scheduled: true } : {}),
       html,
       url: `${SITE_URL}/blog/${slug}`,
     })

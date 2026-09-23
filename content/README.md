@@ -29,6 +29,7 @@ hauoil.com/blog の正本はこのディレクトリ。CMSは無い。ファイ�
 | `metaTitle` | | `<title>` を別にしたい時だけ |
 | `slug` | | ファイル名と違うURLにしたい時だけ |
 | `draft` | | `true` の間は dev と Vercel Preview でだけ見える。本番ビルド・sitemap・RSS には出ない |
+| `publishAt` | | 予約公開の日時。`2026-09-25T08:00:00+09:00`（タイムゾーン省略は日本時間。`2026-09-25 08:00` も可）。この時刻より前の本番ビルドには出ない。下の「予約公開」参照 |
 
 ## Markdown の変換仕様
 
@@ -60,12 +61,31 @@ cat article.json | npm run new-post -- --json
 
 ```bash
 npm run dev        # http://localhost:5173/blog/<slug>  draft も見える。/blog/<slug>/cover.png もその場で生成
-npm run build      # 静的HTML・アイキャッチ・sitemap・RSS・blog/index.json を dist/ に生成。draft は除外
+npm run build      # 静的HTML・アイキャッチ・sitemap・RSS・blog/index.json を dist/ に生成。draft と公開時刻前の予約記事は除外
 npm run preview    # dist/ を http://localhost:4173 で確認
 ```
 
 - **Vercel Preview**: main 以外のブランチを push すると Preview URL が出る。Preview では draft も表示される（Vercel が noindex を付ける）。スマホでの確認に使う
 - **公開**: frontmatter の `draft: true` を外す → `git push origin main` → Vercel が自動デプロイ → `https://hauoil.com/blog/<slug>` と `/sitemap.xml` `/feed.xml` を確認
+
+## 予約公開（publishAt）
+
+| 状態 | frontmatter | 本番 |
+|---|---|---|
+| 下書き | `draft: true`（publishAt があっても下書きが優先） | 出ない |
+| 承認済み・即時公開 | `draft` なし / `false`、`publishAt` なし | 次のビルドで出る（今まで通り） |
+| 承認済み・予約公開 | `draft` なし / `false`、`publishAt` が未来 | 出ない。公開時刻を過ぎた後のビルドで出る |
+| 公開済み | 上の2つが本番に出た状態 | 出る |
+
+- 判定は `scripts/blog-content.mjs` の `loadBlog()` の1か所だけ。一覧・記事ページ・sitemap.xml・feed.xml・blog/index.json・JS バンドルは全部ここから作るので必ず揃う
+- 判定時刻はビルド開始時刻（`scripts/build.mjs` が `BLOG_NOW` を1回決めて全工程に渡す）。`BLOG_NOW=2026-09-25T08:00:00+09:00 npm run build` で「その時刻にビルドしたら」を確かめられる
+- `date` は記事の日付（表示・並び順）のまま。実際に公開される日時は `publishAt`。過去日付の `date` で予約してよい
+- 予約記事は公開前でも本番ビルドで検証される（category の typo 等は、公開時刻ではなく push した時点で気づける）
+- Preview（main 以外のブランチ）と dev では予約記事も「公開予約 9/25 08:00」の印つきで見える
+- **公開時刻になったら誰がビルドするか**: hauoli-admin の予約 tick（Cloud Scheduler 5分毎）が「公開時刻を過ぎたのに本番の blog/index.json に居ない記事」を見つけると Vercel の Deploy Hook を1回叩く。詳細は hauoli-admin の README「ブログ予約公開」
+- 予約の設定・変更・解除・今すぐ公開は Admin の Content 画面から（md を書き換えて main にコミットする）。手で md を編集しても同じ
+- **公開済みの記事の `publishAt` を未来に変えない**（次のビルドで本番から消える）。Admin はこの操作を受け付けない
+- `npm test` = 予約公開のテスト（一時ディレクトリで本番ビルド・Preview ビルドを実際に走らせ、全出力で公開判定が一致するかを見る）
 
 ## アイキャッチの仕組み
 

@@ -130,6 +130,8 @@
 }
 .blog-post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 0.78rem; color: var(--c-text-dim); margin-bottom: 18px; }
 .blog-updated { color: var(--c-text-dim); }
+/* 公開前の記事の目印（Preview 専用） */
+.blog-state { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; color: #b45309; border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; }
 
 .blog-post-main { background: var(--c-warm-bg); color: var(--c-text-dark); padding: 64px 40px 80px; }
 .blog-post-cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: -104px 0 48px; border-radius: 2px; }
