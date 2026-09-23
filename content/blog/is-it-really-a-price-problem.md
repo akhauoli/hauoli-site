@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - product-itself-has-no-value
   - cpa-depends-on-ltv
   - problem-is-crumpled-tissue
-  - worry-is-not-a-problem-yet
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Growth Reels原稿「それ、本当に価格の問題？」／共有プロジェクト"
