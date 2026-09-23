@@ -9,7 +9,7 @@ author: akihito
 draft: false
 related:
   - company-knowledge-needs-updates
-  - ai-staff-learning-the-job
+  - work-is-a-passing-game
   - horenso-ai-learning-feedback
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
@@ -204,6 +204,10 @@ ChatWorkにも書いた。
 質問が10人から来たら？
 
 そこで仕事が止まる。
+
+こういう「今、誰がボールを持っていて、どこで止まってるか」を見る考え方は、
+[仕事が遅いんじゃない。ボール持ちすぎなんだよ](/blog/work-is-a-passing-game)
+にもつながる。
 
 ---
 
