@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - information-follows-emotional-order
   - did-the-customer-really-say-that
   - product-itself-has-no-value
-  - is-it-really-a-price-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Akki Principles「リテラシーの乖離」「違うことは優れているより強い」"
