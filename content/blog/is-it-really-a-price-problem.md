@@ -2,7 +2,7 @@
 title: それ、本当に価格の問題？
 metaTitle: 売れない時、価格を下げる前に見ること｜それ、本当に価格の問題？
 description: 売れない時、すぐ値下げするのは早い。価値が伝わっていないのか、違う人に売っているのか、本当に価格で止まっているのか。価格を触る前に確認したい判断順をまとめます。
-date: 2026-09-24
+date: 2026-09-18
 category: marketing
 author: akihito
 draft: false
