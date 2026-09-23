@@ -8,8 +8,8 @@ author: akihito
 draft: false
 related:
   - did-the-customer-really-say-that
+  - different-is-stronger-than-better
   - is-it-really-a-price-problem
-  - cpa-depends-on-ltv
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Growth Reels原稿「商品そのものに価値はない」／共有プロジェクト"
