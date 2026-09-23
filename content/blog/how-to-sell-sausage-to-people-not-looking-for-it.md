@@ -7,8 +7,8 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - five-reasons-people-dont-buy
   - information-follows-emotional-order
-  - product-itself-has-no-value
   - is-it-really-a-price-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
