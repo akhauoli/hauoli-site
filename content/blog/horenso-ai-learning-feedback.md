@@ -6,6 +6,10 @@ date: 2026-09-06
 category: perspective
 author: akihito
 draft: false
+related:
+  - ai-staff-learning-the-job
+  - company-knowledge-needs-updates
+  - the-work-starts-after-launch
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -99,6 +103,11 @@ CVRは改善した？
 ---
 
 ## AIに答えだけ渡しても、仕事は覚えない
+
+そもそもAIを「使う道具」じゃなく、
+一緒に仕事を覚えていく存在として見てる話は、
+[「うちのAIスタッフは、俺に仕事を習ってる」](/blog/ai-staff-learning-the-job)
+に書いてる。
 
 AIに仕事を教える時、
 
