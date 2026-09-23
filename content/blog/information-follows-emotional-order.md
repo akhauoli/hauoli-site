@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - how-to-sell-sausage-to-people-not-looking-for-it
   - different-is-stronger-than-better
   - did-the-customer-really-say-that
-  - is-it-really-a-price-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Akki Principles「情報は感情の順番に合わせて出す」"
