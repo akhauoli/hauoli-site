@@ -6,6 +6,10 @@ date: 2026-09-03
 category: perspective
 author: akihito
 draft: false
+related:
+  - problem-is-crumpled-tissue
+  - the-work-starts-after-launch
+  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -181,6 +185,11 @@ sources:
 ---
 
 ## 悩みと問題は、俺の中では別物
+
+ここで言う「問題」を、
+事実・原因・変えられること・次の行動まで広げる考え方は、
+[「課題は、丸まったティッシュみたいなものだと思ってる」](/blog/problem-is-crumpled-tissue)
+にもう少し具体的に書いた。
 
 俺の中では、
 
