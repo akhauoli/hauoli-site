@@ -3,13 +3,14 @@ title: CPA上がったから広告変える、って雑すぎる
 metaTitle: CPA悪化の原因をCTR・CVR・CPMから切り分ける広告運用の考え方
 description: CPAが高騰した時、見るべきなのはCPAそのものではない。CTR、CVR、CPMのどこが変わったのか。さらに過去CPAと消化金額から、今評価できる状態なのかを判断する。数字を読み上げるのではなく、次の一手を決めるための広告運用の考え方。
 date: 2026-09-11
+updated: 2026-09-23
 category: marketing
 author: akihito
 draft: false
 related:
+  - dont-just-see-watch
   - cpa-depends-on-ltv
   - meta-ads-learning-drift-4-types
-  - the-work-starts-after-launch
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -531,6 +532,8 @@ CVRも崩れてる。
 ---
 
 ## 「見る」と「変える」は別の判断
+
+この「見る」の感覚そのものは、[「ちょっと見てこい」は、本当に見るだけじゃ怒られた](/blog/dont-just-see-watch)に書いた。
 
 CPAが悪い。
 
