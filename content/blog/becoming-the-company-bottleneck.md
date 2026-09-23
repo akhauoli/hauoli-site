@@ -3,13 +3,14 @@ title: 全部俺を通してたら、俺が会社のボトルネックになっ�
 metaTitle: 経営者・責任者が会社のボトルネックになる理由｜全部自分を通す組織から抜ける
 description: 自分で見た方が早い。自分で決めた方が正確。そう思って全部の判断を自分に集めていたら、気づけば会社中が俺待ちになっていた。「あっきーがボトルネックになっちゃうよ」と言われて気づいた、仕事を任せる本当の意味について書きます。
 date: 2026-09-13
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
 related:
+  - not-cold-just-too-passionate
   - work-is-a-passing-game
   - repeated-explanation-is-a-system-problem
-  - company-knowledge-needs-updates
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -197,6 +198,8 @@ sources:
 だった。
 
 もっと早く返さないと。
+
+この「早く返したい」感覚の根っこは、[冷たいんじゃない。熱いから速いんだと思う](/blog/not-cold-just-too-passionate)にもつながる。
 
 もっと効率良くやらないと。
 
