@@ -197,7 +197,7 @@
 
 /* ── 05 Track Record ── */
 .sg-record-note { font-size: 0.82rem; color: var(--c-text-mid); margin: -36px 0 32px; padding-left: 12px; border-left: 2px solid var(--c-accent); max-width: 66ch; }
-.sg-records { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.sg-records { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 760px; }
 .sg-record { background: var(--sg-warm-card); border: 1px solid var(--c-border-light); padding: 30px 26px; }
 .sg-record-num { font-family: var(--font-display); font-size: clamp(2.6rem, 5vw, 3.4rem); font-weight: 600; line-height: 1; color: var(--c-text-dark); font-variant-numeric: tabular-nums; }
 .sg-record-num small { font-size: 0.5em; color: #A86F2A; margin-left: 3px; }
