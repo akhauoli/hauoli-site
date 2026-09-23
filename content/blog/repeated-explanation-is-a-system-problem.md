@@ -6,6 +6,10 @@ date: 2026-09-07
 category: perspective
 author: akihito
 draft: false
+related:
+  - company-knowledge-needs-updates
+  - ai-staff-learning-the-job
+  - horenso-ai-learning-feedback
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -346,6 +350,13 @@ CVRは改善傾向。
 ---
 
 ## Knowledgeって、資料置き場じゃない
+
+ただし、
+残したKnowledgeも完成じゃない。
+
+現実の結果に合わせて更新し続ける話は、
+[「iPhoneのアプリですら更新するのに、社内ナレッジは何年そのままなの？」](/blog/company-knowledge-needs-updates)
+に書いてる。
 
 PDFが100個ある。
 
