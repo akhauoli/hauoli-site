@@ -6,6 +6,10 @@ date: 2026-09-04
 category: perspective
 author: akihito
 draft: false
+related:
+  - ai-staff-learning-the-job
+  - company-knowledge-needs-updates
+  - horenso-ai-learning-feedback
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -673,6 +677,12 @@ AIで5分で作れるようにした。
 ---
 
 ## AIを使う目的も、人を消すことじゃない
+
+じゃあAIをどうチームに入れるのか。
+
+俺が実際に「AIスタッフ」として仕事を教えてる話は、
+[「うちのAIスタッフは、俺に仕事を習ってる」](/blog/ai-staff-learning-the-job)
+に書いてる。
 
 AIの話って、
 
