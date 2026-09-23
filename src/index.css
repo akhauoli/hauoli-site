@@ -3,6 +3,8 @@
   --c-dark:         #131211;
   --c-dark-mid:     #1D1B18;
   --c-dark-card:    #242119;
+  --c-dark-raised:  #27231B;   /* 一覧の地(--c-dark-mid)より一段明るいカード面 */
+  --c-dark-raised2: #2E2A21;   /* その hover */
   --c-accent:       #C98A3A;
   --c-accent-light: #E0A858;
   --c-gold:         #C9A84C;
