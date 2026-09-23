@@ -3,6 +3,7 @@ title: 同じことを3回説明してるなら、人じゃなく仕組みを疑
 metaTitle: 同じ質問・説明・ミスが繰り返される会社で見直すべき仕組み
 description: 同じ質問、説明、確認、ミスが何度も起きる。そのたびに人を責めても、会社に学習が残らなければまた繰り返す。情報の置き場所、判断基準、Knowledge、Skill、AI接続まで、同じことを繰り返さない仕組みについて考えます。
 date: 2026-09-07
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
