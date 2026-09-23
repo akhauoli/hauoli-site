@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - information-follows-emotional-order
+  - different-is-stronger-than-better
   - product-itself-has-no-value
-  - dont-just-see-watch
-  - is-it-really-a-price-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "KAYOI常時録音機能に関する本人説明／Hau'oli Growth共有プロジェクト"
