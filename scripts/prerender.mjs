@@ -93,6 +93,44 @@ writePage('blog/index.html', renderPage('/blog', {
   },
 }))
 
+// ── Service Guide ──
+// 商談後にURLで送る/サイト訪問者向けのサービス案内の正本。料金は「〜」表記なので最低価格として出す
+const guideUrl = `${SITE_URL}/service-guide`
+const GUIDE_TITLE = `Service Guide｜月次CMO参画｜${SITE_NAME}`
+const GUIDE_DESCRIPTION = "Hau'oli growth の Service Guide。月次CMO参画で、経営・マーケティング・現場を横断して優先順位を決め、判断基準と仕組みを社内に残す。支援内容・代表の実績・料金・開始までの流れ。"
+writePage('service-guide/index.html', renderPage('/service-guide', {
+  title: GUIDE_TITLE,
+  description: GUIDE_DESCRIPTION,
+  url: guideUrl,
+  type: 'website',
+  image: abs(DEFAULT_OG_IMAGE),
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebPage', '@id': guideUrl, url: guideUrl, name: GUIDE_TITLE, description: GUIDE_DESCRIPTION, inLanguage: 'ja', isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL } },
+      {
+        '@type': 'Service',
+        name: '月次CMO参画',
+        serviceType: 'マーケティング戦略支援（月次CMO参画）',
+        url: guideUrl,
+        description: '経営・マーケティング・現場を横断して優先順位を決める責任者機能を月額で提供し、最終的に判断基準と仕組みを社内に残す支援。',
+        provider: organization,
+        areaServed: { '@type': 'Country', name: 'JP' },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: '料金プラン',
+          itemListElement: [
+            { '@type': 'Offer', name: 'CMO診断（初期診断・戦略設計を1ヶ月で行う単発パッケージ）', priceSpecification: { '@type': 'PriceSpecification', minPrice: 300000, priceCurrency: 'JPY' } },
+            { '@type': 'Offer', name: '月次CMO参画', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 200000, priceCurrency: 'JPY', unitText: '月' } },
+            { '@type': 'Offer', name: 'CMO + 組織構築（応相談）' },
+          ],
+        },
+      },
+      crumbs([['Home', SITE_URL + '/'], ['Service Guide', guideUrl]]),
+    ],
+  },
+}))
+
 // ── 記事 ──
 let generated = 0
 for (const p of posts) {
@@ -151,6 +189,7 @@ writePage('404.html', renderPage('/404', {
 const latest = posts[0] ? (posts[0].updated || posts[0].date) : null
 const urls = [
   { loc: `${SITE_URL}/`, changefreq: 'monthly', priority: '1.0' },
+  { loc: guideUrl, changefreq: 'monthly', priority: '0.9' },
   { loc: blogUrl, changefreq: 'weekly', priority: '0.8', lastmod: latest },
   ...posts.map(p => ({ loc: p.url, changefreq: 'monthly', priority: '0.7', lastmod: p.updated || p.date })),
 ]
@@ -194,4 +233,4 @@ writeFileSync(join(dist, 'blog/index.json'), JSON.stringify({
   posts: posts.map(({ html: _html, sources: _sources, ...p }) => p),
 }, null, 2))
 
-console.log(`プリレンダー完了: 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)
+console.log(`プリレンダー完了: Service Guide + 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)

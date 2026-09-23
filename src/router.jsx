@@ -5,6 +5,10 @@ import { track } from './tracking'
 // pathname を state に持ち、内部リンクは pushState で切り替える。
 const RouterContext = createContext({ path: '/', navigate: () => {} })
 
+// この読み込みで一度でもSPA遷移したか。直接着地したページだけが自分で閲覧を送るために使う
+let navigated = false
+export const hasNavigated = () => navigated
+
 export function normalizePath(p) {
   const s = (p || '/').replace(/\/+$/, '')
   return s === '' ? '/' : s
@@ -21,13 +25,14 @@ export function RouterProvider({ initialPath, children }) {
   }, [path])
 
   useEffect(() => {
-    const onPop = () => setPath(normalizePath(window.location.pathname))
+    const onPop = () => { navigated = true; setPath(normalizePath(window.location.pathname)) }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
   const navigate = (to) => {
     const url = new URL(to, window.location.href)
+    navigated = true
     window.history.pushState(null, '', url)
     setPath(normalizePath(url.pathname))
     // ハッシュ付き(例: /#contact)なら描画後にその位置へ、それ以外は先頭へ

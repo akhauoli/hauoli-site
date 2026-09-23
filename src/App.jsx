@@ -5,6 +5,7 @@ import Budou from './Budou'
 import { rememberTouch, initPixel, track } from './tracking'
 import { RouterProvider, Link, useRoute, useTitle } from './router'
 import { BlogList, BlogPost, NotFound } from './blog/Blog'
+import ServiceGuide from './guide/ServiceGuide'
 
 // 上昇パーティクル（決定論的配置）
 const PARTICLES = [
@@ -173,8 +174,15 @@ function useInView(threshold = 0.15) {
   return [ref, inView]
 }
 
+// Service Guide にはページ内にフォームがあるので、そこではお問い合わせをページ内へ飛ばす
+function useContactHref() {
+  const { path } = useRoute()
+  return path === '/service-guide' ? '#contact' : '/#contact'
+}
+
 function Nav({ menuOpen, setMenuOpen }) {
   const [scrolled, setScrolled] = useState(false)
+  const contactHref = useContactHref()
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -196,13 +204,14 @@ function Nav({ menuOpen, setMenuOpen }) {
         <li><Link href="/#strengths">強み</Link></li>
         <li><Link href="/#about">代表</Link></li>
         <li><Link href="/blog">BLOG</Link></li>
-        <li><Link href="/#contact" className="nav-cta" onClick={() => track('cta_click', { location: 'nav' })}>お問い合わせ</Link></li>
+        <li><Link href={contactHref} className="nav-cta" onClick={() => track('cta_click', { location: 'nav' })}>お問い合わせ</Link></li>
       </ul>
     </nav>
   )
 }
 
 function MobileMenu({ open, onClose }) {
+  const contactHref = useContactHref()
   return (
     <div className={`mobile-menu${open ? ' open' : ''}`}>
       <nav className="mobile-nav">
@@ -211,8 +220,9 @@ function MobileMenu({ open, onClose }) {
         <Link href="/#strengths" onClick={onClose}>強み</Link>
         <Link href="/#about" onClick={onClose}>代表</Link>
         <Link href="/#mvv" onClick={onClose}>MVV</Link>
+        <Link href="/service-guide" onClick={onClose}>SERVICE GUIDE</Link>
         <Link href="/blog" onClick={onClose}>BLOG</Link>
-        <Link href="/#contact" onClick={() => { track('cta_click', { location: 'mobile_nav' }); onClose() }}>お問い合わせ</Link>
+        <Link href={contactHref} onClick={() => { track('cta_click', { location: 'mobile_nav' }); onClose() }}>お問い合わせ</Link>
       </nav>
     </div>
   )
@@ -433,6 +443,9 @@ function Services() {
           <ServiceCard key={s.id} service={s} index={i} />
         ))}
       </div>
+      <p className="services-guide-link">
+        <Link href="/service-guide">支援内容・料金・開始までの流れは Service Guide へ<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg></Link>
+      </p>
     </section>
   )
 }
@@ -551,12 +564,14 @@ function Contact() {
 }
 
 function Footer() {
+  const contactHref = useContactHref()
   return (
     <footer className="footer">
       <p className="footer-logo">Hau'oli growth</p>
       <nav className="footer-links" aria-label="フッター">
+        <Link href="/service-guide">Service Guide</Link>
         <Link href="/blog">Blog</Link>
-        <Link href="/#contact" onClick={() => track('cta_click', { location: 'footer' })}>お問い合わせ</Link>
+        <Link href={contactHref} onClick={() => track('cta_click', { location: 'footer' })}>お問い合わせ</Link>
       </nav>
       <p className="footer-copy">© 2026 Hau'oli growth. All rights reserved.</p>
     </footer>
@@ -584,6 +599,7 @@ function Home() {
 function Page() {
   const { path } = useRoute()
   if (path === '/') return <Home />
+  if (path === '/service-guide') return <ServiceGuide />
   if (path === '/blog') return <main><BlogList /></main>
   const m = path.match(/^\/blog\/([^/]+)$/)
   if (m) return <main><BlogPost slug={m[1]} /></main>

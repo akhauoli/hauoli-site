@@ -406,6 +406,9 @@ img { max-width: 100%; display: block; }
 .services .section-heading { color: var(--c-text-light); }
 .services-sub { font-size: 0.9rem; color: var(--c-text-dim); margin-top: -6px; }
 .services-sub strong { color: var(--c-text-light); font-weight: 500; }
+.services-guide-link { max-width: var(--max-w); margin: 40px auto 0; padding: 0 40px; text-align: right; }
+.services-guide-link a { display: inline-flex; align-items: center; gap: 8px; font-size: 0.84rem; color: var(--c-accent-light); border-bottom: 1px solid rgba(224,168,88,0.4); padding-bottom: 2px; }
+@media (max-width: 640px) { .services-guide-link { padding: 0 20px; text-align: left; } }
 
 .services-grid {
   max-width: var(--max-w);

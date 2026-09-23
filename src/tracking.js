@@ -122,6 +122,8 @@ function beacon(event, params) {
 
 export function track(event, params = {}) {
   if (typeof window === 'undefined') return
+  // beaconOnly: Admin にだけ送る。直接着地した時の閲覧は GTM/Pixel の初期化側が既に数えているので二重にしない
+  if (params.beaconOnly) { beacon(event, params); return }
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({ event, ...params })
   beacon(event, params)
