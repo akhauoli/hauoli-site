@@ -2,7 +2,7 @@
 title: 課題は、丸まったティッシュみたいなものだと思ってる
 metaTitle: 仕事の悩みを「問題」と「タスク」に分解する考え方
 description: 仕事の悩みは、複数の問題が丸まって一つに見えていることが多い。課題を事実・原因・変えられること・次の行動へ分け、悩みをタスクに変える考え方をまとめます。
-date: 2026-09-22
+date: 2026-09-02
 category: perspective
 author: akihito
 draft: false
