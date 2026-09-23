@@ -3,6 +3,7 @@ title: ホウレンソウできない人は、AIも育てられない
 metaTitle: AIを育てるには結果の共有が必要｜ホウレンソウとAI活用の本質
 description: AIに指示や正解を渡すだけでは、仕事は覚えない。なぜそう判断したのか、実行した結果どうなったのかまで返して初めて次の判断に活かせる。人材育成にもAI育成にも共通する「ホウレンソウ」と学習の考え方をまとめます。
 date: 2026-09-06
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
