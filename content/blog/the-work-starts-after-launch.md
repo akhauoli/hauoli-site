@@ -8,9 +8,9 @@ category: perspective
 author: akihito
 draft: false
 related:
+  - work-is-a-passing-game
   - company-knowledge-needs-updates
   - problem-is-crumpled-tissue
-  - cpa-is-a-result-not-a-cause
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -484,6 +484,11 @@ AIを入れた。
 これなら、
 
 Goalを持ったまま仕事が続いてる。
+
+あと、
+仕事を止めないために「誰へ先にボールを渡すか」を考える話は、
+[仕事が遅いんじゃない。ボール持ちすぎなんだよ](/blog/work-is-a-passing-game)
+に書いてる。
 
 ---
 
