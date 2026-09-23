@@ -3,6 +3,7 @@ title: 「広告の調子が悪い」を、俺は4つに分けて見る
 metaTitle: Meta広告のCPA悪化・学習ズレを4タイプで判断する方法
 description: Meta広告の数字が崩れた時、すぐ作り直すのか、それとも待つのか。同じ「調子が悪い」でも中で起きていることは違う。俺が学習のズレを4つに分けて、どの順番で見ているのかをまとめます。
 date: 2026-09-01
+updated: 2026-09-23
 category: marketing
 author: akihito
 related:
