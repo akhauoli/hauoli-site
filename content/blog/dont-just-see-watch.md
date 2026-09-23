@@ -7,9 +7,9 @@ category: perspective
 author: akihito
 draft: false
 related:
+  - did-the-customer-really-say-that
   - cpa-is-a-result-not-a-cause
   - the-work-starts-after-launch
-  - not-cold-just-too-passionate
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
