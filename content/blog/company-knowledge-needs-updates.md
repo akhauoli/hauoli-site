@@ -6,6 +6,10 @@ date: 2026-09-08
 category: management
 author: akihito
 draft: false
+related:
+  - repeated-explanation-is-a-system-problem
+  - horenso-ai-learning-feedback
+  - the-work-starts-after-launch
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -178,7 +182,7 @@ OSが変われば対応する。
 
 までがセット。
 
-前に書いたホウレンソウの話も、
+[「ホウレンソウできない人は、AIも育てられない」](/blog/horenso-ai-learning-feedback)で書いた話も、
 
 ここにつながる。
 
@@ -592,6 +596,13 @@ v1を作る。
 ---
 
 ## 仕組み化のゴールは、完成させることじゃない
+
+「作った＝終わり」じゃなく、
+そこから現実を見て回す。
+
+この考え方は、
+[「正解なんて出てねぇよ。やっと始まったんだよ」](/blog/the-work-starts-after-launch)
+とも同じ。
 
 仕組みを作る。
 
