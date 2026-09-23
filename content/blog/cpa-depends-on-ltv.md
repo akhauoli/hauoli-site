@@ -9,8 +9,8 @@ author: akihito
 draft: false
 related:
   - is-it-really-a-price-problem
+  - product-itself-has-no-value
   - cpa-is-a-result-not-a-cause
-  - meta-ads-learning-drift-4-types
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
