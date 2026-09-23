@@ -3,6 +3,7 @@ title: 「うちは自動化なんで」って、それ誰が責任取るの？
 metaTitle: AI自動化・広告自動化の落とし穴｜省力化と責任の考え方
 description: AIや広告の自動化は便利。でも、作業を自動化することと、判断や責任まで手放すことは別の話。上手くいかなくなった時に誰が見て、判断し、責任を持つのか。Hau'oli growthが「自動化」より「省力化」を重視する理由をまとめます。
 date: 2026-09-04
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
