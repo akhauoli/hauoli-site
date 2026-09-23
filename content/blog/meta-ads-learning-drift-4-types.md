@@ -5,6 +5,10 @@ description: Meta広告の数字が崩れた時、すぐ作り直すのか、そ
 date: 2026-09-01
 category: marketing
 author: akihito
+related:
+  - cpa-is-a-result-not-a-cause
+  - cpa-depends-on-ltv
+  - the-work-starts-after-launch
 sources:
   - "akki-brain 13_Brain/frameworks/2026-09-09 異常検知の4つの型（D A B C）と対応アプローチ.md（2026-09-21追記）"
   - "brain-hub ent_1788985833937_762bb83d / ent_1788985716938_0d0f7a6f / ent_1788985689638_5d7c8b86 / ent_1788985771837_160c3138"
@@ -472,6 +476,16 @@ AIでも広告運用でも一緒だと思ってて、
 ---
 
 ## 「広告の調子が悪い」で止めない
+
+CPAが高騰した時の最初の切り分けは、
+まずCTR・CVR・CPMを見る。
+
+その見方は、
+[「CPA上がったから広告変える、って雑すぎる」](/blog/cpa-is-a-result-not-a-cause)
+に詳しく書いた。
+
+この記事の4分類は、
+その先で「Metaの学習のズレ」を疑う時の見方。
 
 広告の相談で、
 
