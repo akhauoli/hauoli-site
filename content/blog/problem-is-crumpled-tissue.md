@@ -6,6 +6,10 @@ date: 2026-09-02
 category: perspective
 author: akihito
 draft: false
+related:
+  - worry-is-not-a-problem-yet
+  - the-work-starts-after-launch
+  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言『課題は丸まったティッシュ』／Hau'oli Growth共有プロジェクト"
 ---
@@ -262,6 +266,16 @@ CVRを変えられるのか。
 ---
 
 ## 問題がタスクになったら、かなり軽くなる
+
+ただ、
+タスクになったら全部終わり、
+ではない。
+
+やってみて初めて分かることもある。
+
+実行した後まで含めて仕事を見る話は、
+[「正解なんて出てねぇよ。やっと始まったんだよ」](/blog/the-work-starts-after-launch)
+にも書いてる。
 
 俺が課題整理でやりたいのって、
 別に難しい分析じゃない。
