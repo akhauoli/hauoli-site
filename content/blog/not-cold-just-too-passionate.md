@@ -3,13 +3,14 @@ title: 冷たいんじゃない。熱いから速いんだと思う
 metaTitle: 冷たいんじゃない。熱いから速いんだと思う｜AI・Bot・冷徹と言われる理由
 description: 「AIみたい」「Botみたい」「冷徹」と言われる。でも、返信が早いのも、結論を求めるのも、正確に伝えたいのも、たぶん根っこは同じ。冷たいんじゃなく、ちょっと熱すぎるだけなのかもしれない。
 date: 2026-09-14
+updated: 2026-09-23
 category: perspective
 author: akihito
 draft: false
 related:
+  - no-confidence-but-no-intention-to-run
   - becoming-the-company-bottleneck
   - work-is-a-passing-game
-  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -325,6 +326,8 @@ Botみたい。
 会社を良くしたい。
 
 クライアントの結果を出したい。
+
+その気持ちと、結果が分からなくても決めて進む時の考え方は、[自信はない。でも、逃げる気もない](/blog/no-confidence-but-no-intention-to-run)にもつながる。
 
 思いついたものを形にしたい。
 
