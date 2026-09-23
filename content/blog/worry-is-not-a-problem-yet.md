@@ -9,8 +9,8 @@ author: akihito
 draft: false
 related:
   - problem-is-crumpled-tissue
+  - is-it-really-a-price-problem
   - the-work-starts-after-launch
-  - repeated-explanation-is-a-system-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
