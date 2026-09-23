@@ -6,6 +6,10 @@ date: 2026-09-10
 category: marketing
 author: akihito
 draft: false
+related:
+  - cpa-is-a-result-not-a-cause
+  - meta-ads-learning-drift-4-types
+  - the-work-starts-after-launch
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -559,6 +563,15 @@ LTVは？
 ---
 
 ## CPAが高いんじゃなく、設計がおかしいこともある
+
+ただし、
+事業として成立するCPAでも、
+以前より急に上がったなら、
+次は原因を分けて見る。
+
+その切り分けは、
+[「CPA上がったから広告変える、って雑すぎる」](/blog/cpa-is-a-result-not-a-cause)
+に書いてる。
 
 例えば、
 
