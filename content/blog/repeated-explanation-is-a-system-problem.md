@@ -8,9 +8,9 @@ category: perspective
 author: akihito
 draft: false
 related:
+  - becoming-the-company-bottleneck
   - company-knowledge-needs-updates
   - work-is-a-passing-game
-  - horenso-ai-learning-feedback
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -302,6 +302,11 @@ AIを使ってはいるけど、
 だって、
 
 **判断基準を渡してないから。**
+
+判断が一人に集まり続けると、その人自身が会社のボトルネックになる。
+俺自身がそうなっていた時の話は、
+[全部俺を通してたら、俺が会社のボトルネックになった](/blog/becoming-the-company-bottleneck)
+に書いた。
 
 どの数字を見るのか。
 
