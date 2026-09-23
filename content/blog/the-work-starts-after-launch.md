@@ -6,6 +6,10 @@ date: 2026-09-09
 category: perspective
 author: akihito
 draft: false
+related:
+  - company-knowledge-needs-updates
+  - problem-is-crumpled-tissue
+  - cpa-is-a-result-not-a-cause
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -199,6 +203,14 @@ sources:
 ---
 
 ## これ、全部一緒なんだよね
+
+広告でこの考え方を具体的にやると、
+「CPAが悪い」で止めずに、
+何が変わったのかを分けて見ることになる。
+
+その見方は、
+[「CPA上がったから広告変える、って雑すぎる」](/blog/cpa-is-a-result-not-a-cause)
+に書いてる。
 
 広告でも、
 
