@@ -3,7 +3,7 @@ title: 反応が落ちた広告、訴求まで捨ててない？
 metaTitle: CTRが落ちたら訴求を変える？｜需要とクリエイティブ疲労を分けて考える
 description: CTRが下がったから、その訴求に需要がないとは限らない。訴求とクリエイティブを分け、需要の大きさに応じて予算配分する考え方を整理します。
 date: 2026-10-01
-publishAt: 2026-10-01T08:00:00+09:00
+publishAt: 2026-10-01T06:00:00+09:00
 category: marketing
 author: akihito
 draft: false
