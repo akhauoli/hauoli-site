@@ -3,7 +3,7 @@ title: 「また来てください」だけで、次も来る理由はできる�
 metaTitle: 「また来てください」だけで、次も来る理由はできる？｜CTAと再来理由は別
 description: 「また来てください」は必要。でも、それ自体が次も来る理由になるわけではない。再来理由をつくることと、最後にCTAで行動を促すことを分けて考える理由を整理します。
 date: 2026-09-26
-publishAt: 2026-09-26T08:00:00+09:00
+publishAt: 2026-09-26T06:00:00+09:00
 category: marketing
 author: akihito
 draft: false
