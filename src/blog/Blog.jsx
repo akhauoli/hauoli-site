@@ -94,7 +94,7 @@ export function BlogList() {
           <p className="section-label">Blog</p>
           <Budou as="h1" className="blog-head-title">仕事で、何を見ているか。</Budou>
           <Budou as="p" className="blog-head-lead">
-            Instagramで話したことを、もう一段深く。マーケティング、経営・組織、AI・仕組み、仕事の考え方を、読んだ人が自分の仕事に持ち帰れる形で残していきます。
+            Hau'oli growth が何を大事にし、どう考え、どう動いているか。マーケティング、経営・組織、AI・仕組み、仕事の考え方。現場で積み重ねてきた知識と判断を、ひとつずつ言葉にして残していきます。
           </Budou>
         </div>
       </section>

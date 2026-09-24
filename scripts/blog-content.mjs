@@ -9,7 +9,7 @@ import { Marked } from 'marked'
 export const SITE_URL = 'https://hauoil.com'
 export const SITE_NAME = "Hau'oli growth"
 export const BLOG_TITLE = `Blog｜${SITE_NAME}`
-export const BLOG_DESCRIPTION = 'マーケティング、経営・組織、AI・仕組み、仕事の考え方。Hau\'oli growth が日々の仕事で何を見て、なぜそう判断するのかを蓄積していきます。'
+export const BLOG_DESCRIPTION = 'Hau\'oli growth が何を大事にし、どう考え、どう動いているか。マーケティング、経営・組織、AI・仕組み、仕事の考え方について、現場で積み重ねてきた知識と判断を言葉にして残していきます。'
 export const DEFAULT_OG_IMAGE = '/og-default.jpg'
 
 const CONTENT_DIR = fileURLToPath(new URL('../content/', import.meta.url))
