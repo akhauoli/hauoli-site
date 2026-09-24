@@ -3,7 +3,7 @@ title: 商圏って、地図に丸を描いたら終わりじゃない
 metaTitle: 商圏って、地図に丸を描いたら終わりじゃない｜距離ではなく人の移動で見る
 description: 商圏は単純な半径○kmでは決まらない。大阪・御堂筋線のように、鉄道・道路・川・生活動線で商圏は伸びたり歪んだりする。実効商圏の考え方を整理します。
 date: 2026-09-28
-publishAt: 2026-09-28T08:00:00+09:00
+publishAt: 2026-09-28T06:00:00+09:00
 category: marketing
 author: akihito
 draft: false
