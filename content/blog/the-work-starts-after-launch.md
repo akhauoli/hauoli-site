@@ -8,9 +8,9 @@ category: perspective
 author: akihito
 draft: false
 related:
+  - trade-area-is-not-a-circle
   - work-is-a-passing-game
   - company-knowledge-needs-updates
-  - problem-is-crumpled-tissue
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---
@@ -290,6 +290,8 @@ AIを入れてみないと分からないなら、
 広告なら、
 
 一回配信してみる。
+
+商圏設計も同じで、最初に地図で仮説を作って、実際の予約や来店で答え合わせする。その具体例は、[商圏って、地図に丸を描いたら終わりじゃない](/blog/trade-area-is-not-a-circle)に書いた。
 
 LPなら、
 
