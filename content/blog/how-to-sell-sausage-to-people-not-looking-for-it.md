@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - ads-change-customers-so-service-must-change
   - five-reasons-people-dont-buy
   - information-follows-emotional-order
-  - is-it-really-a-price-problem
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "既存マーケティング資料｜顧客ファネル・顧客ステージ"
@@ -434,6 +434,8 @@ Instagramを見てる人は違う。
 当然、
 
 まだ終わってないものがある。
+
+この「早く来てもらった人を、店舗側でどう迎えるか」は、[広告で呼んだお客さんに、前と同じ接客してない？](/blog/ads-change-customers-so-service-must-change)で続けて書いた。
 
 ---
 
