@@ -7,9 +7,9 @@ category: marketing
 author: akihito
 draft: false
 related:
+  - cta-does-not-create-a-reason-to-return
   - how-to-sell-sausage-to-people-not-looking-for-it
   - did-the-customer-really-say-that
-  - different-is-stronger-than-better
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Growth Reels原稿「商品そのものに価値はない」／共有プロジェクト"
@@ -156,6 +156,10 @@ sources:
 **それを使ったら何が変わるの？**
 
 そこを見る。
+
+この「その人の生活がどう変わるか」は、買ってもらう時だけじゃなく、次回来店の理由をつくる時も同じだと思ってる。
+
+その話は、[「また来てください」だけで、次も来る理由はできる？](/blog/cta-does-not-create-a-reason-to-return)に書いた。
 
 ---
 
