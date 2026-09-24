@@ -3,7 +3,7 @@ title: 配信されてない広告を、負けと決めるのは早い
 metaTitle: Meta広告が配信されない＝弱い広告？｜配信量だけで良し悪しを決めない理由
 description: 広告セット内で配信量が少ない広告を、そのまま「弱い」と判断していないか。Metaが最適化している単位と、人間が検証したい単位は同じとは限らない。配信量・役割・予算配分から広告を見る考え方。
 date: 2026-10-02
-publishAt: 2026-10-02T08:00:00+09:00
+publishAt: 2026-10-02T06:00:00+09:00
 category: marketing
 author: akihito
 draft: false
