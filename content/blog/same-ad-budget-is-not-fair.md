@@ -3,7 +3,7 @@ title: 全店舗に同じ広告費。それ、本当に公平？
 metaTitle: 店舗の広告予算はいくらが適正？｜目標・CPA・予約枠・商圏から逆算する考え方
 description: 広告費を月10万円、20万円と先に決めていないか。必要な新規数、受け入れ可能な予約枠、CPA、商圏の市場サイズから広告予算を逆算する考え方を整理します。
 date: 2026-10-03
-publishAt: 2026-10-03T08:00:00+09:00
+publishAt: 2026-10-03T06:00:00+09:00
 category: marketing
 author: akihito
 draft: false
