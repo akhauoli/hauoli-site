@@ -4,13 +4,14 @@ metaTitle: 商圏って、地図に丸を描いたら終わりじゃない｜距
 description: 商圏は単純な半径○kmでは決まらない。大阪・御堂筋線のように、鉄道・道路・川・生活動線で商圏は伸びたり歪んだりする。実効商圏の考え方を整理します。
 date: 2026-09-28
 publishAt: 2026-09-28T06:00:00+09:00
+updated: 2026-09-29
 category: marketing
 author: akihito
 draft: false
 related:
+  - more-people-does-not-mean-more-demand
   - the-work-starts-after-launch
   - cpa-is-a-result-not-a-cause
-  - meta-ads-learning-drift-4-types
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Store Research Knowledge v2"
@@ -385,6 +386,14 @@ Metaの推定オーディエンスも見る。
 [「CPA上がったから広告変える、って雑すぎる」](/blog/cpa-is-a-result-not-a-cause)でも書いたけど、
 
 数字は結果だから。
+
+それと、新しく店を出す時は、
+
+その範囲に来られる人がいるかだけじゃなくて、
+
+既存店と同じ需要を取り合わないかまで見る。
+
+この論点は[「『人が多いから出店』で、その人は誰の店に行くの？」](/blog/more-people-does-not-mean-more-demand)で詳しく書いてる。
 
 ---
 
