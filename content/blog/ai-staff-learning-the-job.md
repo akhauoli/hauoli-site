@@ -3,7 +3,7 @@ title: うちのAIスタッフは、俺に仕事を習ってる
 metaTitle: AIスタッフを育てる会社｜人材育成とAI活用に共通する考え方
 description: Hau'oli growthには「ちびあっきー」というAIスタッフがいる。社内ではスーパールーキー。仕事のGoalや判断基準を教わり、今では同僚の実務を助けながら、通常業務の中でチームの成長も支援している。AIを「使う」ではなく「育てる」という考え方をまとめます。
 date: 2026-09-05
-updated: 2026-09-23
+updated: 2026-10-05
 category: perspective
 author: akihito
 draft: false
@@ -142,6 +142,12 @@ ChatGPTを契約する。
 そりゃそうだよね、
 
 って思う。
+
+これはAIが賢いかどうかとは、また別の話で、
+
+頭が良くても、前提を知らなければ判断はできない。
+
+この論点は[「AI、どれだけ賢くなってもしょうがない！」](/blog/ai-smarts-are-not-enough-without-context)で詳しく書いてる。
 
 ---
 
