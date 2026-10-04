@@ -1,6 +1,7 @@
 # hauoli-site（hauoil.com）— 作業ルール
 
 > このリポジトリの決めごとは本ファイルと台帳（下の「決めたこと（台帳）」節）が正本。どの経路で起動した Claude もここに従う。
+> 司令部の脳（あっきーさんの理解・記憶・スキル・全体の状況）は GitHub `akhauoli/akki-hq`。全体の状況や記憶が要る時は、akki-hq を一緒に開く（クラウドなら clone）して `CLAUDE.md` と `memory/` を読む。
 
 ## 何のためか
 株式会社Hau'oli growth のコーポレートサイト（トップ1ページ＋ブログ /blog）。問い合わせ・広告計測・ブログ→SNS配信の入口。構成は README、ブログ原稿は `content/`。
