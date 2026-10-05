@@ -3,13 +3,14 @@ title: それ、本当に価格の問題？
 metaTitle: 売れない時、価格を下げる前に見ること｜それ、本当に価格の問題？
 description: 売れない時、すぐ値下げするのは早い。価値が伝わっていないのか、違う人に売っているのか、本当に価格で止まっているのか。価格を触る前に確認したい判断順をまとめます。
 date: 2026-09-18
+updated: 2026-10-05
 category: marketing
 author: akihito
 draft: false
 related:
   - product-itself-has-no-value
   - cpa-depends-on-ltv
-  - problem-is-crumpled-tissue
+  - five-reasons-people-dont-buy
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Growth Reels原稿「それ、本当に価格の問題？」／共有プロジェクト"

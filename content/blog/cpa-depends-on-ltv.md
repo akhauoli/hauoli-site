@@ -3,13 +3,13 @@ title: 「CPA5,000円で取ってきて」は、アルファードを300万で�
 metaTitle: CPAの高い・安いはLTVで決まる｜広告費を事業構造から考える方法
 description: CPA5,000円は高いのか、安いのか。実はCPAだけでは判断できない。LTV、粗利、成約率、継続率など事業構造から許容CPAを逆算しないと、広告の良し悪しは分からない。広告を「安く取る」ではなく「利益が残る形で取る」ための考え方をまとめます。
 date: 2026-09-10
-updated: 2026-09-23
+updated: 2026-10-05
 category: marketing
 author: akihito
 draft: false
 related:
   - is-it-really-a-price-problem
-  - product-itself-has-no-value
+  - same-ad-budget-is-not-fair
   - cpa-is-a-result-not-a-cause
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"

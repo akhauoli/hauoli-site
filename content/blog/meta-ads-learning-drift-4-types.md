@@ -3,13 +3,13 @@ title: 「広告の調子が悪い」を、俺は4つに分けて見る
 metaTitle: Meta広告のCPA悪化・学習ズレを4タイプで判断する方法
 description: Meta広告の数字が崩れた時、すぐ作り直すのか、それとも待つのか。同じ「調子が悪い」でも中で起きていることは違う。俺が学習のズレを4つに分けて、どの順番で見ているのかをまとめます。
 date: 2026-09-01
-updated: 2026-09-23
+updated: 2026-10-05
 category: marketing
 author: akihito
 related:
   - cpa-is-a-result-not-a-cause
-  - cpa-depends-on-ltv
-  - the-work-starts-after-launch
+  - separate-demand-from-creative-fatigue
+  - low-delivery-does-not-mean-losing-ad
 sources:
   - "akki-brain 13_Brain/frameworks/2026-09-09 異常検知の4つの型（D A B C）と対応アプローチ.md（2026-09-21追記）"
   - "brain-hub ent_1788985833937_762bb83d / ent_1788985716938_0d0f7a6f / ent_1788985689638_5d7c8b86 / ent_1788985771837_160c3138"

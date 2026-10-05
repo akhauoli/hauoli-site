@@ -3,14 +3,14 @@ title: 「悩んでます」って、まだ問題になってないんだよね
 metaTitle: 仕事の悩みを「問題」と「次の行動」に変える考え方
 description: 「売上で悩んでます」「採用で悩んでます」だけでは、まだ何を解決すればいいか分からない。理想・現在地・差・原因・変えられること・次の行動まで分けて、悩みを仕事に変える考え方をまとめます。
 date: 2026-09-03
-updated: 2026-09-23
+updated: 2026-10-05
 category: perspective
 author: akihito
 draft: false
 related:
   - problem-is-crumpled-tissue
   - is-it-really-a-price-problem
-  - the-work-starts-after-launch
+  - cta-does-not-create-a-reason-to-return
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---

@@ -4,14 +4,14 @@ metaTitle: 空き枠が多いのに予約が入らない理由｜時間帯ごと
 description: 予約表の空きが多いから集客不足とは限らない。15〜18時の「魔の時間」のように、そもそも来店しづらい時間帯がある。空き枠ではなく顧客が予約できる枠から店舗稼働を考える。
 date: 2026-09-30
 publishAt: 2026-09-30T06:00:00+09:00
-updated: 2026-10-03
+updated: 2026-10-05
 category: marketing
 author: akihito
 draft: false
 related:
   - trade-area-is-not-a-circle
   - cpa-is-a-result-not-a-cause
-  - the-work-starts-after-launch
+  - more-people-does-not-mean-more-demand
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
 ---

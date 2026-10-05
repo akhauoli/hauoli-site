@@ -3,13 +3,13 @@ title: 課題は、丸まったティッシュみたいなものだと思って�
 metaTitle: 仕事の悩みを「問題」と「タスク」に分解する考え方
 description: 仕事の悩みは、複数の問題が丸まって一つに見えていることが多い。課題を事実・原因・変えられること・次の行動へ分け、悩みをタスクに変える考え方をまとめます。
 date: 2026-09-02
-updated: 2026-09-23
+updated: 2026-10-05
 category: perspective
 author: akihito
 draft: false
 related:
   - worry-is-not-a-problem-yet
-  - product-itself-has-no-value
+  - is-it-really-a-price-problem
   - the-work-starts-after-launch
 sources:
   - "小林顕人 本人発言『課題は丸まったティッシュ』／Hau'oli Growth共有プロジェクト"

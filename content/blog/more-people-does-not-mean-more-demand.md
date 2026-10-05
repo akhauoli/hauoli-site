@@ -3,6 +3,7 @@ title: 「人が多いから出店」で、その人は誰の店に行くの？
 metaTitle: 人口が多いだけで出店していい？｜商圏・Meta広告・需要の食い合いを考える
 description: 人口や推定オーディエンスが多くても、それだけでは新店が成立するとは限らない。既存店との商圏重複、Meta広告のボリューム、需要の刈り取りと種まきまで含めて出店を考える。
 date: 2026-09-29
+updated: 2026-10-05
 publishAt: 2026-09-29T06:00:00+09:00
 category: marketing
 author: akihito
@@ -10,7 +11,7 @@ draft: false
 related:
   - trade-area-is-not-a-circle
   - how-to-sell-sausage-to-people-not-looking-for-it
-  - different-is-stronger-than-better
+  - same-ad-budget-is-not-fair
 sources:
   - "小林顕人 本人発言／Hau'oli Growth共有プロジェクト"
   - "Hau'oli Store Research Knowledge v2"
