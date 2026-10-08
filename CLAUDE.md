@@ -21,6 +21,7 @@
 - [2026-09-21] やらないこと: note連携 / Reel→記事の自動生成 / 自動公開 / 大量SEO記事（SNS自動投稿は 9/23 に別基盤 Content Distribution として開始）(出典: project_hauoli_site)
 - [2026-09-22] 問い合わせのシートバックアップは GAS の自動追記のまま恒久運用。Admin に CSV エクスポートは作らない（人が押す前提のバックアップは忘れたら空になる）。Phase3（CAPI・AI自動化）はやらない(出典: project_hauoli_site)
 - [2026-09-23] 実績表記はサイト全体で「代表・小林顕人の累計300店舗超」に統一。「200社」「150店舗」等の旧表記は使わない。新しいページ・記事・資料でも数字はこれに揃える(出典: project_hauoli_site)
+- [2026-09-23] Service Guide の正本は /service-guide（`src/guide/ServiceGuide.jsx`）。役割は商談後に送る・訪問者がサービスを理解する案内で、商談資料（Google Slides で別途）とは混ぜない。根拠を確認できない実績（平均継続3年+・累計広告運用¥3億+）は載せない（根拠が出たら RECORDS に足す）(出典: 会話)
 - [2026-09-24] ブログは Instagram の続きではなく「Hau'oli growth の知識と積み重ねの保管庫」。読者が考え方・書き手の人となりを知り、一緒に成長したいと思える場。Reel 由来の記事も話したままでなくリライトする(出典: project_hauoli_site)
 - [2026-09-25] 会社名は「株式会社Hau'oli growth」（g 小文字）で統一。英文社名「Inc」等は使わない。所在地は大阪市北区梅田1-2-2 大阪駅前第2ビル12-12(出典: project_hauoli_site, reference_hauoli_growth)
 - [2026-09-25] SNS（IG・X・Threads）に出す記事はブログの公開日が古い順。最初の本番確認も一番古い記事から。手元の下書きから適当に選ばない(出典: feedback_sns_post_order)
