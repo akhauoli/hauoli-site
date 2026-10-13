@@ -9,11 +9,14 @@
 //     "custom_cover" | "cover", "related": [], "source_notes" | "sources": [] , "updated", "metaTitle" }
 import { existsSync, readFileSync, writeFileSync, mkdirSync, unlinkSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { loadBlog } from './blog-content.mjs'
+import { loadBlog, toJstIso } from './blog-content.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const args = process.argv.slice(2)
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+
+// 今日の日付は日本時間で作る（toISOString() は UTC のため、JST 0〜9時に前日になる）
+const jstToday = () => toJstIso(Date.now()).slice(0, 10)
 
 function fail(msg) { console.error(msg); process.exit(1) }
 
@@ -53,7 +56,7 @@ if (args[0] === '--json') {
   const fm = {
     title: d.title,
     description: d.description || d.excerpt,
-    date: d.date || new Date().toISOString().slice(0, 10),
+    date: d.date || jstToday(),
     updated: d.updated,
     category: d.category,
     author: d.author || 'akihito',
@@ -67,7 +70,7 @@ if (args[0] === '--json') {
 } else {
   const slug = args[0]
   if (!slug || !SLUG_RE.test(slug)) fail('使い方: npm run new-post <slug>   または   npm run new-post -- --json <file.json>')
-  const today = new Date().toISOString().slice(0, 10)
+  const today = jstToday()
   const body = readFileSync(`${root}content/blog/_TEMPLATE.md`, 'utf8')
     .replace('date: 2026-01-01', `date: ${today}`)
     .replaceAll('<slug>', slug)
