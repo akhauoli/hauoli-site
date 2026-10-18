@@ -3,7 +3,7 @@ title: CPA上がったから広告変える、って雑すぎる
 metaTitle: CPA悪化の原因をCTR・CVR・CPMから切り分ける広告運用の考え方
 description: CPAが高騰した時、見るべきなのはCPAそのものではない。CTR、CVR、CPMのどこが変わったのか。さらに過去CPAと消化金額から、今評価できる状態なのかを判断する。数字を読み上げるのではなく、次の一手を決めるための広告運用の考え方。
 date: 2026-09-11
-updated: 2026-10-05
+updated: 2026-10-19
 category: marketing
 author: akihito
 draft: false
@@ -210,6 +210,10 @@ CVRが落ちてる。
 次に何をするか決めるため。
 
 だと思ってる。
+
+原因候補が見えた時に、何を確かめるのか。
+
+この論点は[「「頑張ります」は分かった。で、何が悪いと思ってる？」](/blog/effort-is-not-a-diagnosis)で詳しく書いてる。
 
 ---
 
