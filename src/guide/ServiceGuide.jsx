@@ -7,9 +7,11 @@ import './guide.css'
 
 // Service Guide（/service-guide）。商談後にURLを送る・サイト訪問者がサービスを理解するための正本。
 // 元は Artifact「Hau'oli growth — 月次CMOパッケージ」(10ページ)。構成はそのまま、表現と実績の主体を修正して昇格。
+// 2026-10-22 料金を改定: 入口は「グロースパートナー」月20万〜（1ブランドごと）、上の段が「外部CMO」月50万〜。
+// CMO の名前は上の段に取っておく。広告運用・LP・KAYOI はどのプランにも足せるオプション（台帳 akki-hq memory/decisions/hauoli-cmo.md）。
 // 実績数字は「代表・小林顕人の累計実績」。根拠を確認できない数字（平均継続期間・累計広告運用額）は載せない。
 
-export const GUIDE_TITLE = "Service Guide｜月次CMO参画｜Hau'oli growth"
+export const GUIDE_TITLE = "Service Guide｜グロースパートナー・外部CMO｜Hau'oli growth"
 
 const SECTIONS = [
   ['problem', 'Problem'],
@@ -63,7 +65,7 @@ const AFTER = [
   '月次MTGで優先課題を決め、全施策が一本の軸に揃う',
   'KPIの意味と変化を毎月のレポートで共有し、判断に使える形になる',
   '発信軸・トーン・コンテンツ計画が決まり、ブランドが揃う',
-  '週次または隔週のチェックで検証が回り、改善が積み上がる',
+  '隔週の定例で検証が回り、改善が積み上がる',
   '月末レポートで、投資対効果と翌月の計画が見える',
   'LTV・リピートの設計が、戦略の中心に組み込まれる',
 ]
@@ -89,21 +91,29 @@ const PLANS = [
     items: ['現状診断・課題の優先順位整理', '3〜6ヶ月の施策ロードマップ', 'KPI設計・数値目標の設定', '戦略提案MTG（2回）'],
   },
   {
-    key: 'standard', tier: 'STANDARD', name: '月次CMO参画', featured: true,
-    kind: '月額継続 · 最低1年',
+    key: 'standard', tier: 'GROWTH PARTNER', name: 'グロースパートナー', featured: true,
+    kind: '月額継続 · 最低1年 · 1ブランドごと',
     price: '¥20', unit: '万〜', per: '月',
-    notes: ['初期費用：月額の50%（¥10万〜）', '広告運用は別途 ¥10万〜/月'],
+    notes: ['初期費用：月額の50%（¥10万〜）', '広告運用は下のオプションから追加'],
     listLabel: '毎月届くもの',
-    items: ['週次または隔週の戦略MTG', '施策実行・広告/SNSの改善', '月次KPIレポート＋翌月計画', 'Chatwork / LINE での常時サポート', 'クリエイティブ改善提案'],
+    items: ['月2回の定例MTG', '集客の作戦づくり・KPI設計', '数字の分析と改善提案（月次レポート＋翌月計画）', 'LP・予約導線の改善', 'Chatwork / LINE での常時サポート', 'クリエイティブ改善提案'],
   },
   {
-    key: 'enterprise', tier: 'ENTERPRISE', name: 'CMO + 組織構築',
-    kind: 'カスタム · 要相談',
-    price: '応相談', unit: '', per: '',
-    notes: ['事業規模・対応範囲に応じて設計'],
-    listLabel: '何が届くか',
-    items: ['全ステージ（IGNITE〜TRANSFORM）', 'インハウス移行＋採用・育成', 'グロース戦略・スケール設計', '経営会議への参加', '優先レスポンス対応'],
+    key: 'enterprise', tier: 'EXECUTIVE', name: '外部CMO',
+    kind: '月額継続 · 会社全体のマーケティング責任者',
+    price: '¥50', unit: '万〜', per: '月',
+    notes: ['月2回の訪問（オンライン可）', '交通費・宿泊費は実費'],
+    listLabel: '毎月届くもの',
+    items: ['経営との隔週の作戦会議', '経営者への月次レビュー（何が変わったか）', '集客導線・現場フローの設計', '広告予算配分の意思決定支援', 'KPIの設計とモニタリング', '社内マーケチームの体制づくり・育成', 'システム・AI活用の相談'],
   },
+]
+
+// どのプランにも足せるもの。広告運用だけの契約は受けない
+const OPTIONS = [
+  { name: '広告運用', price: '広告費の20%', sub: '最低 ¥10万 / 月', text: 'Meta・TikTok などの運用。グロースパートナー・外部CMOとセットでのみ承ります。' },
+  { name: 'LP制作', price: '¥5,000', sub: '1本', text: '差し替え・修正は無料。今お持ちのLPを改善する時も、こちらで作り直します。' },
+  { name: 'LP利用料', price: '¥2,000', sub: '1枚 / 月', text: '「店名.kayoi.jp」で公開。予約・来店まで計測がつながります。契約期間中のご利用です。' },
+  { name: 'KAYOI', price: '¥10,000', sub: '1店舗 / 月', text: '予約・顧客・成約までを1つにつなぐ、店舗の成長の仕組み。' },
 ]
 
 const STEPS = [
@@ -111,7 +121,7 @@ const STEPS = [
   { title: '診断・提案書', text: '課題を分析し、施策ロードマップと費用感をお出しします。', time: '3〜5営業日' },
   { title: '契約締結', text: 'プラン確認・契約書締結・初期費用のお支払い。', time: '最短1日' },
   { title: 'キックオフMTG', text: '目標・KPI・月次サイクルを確定し、共有ツールを準備します。', time: '90分' },
-  { title: '月次CMO稼働', text: '戦略立案・施策実行・レポートの月次サイクルを回し始めます。', time: '月次継続' },
+  { title: '月次サイクル開始', text: '戦略立案・施策実行・レポートの月次サイクルを回し始めます。', time: '月次継続' },
 ]
 
 const COMPANY = [
@@ -119,7 +129,7 @@ const COMPANY = [
   ['代表取締役', '小林 顕人'],
   ['設立', '2024年6月26日'],
   ['所在地', '大阪市北区梅田1-2-2 大阪駅前第2ビル12-12'],
-  ['事業内容', '月次CMO参画・マーケティング戦略支援'],
+  ['事業内容', 'マーケティング支援（グロースパートナー・外部CMO）・店舗向けシステム KAYOI'],
   ['Web', 'hauoil.com'],
 ]
 
@@ -165,8 +175,8 @@ export default function ServiceGuide() {
             <Link href="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">Service Guide</span>
           </nav>
           <p className="section-label sg-label sg-label--dark">Hau'oli growth — Service Guide</p>
-          <Budou as="h1" className="sg-cover-title">月次CMO参画で、<br /><em>事業の打ち手</em>を変える。</Budou>
-          <Budou as="p" className="sg-cover-lead">採用でも、ツールでもなく。全体を見て判断するマーケティング責任者を、月額で迎え入れる。そして最後は、その判断の仕組みを社内に残す。</Budou>
+          <Budou as="h1" className="sg-cover-title">月額のパートナーで、<br /><em>事業の打ち手</em>を変える。</Budou>
+          <Budou as="p" className="sg-cover-lead">採用でも、ツールでもなく。全体を見て判断するマーケティングのパートナーを、月額で迎え入れる。そして最後は、その判断の仕組みを社内に残す。</Budou>
           <div className="sg-cover-stat">
             <span className="sg-cover-num">300<small>+</small></span>
             <span className="sg-cover-num-label">代表・小林顕人<br />累計支援店舗数</span>
@@ -311,7 +321,7 @@ export default function ServiceGuide() {
       <section id="pricing" className="sg-sec sg-sec--warm">
         <div className="sg-inner">
           <Head tone="warm" label="07 — Pricing" title={<><span className="num">3</span>つの関わり方</>}
-            lead="中心は月次CMO参画です。まず現状を整理したい場合は、1ヶ月の初期診断から始められます。" />
+            lead="中心はグロースパートナーです。会社全体のマーケティングを任せたい場合は外部CMO、まず現状を整理したい場合は1ヶ月の初期診断から始められます。" />
           <div className="sg-plans">
             {PLANS.map(p => (
               <article key={p.key} className={`sg-plan sg-plan--${p.key}${p.featured ? ' sg-plan--featured' : ''}`}>
@@ -327,6 +337,19 @@ export default function ServiceGuide() {
                 <ul className="sg-plan-items">{p.items.map(it => <li key={it}>{it}</li>)}</ul>
               </article>
             ))}
+          </div>
+          <div className="sg-options">
+            <p className="sg-options-label">オプション — どのプランにも追加できます</p>
+            <div className="sg-options-grid">
+              {OPTIONS.map(o => (
+                <div key={o.name} className="sg-option">
+                  <p className="sg-option-name">{o.name}</p>
+                  <p className="sg-option-price">{o.price}<span> / {o.sub}</span></p>
+                  <p className="sg-option-text">{o.text}</p>
+                </div>
+              ))}
+            </div>
+            <p className="sg-options-note">価格はすべて税別です。</p>
           </div>
         </div>
       </section>

@@ -259,6 +259,17 @@
 .sg-plan-items li { font-size: 0.84rem; line-height: 1.6; padding-left: 16px; position: relative; }
 .sg-plan-items li::before { content: ''; position: absolute; left: 0; top: 0.78em; width: 7px; height: 1px; background: var(--c-accent); }
 
+/* オプション（広告運用・LP・KAYOI） */
+.sg-options { margin-top: 40px; }
+.sg-options-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; color: #A86F2A; margin-bottom: 14px; }
+.sg-options-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sg-option { background: var(--sg-warm-card); border: 1px solid var(--c-border-light); padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.sg-option-name { font-weight: 600; font-size: 0.92rem; }
+.sg-option-price { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
+.sg-option-price span { font-family: var(--font-body); font-size: 0.74rem; font-weight: 400; color: var(--c-text-mid); }
+.sg-option-text { font-size: 0.8rem; line-height: 1.7; color: var(--c-text-mid); }
+.sg-options-note { margin-top: 12px; font-size: 0.76rem; color: var(--c-text-mid); }
+
 /* ── 08 Process ── */
 .sg-steps { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--c-border-dark); }
 .sg-step { padding: 26px 20px 8px 0; display: flex; flex-direction: column; gap: 14px; }
@@ -292,6 +303,7 @@
   .sg-plans { grid-template-columns: 1fr; max-width: 520px; }
   .sg-plan--featured { order: -1; }
   .sg-plan-kind { min-height: 0; }
+  .sg-options-grid { grid-template-columns: repeat(2, 1fr); }
   .sg-steps { grid-template-columns: 1fr; border-top: none; }
   .sg-step, .sg-step + .sg-step { flex-direction: row; gap: 20px; padding: 20px 0; border-left: none; border-top: 1px solid var(--c-border-dark); }
   .sg-step-num { width: 2.4ch; flex-shrink: 0; font-size: 1.6rem; }
@@ -326,6 +338,7 @@
   .sg-record { padding: 24px 20px; }
   .sg-plan { padding: 26px 20px 24px; }
   .sg-plan--featured { padding-top: 38px; }
+  .sg-options-grid { grid-template-columns: 1fr; }
   .sg-midcta-inner { flex-direction: column; align-items: stretch; }
   .sg-btn { justify-content: center; }
   .sg-company > div { grid-template-columns: 5.5em 1fr; gap: 12px; }

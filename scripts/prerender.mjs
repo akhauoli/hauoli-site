@@ -96,8 +96,8 @@ writePage('blog/index.html', renderPage('/blog', {
 // ── Service Guide ──
 // 商談後にURLで送る/サイト訪問者向けのサービス案内の正本。料金は「〜」表記なので最低価格として出す
 const guideUrl = `${SITE_URL}/service-guide`
-const GUIDE_TITLE = `Service Guide｜月次CMO参画｜${SITE_NAME}`
-const GUIDE_DESCRIPTION = "Hau'oli growth の Service Guide。月次CMO参画で、経営・マーケティング・現場を横断して優先順位を決め、判断基準と仕組みを社内に残す。支援内容・代表の実績・料金・開始までの流れ。"
+const GUIDE_TITLE = `Service Guide｜グロースパートナー・外部CMO｜${SITE_NAME}`
+const GUIDE_DESCRIPTION = "Hau'oli growth の Service Guide。グロースパートナー（月20万円〜）と外部CMO（月50万円〜）で、経営・マーケティング・現場を横断して優先順位を決め、判断基準と仕組みを社内に残す。支援内容・代表の実績・料金・開始までの流れ。"
 writePage('service-guide/index.html', renderPage('/service-guide', {
   title: GUIDE_TITLE,
   description: GUIDE_DESCRIPTION,
@@ -110,8 +110,8 @@ writePage('service-guide/index.html', renderPage('/service-guide', {
       { '@type': 'WebPage', '@id': guideUrl, url: guideUrl, name: GUIDE_TITLE, description: GUIDE_DESCRIPTION, inLanguage: 'ja', isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL } },
       {
         '@type': 'Service',
-        name: '月次CMO参画',
-        serviceType: 'マーケティング戦略支援（月次CMO参画）',
+        name: 'グロースパートナー・外部CMO',
+        serviceType: 'マーケティング戦略支援（グロースパートナー・外部CMO）',
         url: guideUrl,
         description: '経営・マーケティング・現場を横断して優先順位を決める責任者機能を月額で提供し、最終的に判断基準と仕組みを社内に残す支援。',
         provider: organization,
@@ -121,8 +121,9 @@ writePage('service-guide/index.html', renderPage('/service-guide', {
           name: '料金プラン',
           itemListElement: [
             { '@type': 'Offer', name: 'CMO診断（初期診断・戦略設計を1ヶ月で行う単発パッケージ）', priceSpecification: { '@type': 'PriceSpecification', minPrice: 300000, priceCurrency: 'JPY' } },
-            { '@type': 'Offer', name: '月次CMO参画', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 200000, priceCurrency: 'JPY', unitText: '月' } },
-            { '@type': 'Offer', name: 'CMO + 組織構築（応相談）' },
+            { '@type': 'Offer', name: 'グロースパートナー（1ブランドごと）', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 200000, priceCurrency: 'JPY', unitText: '月' } },
+            { '@type': 'Offer', name: '外部CMO', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 500000, priceCurrency: 'JPY', unitText: '月' } },
+            { '@type': 'Offer', name: '広告運用（広告費の20%・最低10万円／月。プランとセット）', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 100000, priceCurrency: 'JPY', unitText: '月' } },
           ],
         },
       },
