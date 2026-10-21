@@ -7,11 +7,11 @@ import './guide.css'
 
 // Service Guide（/service-guide）。商談後にURLを送る・サイト訪問者がサービスを理解するための正本。
 // 元は Artifact「Hau'oli growth — 月次CMOパッケージ」(10ページ)。構成はそのまま、表現と実績の主体を修正して昇格。
-// 2026-10-22 料金を改定: 入口は「グロースパートナー」月20万〜（1ブランドごと）、上の段が「外部CMO」月50万〜。
+// 2026-10-22 料金を改定: 入口は「GROWTHパートナー」月20万〜（1ブランドごと）、上の段が「外部CMO」月50万〜。
 // CMO の名前は上の段に取っておく。広告運用・LP・KAYOI はどのプランにも足せるオプション（台帳 akki-hq memory/decisions/hauoli-cmo.md）。
 // 実績数字は「代表・小林顕人の累計実績」。根拠を確認できない数字（平均継続期間・累計広告運用額）は載せない。
 
-export const GUIDE_TITLE = "Service Guide｜グロースパートナー・外部CMO｜Hau'oli growth"
+export const GUIDE_TITLE = "Service Guide｜GROWTHパートナー・外部CMO｜Hau'oli growth"
 
 const SECTIONS = [
   ['problem', 'Problem'],
@@ -91,7 +91,7 @@ const PLANS = [
     items: ['現状診断・課題の優先順位整理', '3〜6ヶ月の施策ロードマップ', 'KPI設計・数値目標の設定', '戦略提案MTG（2回）'],
   },
   {
-    key: 'standard', tier: 'GROWTH PARTNER', name: 'グロースパートナー', featured: true,
+    key: 'standard', tier: 'STANDARD', name: 'GROWTHパートナー', featured: true,
     kind: '月額継続 · 最低半年 · 1ブランドごと',
     price: '¥20', unit: '万〜', per: '月',
     notes: ['初期費用：月額の50%（¥10万〜）', '広告運用は下のオプションから追加'],
@@ -110,7 +110,7 @@ const PLANS = [
 
 // どのプランにも足せるもの。広告運用だけの契約は受けない
 const OPTIONS = [
-  { name: '広告運用', price: '広告費の20%', sub: '最低 ¥10万 / 月', text: 'Meta・TikTok などの運用。グロースパートナー・外部CMOとセットでのみ承ります。' },
+  { name: '広告運用', price: '広告費の20%', sub: '最低 ¥10万 / 月', text: 'Meta・TikTok などの運用。GROWTHパートナー・外部CMOとセットでのみ承ります。' },
   { name: 'LP制作', price: '¥5,000', sub: '1本', text: '差し替え・修正は無料。今お持ちのLPを改善する時も、こちらで作り直します。' },
   { name: 'LP利用料', price: '¥2,000', sub: '1枚 / 月', text: '「店名.kayoi.jp」で公開。予約・来店まで計測がつながります。契約期間中のご利用です。' },
   { name: 'KAYOI', price: '¥10,000', sub: '1店舗 / 月', text: '予約・顧客・成約までを1つにつなぐ、店舗の成長の仕組み。' },
@@ -129,7 +129,7 @@ const COMPANY = [
   ['代表取締役', '小林 顕人'],
   ['設立', '2024年6月26日'],
   ['所在地', '大阪市北区梅田1-2-2 大阪駅前第2ビル12-12'],
-  ['事業内容', 'マーケティング支援（グロースパートナー・外部CMO）・店舗向けシステム KAYOI'],
+  ['事業内容', 'マーケティング支援（GROWTHパートナー・外部CMO）・店舗向けシステム KAYOI'],
   ['Web', 'hauoil.com'],
 ]
 
@@ -321,7 +321,7 @@ export default function ServiceGuide() {
       <section id="pricing" className="sg-sec sg-sec--warm">
         <div className="sg-inner">
           <Head tone="warm" label="07 — Pricing" title={<><span className="num">3</span>つの関わり方</>}
-            lead="中心はグロースパートナーです。会社全体のマーケティングを任せたい場合は外部CMO、まず現状を整理したい場合は1ヶ月の初期診断から始められます。" />
+            lead="中心はGROWTHパートナーです。会社全体のマーケティングを任せたい場合は外部CMO、まず現状を整理したい場合は1ヶ月のGROWTH診断から始められます。" />
           <div className="sg-plans">
             {PLANS.map(p => (
               <article key={p.key} className={`sg-plan sg-plan--${p.key}${p.featured ? ' sg-plan--featured' : ''}`}>
