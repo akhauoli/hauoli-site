@@ -120,7 +120,7 @@ writePage('service-guide/index.html', renderPage('/service-guide', {
           '@type': 'OfferCatalog',
           name: '料金プラン',
           itemListElement: [
-            { '@type': 'Offer', name: 'CMO診断（初期診断・戦略設計を1ヶ月で行う単発パッケージ）', priceSpecification: { '@type': 'PriceSpecification', minPrice: 300000, priceCurrency: 'JPY' } },
+            { '@type': 'Offer', name: 'GROWTH診断（初期診断・戦略設計を1ヶ月で行う単発パッケージ）', priceSpecification: { '@type': 'PriceSpecification', minPrice: 300000, priceCurrency: 'JPY' } },
             { '@type': 'Offer', name: 'グロースパートナー（1ブランドごと）', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 200000, priceCurrency: 'JPY', unitText: '月' } },
             { '@type': 'Offer', name: '外部CMO', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 500000, priceCurrency: 'JPY', unitText: '月' } },
             { '@type': 'Offer', name: '広告運用（広告費の20%・最低10万円／月。プランとセット）', priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 100000, priceCurrency: 'JPY', unitText: '月' } },

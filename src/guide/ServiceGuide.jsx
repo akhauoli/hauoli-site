@@ -83,7 +83,7 @@ const TARGETS = [
 
 const PLANS = [
   {
-    key: 'starter', tier: 'STARTER', name: 'CMO診断',
+    key: 'starter', tier: 'STARTER', name: 'GROWTH診断',
     kind: '初期診断・戦略設計を1ヶ月で行う単発パッケージ',
     price: '¥30', unit: '万〜', per: '1回',
     notes: ['月額契約ではありません', '初期費用なし・1ヶ月で完結'],
@@ -92,7 +92,7 @@ const PLANS = [
   },
   {
     key: 'standard', tier: 'GROWTH PARTNER', name: 'グロースパートナー', featured: true,
-    kind: '月額継続 · 最低1年 · 1ブランドごと',
+    kind: '月額継続 · 最低半年 · 1ブランドごと',
     price: '¥20', unit: '万〜', per: '月',
     notes: ['初期費用：月額の50%（¥10万〜）', '広告運用は下のオプションから追加'],
     listLabel: '毎月届くもの',
