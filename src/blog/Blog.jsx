@@ -208,6 +208,7 @@ export function BlogPost({ slug }) {
             何が問題か、まだ整理できていなくても大丈夫です。現在地を整理するところから、一緒に考えます。
           </Budou>
           <Link href="/#contact" className="situations-cta" onClick={() => track('cta_click', { location: 'blog_post', slug: post.slug })}>相談してみる <span aria-hidden="true">→</span></Link>
+          <Link href="/service-guide#pricing" className="blog-cta-sub" onClick={() => track('cta_click', { location: 'blog_post_pricing', slug: post.slug })}>料金を見る｜まずは1ヶ月のGROWTH診断から <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </article>

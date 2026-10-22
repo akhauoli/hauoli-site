@@ -202,6 +202,8 @@
   margin-bottom: 18px;
 }
 .blog-cta-text { max-width: 560px; margin: 0 auto 36px; font-size: 0.92rem; line-height: 1.9; color: var(--c-text-dim); }
+.blog-cta-sub { display: block; width: fit-content; margin: 24px auto 0; font-size: 0.85rem; color: var(--c-text-dim); text-decoration: underline; text-underline-offset: 4px; }
+.blog-cta-sub:hover { color: var(--c-text-light); }
 
 .blog-notfound { min-height: 60vh; }
 

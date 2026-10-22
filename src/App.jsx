@@ -203,6 +203,7 @@ function Nav({ menuOpen, setMenuOpen }) {
         <li><Link href="/#services">SERVICE</Link></li>
         <li><Link href="/#strengths">強み</Link></li>
         <li><Link href="/#about">代表</Link></li>
+        <li><Link href="/service-guide">SERVICE GUIDE</Link></li>
         <li><Link href="/blog">BLOG</Link></li>
         <li><Link href={contactHref} className="nav-cta" onClick={() => track('cta_click', { location: 'nav' })}>お問い合わせ</Link></li>
       </ul>
