@@ -203,6 +203,19 @@
 .sg-record-num small { font-size: 0.5em; color: #A86F2A; margin-left: 3px; }
 .sg-record-label { margin-top: 14px; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.04em; }
 .sg-record-text { margin-top: 8px; font-size: 0.82rem; line-height: 1.8; color: var(--c-text-mid); }
+.sg-case-link {
+  margin-top: 24px; max-width: 760px;
+  display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap;
+  padding: 20px 24px;
+  background: var(--c-dark); color: var(--c-text-light);
+  border: 1px solid var(--c-dark);
+  transition: border-color 0.15s ease-out, transform 0.15s ease-out;
+}
+.sg-case-link:hover { border-color: var(--c-accent); transform: translateX(4px); }
+.sg-case-link:focus-visible { outline: 2px solid var(--c-accent-light); outline-offset: 3px; }
+.sg-case-link-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; color: #fff; background: var(--c-accent); padding: 4px 10px; border-radius: 2px; white-space: nowrap; }
+.sg-case-link-text { font-variant-numeric: lining-nums; flex: 1; min-width: 14em; font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; line-height: 1.55; }
+.sg-case-link svg { color: var(--c-accent-light); flex-shrink: 0; }
 
 /* ── 06 For Whom ── */
 .sg-targets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }

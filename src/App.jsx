@@ -6,6 +6,7 @@ import { rememberTouch, initPixel, track } from './tracking'
 import { RouterProvider, Link, useRoute, useTitle } from './router'
 import { BlogList, BlogPost, NotFound } from './blog/Blog'
 import ServiceGuide from './guide/ServiceGuide'
+import { CaseList, CaseDetail } from './cases/Cases'
 
 // 上昇パーティクル（決定論的配置）
 const PARTICLES = [
@@ -204,6 +205,7 @@ function Nav({ menuOpen, setMenuOpen }) {
         <li><Link href="/#strengths">強み</Link></li>
         <li><Link href="/#about">代表</Link></li>
         <li><Link href="/service-guide">SERVICE GUIDE</Link></li>
+        <li><Link href="/cases">CASES</Link></li>
         <li><Link href="/blog">BLOG</Link></li>
         <li><Link href={contactHref} className="nav-cta" onClick={() => track('cta_click', { location: 'nav' })}>お問い合わせ</Link></li>
       </ul>
@@ -222,6 +224,7 @@ function MobileMenu({ open, onClose }) {
         <Link href="/#about" onClick={onClose}>代表</Link>
         <Link href="/#mvv" onClick={onClose}>MVV</Link>
         <Link href="/service-guide" onClick={onClose}>SERVICE GUIDE</Link>
+        <Link href="/cases" onClick={onClose}>CASES</Link>
         <Link href="/blog" onClick={onClose}>BLOG</Link>
         <Link href={contactHref} onClick={() => { track('cta_click', { location: 'mobile_nav' }); onClose() }}>お問い合わせ</Link>
       </nav>
@@ -571,6 +574,7 @@ function Footer() {
       <p className="footer-logo">Hau'oli growth</p>
       <nav className="footer-links" aria-label="フッター">
         <Link href="/service-guide">Service Guide</Link>
+        <Link href="/cases">Cases</Link>
         <Link href="/blog">Blog</Link>
         <Link href={contactHref} onClick={() => track('cta_click', { location: 'footer' })}>お問い合わせ</Link>
       </nav>
@@ -596,11 +600,14 @@ function Home() {
   )
 }
 
-// パスに応じてページを切り替える。/ はトップ、/blog 配下はブログ、それ以外は404
+// パスに応じてページを切り替える。/ はトップ、/cases 配下は事例、/blog 配下はブログ、それ以外は404
 function Page() {
   const { path } = useRoute()
   if (path === '/') return <Home />
   if (path === '/service-guide') return <ServiceGuide />
+  if (path === '/cases') return <CaseList />
+  const cm = path.match(/^\/cases\/([^/]+)$/)
+  if (cm) return <CaseDetail slug={cm[1]} />
   if (path === '/blog') return <main><BlogList /></main>
   const m = path.match(/^\/blog\/([^/]+)$/)
   if (m) return <main><BlogPost slug={m[1]} /></main>
