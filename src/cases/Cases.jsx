@@ -220,7 +220,7 @@ export function CaseDetail({ slug }) {
           </div>
           <div className="cs-split">
             <SplitCol title="Hau'oli growth" rows={c.split.ours} ours />
-            <SplitCol title="先方（整骨院グループ）" rows={c.split.theirs} />
+            <SplitCol title={`先方（${c.industry}）`} rows={c.split.theirs} />
           </div>
         </div>
       </section>
