@@ -136,7 +136,7 @@ writePage('service-guide/index.html', renderPage('/service-guide', {
 // 中身の正本は src/cases/data.js（画面と同じ1ファイルから title・説明・JSON-LD を作る）
 const casesUrl = `${SITE_URL}/cases`
 const CASES_TITLE = `事例｜${SITE_NAME}`
-const CASES_DESCRIPTION = "Hau'oli growth の支援事例。外部CMO・GROWTHパートナーとして会社の中に入り、話を聞いて「社内の当たり前」に隠れた問題を見つけ、チーム・仕組み・数字の見方として形にしたことを1社ずつ深く書いています。"
+const CASES_DESCRIPTION = "Hau'oli growth の支援事例。外から会社の中に入り、話を聞いて「社内の当たり前」に隠れた問題を見つけ、チーム・仕組み・数字の見方として形にしたことを1社ずつ深く書いています。"
 writePage('cases/index.html', renderPage('/cases', {
   title: CASES_TITLE,
   description: CASES_DESCRIPTION,

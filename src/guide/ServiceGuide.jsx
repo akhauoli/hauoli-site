@@ -300,7 +300,7 @@ export default function ServiceGuide() {
           </div>
           <Link href="/cases/seitai-group" className="sg-case-link" onClick={() => track('cta_click', { location: 'service_guide_case' })}>
             <span className="sg-case-link-label">事例を見る</span>
-            <Budou className="sg-case-link-text">整体関連の多店舗グループで、外部CMOとして実際にやっていること</Budou>
+            <Budou className="sg-case-link-text">整体関連の多店舗グループで、アドバイザーとして実際にやっていること</Budou>
             <Arrow />
           </Link>
         </div>

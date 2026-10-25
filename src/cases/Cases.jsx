@@ -103,7 +103,7 @@ export function CaseDetail({ slug }) {
           <div className="cs-stats">
             {c.stats.map(st => (
               <div key={st.label}>
-                <span className={`cs-stat-num${st.word ? ' cs-stat-num--word' : ''}`}>{st.num}{st.unit && <small>{st.unit}</small>}</span>
+                <span className={`cs-stat-num${st.word ? ' cs-stat-num--word' : ''}${st.long ? ' cs-stat-num--long' : ''}`}>{st.num}{st.unit && <small>{st.unit}</small>}</span>
                 <span className="cs-stat-label">{st.label}</span>
               </div>
             ))}
