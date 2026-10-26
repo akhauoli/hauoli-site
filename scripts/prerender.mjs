@@ -1,6 +1,6 @@
 // ビルド後にブログの各ページを静的HTMLとして書き出す。
 // 手順: vite build(クライアント) → vite build --ssr(.ssr/) → このスクリプト
-// 出力: dist/blog/index.html, dist/blog/<slug>/index.html, dist/404.html,
+// 出力: dist/blog/index.html, dist/blog/<slug>/index.html, dist/cases/index.html, dist/cases/<slug>/index.html, dist/404.html,
 //       dist/sitemap.xml, dist/feed.xml, dist/blog/index.json
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -11,7 +11,7 @@ import { renderCover, coverInputFor } from './blog-cover.mjs'
 const root = fileURLToPath(new URL('../', import.meta.url))
 const dist = join(root, 'dist')
 const template = readFileSync(join(dist, 'index.html'), 'utf8')
-const { render, blog } = await import(pathToFileURL(join(root, '.ssr/entry-server.js')).href)
+const { render, blog, cases } = await import(pathToFileURL(join(root, '.ssr/entry-server.js')).href)
 const { posts, categories, authors } = blog
 const categoryById = Object.fromEntries(categories.map(c => [c.id, c]))
 const authorById = Object.fromEntries(authors.map(a => [a.id, a]))
@@ -132,6 +132,59 @@ writePage('service-guide/index.html', renderPage('/service-guide', {
   },
 }))
 
+// ── 事例 ──
+// 中身の正本は src/cases/data.js（画面と同じ1ファイルから title・説明・JSON-LD を作る）
+const casesUrl = `${SITE_URL}/cases`
+const CASES_TITLE = `事例｜${SITE_NAME}`
+const CASES_DESCRIPTION = "Hau'oli growth の支援事例。外から会社の中に入り、話を聞いて「社内の当たり前」に隠れた問題を見つけ、チーム・仕組み・数字の見方として形にしたことを1社ずつ深く書いています。"
+writePage('cases/index.html', renderPage('/cases', {
+  title: CASES_TITLE,
+  description: CASES_DESCRIPTION,
+  url: casesUrl,
+  type: 'website',
+  image: abs(DEFAULT_OG_IMAGE),
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'CollectionPage', '@id': casesUrl, url: casesUrl, name: CASES_TITLE, description: CASES_DESCRIPTION, inLanguage: 'ja', isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
+        hasPart: cases.map(c => ({ '@type': 'Article', headline: c.cardTitle, url: `${casesUrl}/${c.slug}`, datePublished: c.datePublished })) },
+      crumbs([['Home', SITE_URL + '/'], ['Cases', casesUrl]]),
+    ],
+  },
+}))
+for (const c of cases) {
+  const url = `${casesUrl}/${c.slug}`
+  const title = `事例｜${c.industry}（${c.scale}）の${c.plan}｜${SITE_NAME}`
+  writePage(`cases/${c.slug}/index.html`, renderPage(`/cases/${c.slug}`, {
+    title,
+    description: c.description,
+    url,
+    type: 'article',
+    image: abs(DEFAULT_OG_IMAGE),
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          '@id': url,
+          mainEntityOfPage: url,
+          headline: c.cardTitle,
+          description: c.description,
+          image: abs(DEFAULT_OG_IMAGE),
+          datePublished: c.datePublished,
+          dateModified: c.dateModified,
+          inLanguage: 'ja',
+          author: { '@type': 'Person', name: '小林顕人', jobTitle: '代表取締役 CEO', worksFor: organization },
+          publisher: organization,
+          about: { '@type': 'Service', name: c.plan, provider: organization, url: guideUrl },
+        },
+        { '@type': 'FAQPage', mainEntity: c.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+        crumbs([['Home', SITE_URL + '/'], ['Cases', casesUrl], [c.industry, url]]),
+      ],
+    },
+  }))
+}
+
 // ── 記事 ──
 let generated = 0
 for (const p of posts) {
@@ -191,6 +244,8 @@ const latest = posts[0] ? (posts[0].updated || posts[0].date) : null
 const urls = [
   { loc: `${SITE_URL}/`, changefreq: 'monthly', priority: '1.0' },
   { loc: guideUrl, changefreq: 'monthly', priority: '0.9' },
+  { loc: casesUrl, changefreq: 'monthly', priority: '0.8', lastmod: cases[0]?.dateModified },
+  ...cases.map(c => ({ loc: `${casesUrl}/${c.slug}`, changefreq: 'monthly', priority: '0.8', lastmod: c.dateModified })),
   { loc: blogUrl, changefreq: 'weekly', priority: '0.8', lastmod: latest },
   ...posts.map(p => ({ loc: p.url, changefreq: 'monthly', priority: '0.7', lastmod: p.updated || p.date })),
 ]
@@ -234,4 +289,4 @@ writeFileSync(join(dist, 'blog/index.json'), JSON.stringify({
   posts: posts.map(({ html: _html, sources: _sources, ...p }) => p),
 }, null, 2))
 
-console.log(`プリレンダー完了: Service Guide + 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)
+console.log(`プリレンダー完了: Service Guide + 事例${cases.length}件 + 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)
