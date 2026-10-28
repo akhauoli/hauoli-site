@@ -65,7 +65,9 @@ function writePage(relPath, html) {
 
 function renderPage(url, head, { status } = {}) {
   const body = render(url)
-  let html = applyHead(head).replace('<div id="root"></div>', `<div id="root">${body}</div>`)
+  // data-ssr-path: どのパスの中身か（main.jsx が今のパスと同じ時だけ hydrate する）。404.html はどのパスでも出るので付けない
+  const mark = status === 404 ? '' : ` data-ssr-path="${url}"`
+  let html = applyHead(head).replace('<div id="root"></div>', `<div id="root"${mark}>${body}</div>`)
   if (status === 404) html = html.replace('<meta name="robots" content="index, follow" />', '<meta name="robots" content="noindex" />')
   return html
 }
@@ -285,7 +287,7 @@ const topJsonLd = {
 if (!template.includes('<!-- JSON-LD -->')) throw new Error('index.html に <!-- JSON-LD --> の目印がありません（トップの構造化データを入れる場所）')
 writePage('index.html', template
   .replace('<!-- JSON-LD -->', `<!-- JSON-LD -->\n    <script type="application/ld+json">${JSON.stringify(topJsonLd)}</script>`)
-  .replace('<div id="root"></div>', `<div id="root">${render('/')}</div>`))
+  .replace('<div id="root"></div>', `<div id="root" data-ssr-path="/">${render('/')}</div>`))
 
 // ── 404 ──
 writePage('404.html', renderPage('/404', {
