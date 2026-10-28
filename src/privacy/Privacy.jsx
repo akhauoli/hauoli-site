@@ -2,10 +2,10 @@ import { Link, useTitle } from '../router'
 import Budou from '../Budou'
 import '../blog/blog.css'
 
-// プライバシーポリシー（2026-10-28 下書き）。見た目はブログ記事と同じ部品（blog-head / blog-post-main / blog-body）を使う。
+// プライバシーポリシー（2026-10-28 制定）。見た目はブログ記事と同じ部品（blog-head / blog-post-main / blog-body）を使う。
 // 中身は問い合わせフォーム（src/ContactForm.jsx）・計測（src/tracking.js）・受け口（admin.hauoil.com の /api/leads と gas/contact）が
 // 実際に受け取る項目に合わせている。フォームの項目や計測を変えたら、ここも直す。
-// 【要確認】の所は、あっきーさんに確かめてから埋める（公開前に必ず消す）。
+// 制定日・保管期間・窓口・受付担当は 2026-10-28 に決定（本番反映の OK と同時）。変える時は制定日と別に改定日を足す。
 
 const FORM_ITEMS = [
   'お名前',
@@ -31,7 +31,7 @@ export default function Privacy() {
             </nav>
             <Budou as="h1" className="blog-post-title">プライバシーポリシー</Budou>
             <p className="blog-post-meta">
-              <span>制定日 【要確認】</span>
+              <span>制定日 <time dateTime="2026-10-28">2026年10月28日</time></span>
             </p>
           </div>
         </header>
@@ -104,7 +104,7 @@ export default function Privacy() {
             <ul>
               <li>お問い合わせは Google Cloud（東京リージョン）のデータベースに保管します。</li>
               <li>見られるのは、当社が許可した担当者だけです（Google アカウントでのログインが必要です）。</li>
-              <li>保管期間：【要確認】</li>
+              <li>保管期間：最後のやり取りから3年間。その後は遅滞なく削除します。</li>
             </ul>
 
             <h2>7. 開示・訂正・削除などのご請求</h2>
@@ -113,14 +113,14 @@ export default function Privacy() {
               ご本人であることを確認したうえで、法令に従って対応します。
             </p>
             <ul>
-              <li>窓口：【要確認】（メールアドレス、または<Link href="/#contact">お問い合わせフォーム</Link>）</li>
-              <li>受付担当：【要確認】</li>
+              <li>窓口：<Link href="/#contact">お問い合わせフォーム</Link>からご連絡ください。</li>
+              <li>受付担当：代表 小林 顕人</li>
             </ul>
 
             <h2>8. このポリシーの変更</h2>
             <p>法令の改正や当社の取り扱いの変更に合わせて、このポリシーを変更することがあります。変更後の内容は、このページに載せた時点から効力を持ちます。</p>
 
-            <p>制定日：【要確認】<br />株式会社Hau'oli growth</p>
+            <p>制定日：2026年10月28日<br />株式会社Hau'oli growth</p>
           </div>
         </div>
       </article>
