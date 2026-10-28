@@ -7,6 +7,7 @@ import { RouterProvider, Link, useRoute, useTitle } from './router'
 import { BlogList, BlogPost, NotFound } from './blog/Blog'
 import ServiceGuide from './guide/ServiceGuide'
 import { CaseList, CaseDetail } from './cases/Cases'
+import Privacy from './privacy/Privacy'
 
 // 上昇パーティクル（決定論的配置）
 const PARTICLES = [
@@ -577,6 +578,7 @@ function Footer() {
         <Link href="/cases">Cases</Link>
         <Link href="/blog">Blog</Link>
         <Link href={contactHref} onClick={() => track('cta_click', { location: 'footer' })}>お問い合わせ</Link>
+        <Link href="/privacy">プライバシーポリシー</Link>
       </nav>
       <p className="footer-copy">© 2026 Hau'oli growth. All rights reserved.</p>
     </footer>
@@ -605,6 +607,7 @@ function Page() {
   const { path } = useRoute()
   if (path === '/') return <Home />
   if (path === '/service-guide') return <ServiceGuide />
+  if (path === '/privacy') return <Privacy />
   if (path === '/cases') return <CaseList />
   const cm = path.match(/^\/cases\/([^/]+)$/)
   if (cm) return <CaseDetail slug={cm[1]} />

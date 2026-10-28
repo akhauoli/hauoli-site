@@ -1,12 +1,13 @@
 // ビルド後にブログの各ページを静的HTMLとして書き出す。
 // 手順: vite build(クライアント) → vite build --ssr(.ssr/) → このスクリプト
-// 出力: dist/blog/index.html, dist/blog/<slug>/index.html, dist/cases/index.html, dist/cases/<slug>/index.html, dist/404.html,
+// 出力: dist/index.html(トップ), dist/privacy/index.html, dist/blog/index.html, dist/blog/<slug>/index.html, dist/cases/index.html, dist/cases/<slug>/index.html, dist/404.html,
 //       dist/sitemap.xml, dist/feed.xml, dist/blog/index.json
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { SITE_URL, SITE_NAME, BLOG_TITLE, BLOG_DESCRIPTION, DEFAULT_OG_IMAGE } from './blog-content.mjs'
 import { renderCover, coverInputFor } from './blog-cover.mjs'
+import { ORGANIZATION, PERSON, WEBSITE, ORG_ID, WEBSITE_ID, personFor, jstIso } from './site-schema.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const dist = join(root, 'dist')
@@ -69,7 +70,8 @@ function renderPage(url, head, { status } = {}) {
   return html
 }
 
-const organization = { '@type': 'Organization', name: SITE_NAME, url: SITE_URL, logo: `${SITE_URL}/favicon.svg` }
+// 会社・代表の定義（sameAs 付き）は scripts/site-schema.mjs が正本。ここでは参照するだけ
+const organization = ORGANIZATION
 const crumbs = (items) => ({
   '@type': 'BreadcrumbList',
   itemListElement: items.map(([name, url], i) => ({ '@type': 'ListItem', position: i + 1, name, item: url })),
@@ -174,7 +176,7 @@ for (const c of cases) {
           datePublished: c.datePublished,
           dateModified: c.dateModified,
           inLanguage: 'ja',
-          author: { '@type': 'Person', name: '小林顕人', jobTitle: '代表取締役 CEO', worksFor: organization },
+          author: PERSON,
           publisher: organization,
           about: { '@type': 'Service', name: c.plan, provider: organization, url: guideUrl },
         },
@@ -220,7 +222,7 @@ for (const p of posts) {
           dateModified: p.updated || p.date,
           articleSection: cat.name,
           inLanguage: 'ja',
-          author: { '@type': 'Person', name: author.name, jobTitle: author.role, url: author.url, worksFor: { '@type': 'Organization', name: author.org } },
+          author: personFor(author),
           publisher: organization,
         },
         crumbs([['Home', SITE_URL + '/'], ['Blog', blogUrl], [cat.name, `${blogUrl}?category=${cat.id}`], [p.title, p.url]]),
@@ -228,6 +230,62 @@ for (const p of posts) {
     },
   }))
 }
+
+// ── プライバシーポリシー ──
+const privacyUrl = `${SITE_URL}/privacy`
+const PRIVACY_TITLE = `プライバシーポリシー｜${SITE_NAME}`
+const PRIVACY_DESCRIPTION = "株式会社Hau'oli growth のプライバシーポリシー。お問い合わせフォームで受け取る情報、利用目的、第三者提供、保管、アクセス解析と広告の計測、開示等のご請求の窓口について。"
+writePage('privacy/index.html', renderPage('/privacy', {
+  title: PRIVACY_TITLE,
+  description: PRIVACY_DESCRIPTION,
+  url: privacyUrl,
+  type: 'website',
+  image: abs(DEFAULT_OG_IMAGE),
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebPage', '@id': privacyUrl, url: privacyUrl, name: PRIVACY_TITLE, description: PRIVACY_DESCRIPTION, inLanguage: 'ja', isPartOf: { '@id': WEBSITE_ID }, publisher: { '@id': ORG_ID } },
+      WEBSITE,
+      organization,
+      crumbs([['Home', SITE_URL + '/'], ['プライバシーポリシー', privacyUrl]]),
+    ],
+  },
+}))
+
+// ── トップ ──
+// これまでトップは <div id="root"></div> だけの空 HTML で、JavaScript を動かさない AI 検索・クローラーには本文が0文字だった。
+// ブログと同じ仕組みで中身を HTML に書き出し、ブラウザでは main.jsx が hydrate でそのまま引き継ぐ（見た目は変わらない）。
+// head（title・description・OG）は index.html のまま使い、JSON-LD だけここで入れる。
+const topUrl = `${SITE_URL}/`
+const pick = (re) => (template.match(re) || [])[1] || ''
+const TOP_TITLE = pick(/<meta property="og:title" content="([^"]*)"/)
+const TOP_DESCRIPTION = pick(/<meta name="description" content="([^"]*)"/)
+const builtAt = jstIso(new Date(process.env.BLOG_NOW || Date.now()))
+const topJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': topUrl,
+      url: topUrl,
+      name: TOP_TITLE,
+      description: TOP_DESCRIPTION,
+      inLanguage: 'ja',
+      isPartOf: { '@id': WEBSITE_ID },
+      about: { '@id': ORG_ID },
+      publisher: { '@id': ORG_ID },
+      primaryImageOfPage: abs(DEFAULT_OG_IMAGE),
+      dateModified: builtAt,
+    },
+    WEBSITE,
+    organization,
+    PERSON,
+  ],
+}
+if (!template.includes('<!-- JSON-LD -->')) throw new Error('index.html に <!-- JSON-LD --> の目印がありません（トップの構造化データを入れる場所）')
+writePage('index.html', template
+  .replace('<!-- JSON-LD -->', `<!-- JSON-LD -->\n    <script type="application/ld+json">${JSON.stringify(topJsonLd)}</script>`)
+  .replace('<div id="root"></div>', `<div id="root">${render('/')}</div>`))
 
 // ── 404 ──
 writePage('404.html', renderPage('/404', {
@@ -242,12 +300,13 @@ writePage('404.html', renderPage('/404', {
 // ── sitemap / RSS / 目録 ──
 const latest = posts[0] ? (posts[0].updated || posts[0].date) : null
 const urls = [
-  { loc: `${SITE_URL}/`, changefreq: 'monthly', priority: '1.0' },
+  { loc: `${SITE_URL}/`, changefreq: 'monthly', priority: '1.0', lastmod: builtAt.slice(0, 10) },
   { loc: guideUrl, changefreq: 'monthly', priority: '0.9' },
   { loc: casesUrl, changefreq: 'monthly', priority: '0.8', lastmod: cases[0]?.dateModified },
   ...cases.map(c => ({ loc: `${casesUrl}/${c.slug}`, changefreq: 'monthly', priority: '0.8', lastmod: c.dateModified })),
   { loc: blogUrl, changefreq: 'weekly', priority: '0.8', lastmod: latest },
   ...posts.map(p => ({ loc: p.url, changefreq: 'monthly', priority: '0.7', lastmod: p.updated || p.date })),
+  { loc: privacyUrl, changefreq: 'yearly', priority: '0.3' },
 ]
 writeFileSync(join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -289,4 +348,4 @@ writeFileSync(join(dist, 'blog/index.json'), JSON.stringify({
   posts: posts.map(({ html: _html, sources: _sources, ...p }) => p),
 }, null, 2))
 
-console.log(`プリレンダー完了: Service Guide + 事例${cases.length}件 + 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)
+console.log(`プリレンダー完了: トップ + プライバシーポリシー + Service Guide + 事例${cases.length}件 + 一覧 + 記事${posts.length}本(アイキャッチ自動生成 ${generated}本) + 404 / sitemap.xml / feed.xml / blog/index.json`)
