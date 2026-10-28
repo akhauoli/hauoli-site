@@ -4,6 +4,7 @@ metaTitle: 店舗の広告予算はいくらが適正？｜目標・CPA・予約
 description: 広告費を月10万円、20万円と先に決めていないか。必要な新規数、受け入れ可能な予約枠、CPA、商圏の市場サイズから広告予算を逆算する考え方を整理します。
 date: 2026-10-03
 publishAt: 2026-10-03T06:00:00+09:00
+updated: 2026-10-29
 category: marketing
 author: akihito
 draft: false
@@ -480,6 +481,10 @@ CPAが下がれば、
 **そもそもその商圏に、1,000人取れるだけの需要があるの？**
 
 を見る。
+
+予算を足した分、本当に新規が増えたのか。
+
+この見方は[「集客の柱、何本ある？ その柱、どこまで太くできる？」](/blog/build-more-and-stronger-customer-acquisition-channels)でも書いてる。
 
 ---
 
