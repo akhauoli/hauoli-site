@@ -32,6 +32,7 @@ export default function Privacy() {
             <Budou as="h1" className="blog-post-title">プライバシーポリシー</Budou>
             <p className="blog-post-meta">
               <span>制定日 <time dateTime="2026-10-28">2026年10月28日</time></span>
+              <span>改定日 <time dateTime="2026-11-18">2026年11月18日</time></span>
             </p>
           </div>
         </header>
@@ -120,7 +121,64 @@ export default function Privacy() {
             <h2>8. このポリシーの変更</h2>
             <p>法令の改正や当社の取り扱いの変更に合わせて、このポリシーを変更することがあります。変更後の内容は、このページに載せた時点から効力を持ちます。</p>
 
-            <p>制定日：2026年10月28日<br />株式会社Hau'oli growth</p>
+            <h2 id="google-user-data">9. Google ユーザーデータ（Google 広告アカウントの情報）の取り扱い</h2>
+            <p>
+              当社は、運用を委託されたクライアントの Google 広告アカウントの情報を、Google の OAuth（認可）で許可された範囲
+              （スコープ：<code>https://www.googleapis.com/auth/adwords</code>）で、Google Ads API を通じて取得します。
+              以下は、この Google ユーザーデータに限った取り扱いです。
+            </p>
+            <h3>取得する情報</h3>
+            <ul>
+              <li>アクセスできる Google 広告アカウントの一覧（アカウント名・ID・状態）</li>
+              <li>キャンペーンの名前・配信状態・予算</li>
+              <li>費用・表示回数・クリック数・コンバージョンなどの成果の数字</li>
+              <li>連携のための認可トークン（更新トークン）</li>
+            </ul>
+            <h3>使い方</h3>
+            <ul>
+              <li>クライアントへの運用報告と、運用の判断（どの店舗・どの広告が計画どおりか）のためだけに使います。</li>
+              <li>出店前・検索広告の開始前に行うキーワードの調査（検索数・入札単価の目安の確認）にも使います。</li>
+              <li>現在は読み取りだけです。広告の作成・変更・停止はこの連携では行いません。</li>
+              <li>使うのは当社の限られた担当者だけです。当社のサービスの利用者や外部の方に、この連携を提供することはありません。</li>
+            </ul>
+            <h3>保存</h3>
+            <ul>
+              <li>数字は、質問のたびに Google から取得します。当社のシステムのメモリに最長1時間だけ一時的に置き、データベースには保存しません。</li>
+              <li>認可トークンは、Google Cloud のデータベース（Firestore。保存時に暗号化されます）に保管し、許可された担当者のシステムだけが読めます。</li>
+              <li>連携を解除すると、保管したトークンを削除します。</li>
+            </ul>
+            <h3>共有・販売・学習への利用をしないこと</h3>
+            <ul>
+              <li>Google ユーザーデータを、販売・貸与・第三者への提供はしません（法令に基づく場合を除きます）。</li>
+              <li>広告の表示、ユーザーの属性にもとづく広告配信（リターゲティング・興味関心にもとづく広告）には使いません。</li>
+              <li>AI・機械学習モデルの学習や改善には使いません。</li>
+              <li>人が内容を読むのは、報告・運用の判断・不具合の調査に必要な場合と、法令で求められる場合だけです。</li>
+            </ul>
+            <h3>Google API サービスのユーザーデータに関するポリシー</h3>
+            <p>
+              当社による、Google API から受け取った情報の利用と、その情報の他のアプリへの移転は、
+              <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API サービスのユーザーデータに関するポリシー</a>
+              （限定利用の要件を含みます）に従います。
+            </p>
+            <h3>削除のご請求・お問い合わせ</h3>
+            <p>
+              Google ユーザーデータの削除や、取り扱いについてのお問い合わせは、<a href="mailto:a.kobayashi@hauoil.com">a.kobayashi@hauoil.com</a> までご連絡ください。
+              Google アカウントの設定（<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">アカウントへのアクセス権</a>）から、当社への許可をいつでも取り消せます。
+            </p>
+            <h3 lang="en">Google user data (English summary)</h3>
+            <p lang="en">
+              Hau'oli growth Co., Ltd. uses Google user data obtained through the Google Ads API (OAuth scope
+              https://www.googleapis.com/auth/adwords) only to provide reporting and campaign operations for the advertisers that have
+              contracted us, and for pre-launch keyword research. The current use is read-only. Data is fetched on demand and cached in
+              memory for at most one hour; the OAuth refresh token is stored in Google Cloud Firestore (encrypted at rest) and deleted when the
+              connection is revoked. We do not sell, share or transfer this data to third parties, do not use it for advertising, and do not use it
+              to develop, improve or train AI or machine-learning models. Our use and transfer to any other app of information received from
+              Google APIs will adhere to the{' '}
+              <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>,
+              including the Limited Use requirements. To request deletion or ask a question, contact a.kobayashi@hauoil.com.
+            </p>
+
+            <p>制定日：2026年10月28日<br />改定日：2026年11月18日<br />株式会社Hau'oli growth</p>
           </div>
         </div>
       </article>

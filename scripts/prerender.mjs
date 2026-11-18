@@ -236,7 +236,7 @@ for (const p of posts) {
 // ── プライバシーポリシー ──
 const privacyUrl = `${SITE_URL}/privacy`
 const PRIVACY_TITLE = `プライバシーポリシー｜${SITE_NAME}`
-const PRIVACY_DESCRIPTION = "株式会社Hau'oli growth のプライバシーポリシー。お問い合わせフォームで受け取る情報、利用目的、第三者提供、保管、アクセス解析と広告の計測、開示等のご請求の窓口について。"
+const PRIVACY_DESCRIPTION = "株式会社Hau'oli growth のプライバシーポリシー。お問い合わせフォームで受け取る情報、利用目的、第三者提供、保管、アクセス解析と広告の計測、Google ユーザーデータ（Google 広告アカウントの情報）の取り扱い、開示等のご請求の窓口について。"
 writePage('privacy/index.html', renderPage('/privacy', {
   title: PRIVACY_TITLE,
   description: PRIVACY_DESCRIPTION,
